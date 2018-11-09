@@ -16,15 +16,30 @@ class Pages extends CI_Controller {
         public function aut_login(){
           $user = $this->input->post('username');
           $pass = $this->input->post('pass');
-          $this->load->model('my_model');
-          $result = $this->my_model->validation($user, $pass);
+          $this->load->model('sys_model');
+          $result = $this->sys_model->validation($user, $pass);
           if($result){
-            $data = array(
+            $sel = $this->sys_model->consultaNivelUsuario($user)->nivel_usuario;
+            switch ($sel) {
+              case "usuario":
+                redirect(base_url('user/home'));
+                break;
+              case "bibliotecario":
+                redirect(base_url('blib/home'));
+                break;
+              case "administrador":
+                redirect(base_url('admin/home'));
+                break;
+              default:
+                echo $sel;
+                break;
+            }
+            /*$data = array(
                 'title' => $this->my_model->consultaTitulos()
             );
             $this->load->view('templates/header.php');
             $this->load->view('autenticate', $data);
-            $this->load->view('templates/footer.php');
+            $this->load->view('templates/footer.php');*/
           }else{
             $data['title'] = "Erro de login";
             //$this->load->view('templates/header.php');
