@@ -16,11 +16,12 @@ class Pages extends CI_Controller {
         public function aut_login(){
           $user = $this->input->post('username');
           $pass = $this->input->post('pass');
-
           $this->load->model('my_model');
           $result = $this->my_model->validation($user, $pass);
           if($result){
-            $data['title'] = "Sucesso";
+            $data = array(
+                'title' => $this->my_model->consultaTitulos()
+            );
             $this->load->view('templates/header.php');
             $this->load->view('autenticate', $data);
             $this->load->view('templates/footer.php');
