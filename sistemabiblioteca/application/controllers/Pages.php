@@ -19,15 +19,21 @@ class Pages extends CI_Controller {
           $this->load->model('sys_model');
           $result = $this->sys_model->validation($user, $pass);
           if($result){
-            $sel = $this->sys_model->consultaNivelUsuario($user)->nivel_usuario;
+            $sel = $this->sys_model->consulta_especifico_Usuario($user)->nivel_usuario;
             switch ($sel) {
               case "usuario":
+                $this->session->set_userdata('usuario', $user);
+                $this->session->set_userdata('nivel_usuario', $sel);
                 redirect(base_url('user/home'));
                 break;
               case "bibliotecario":
+                $this->session->set_userdata('usuario', $user);
+                $this->session->set_userdata('nivel_usuario', $sel);
                 redirect(base_url('blib/home'));
                 break;
               case "administrador":
+                $this->session->set_userdata('usuario', $user);
+                $this->session->set_userdata('nivel_usuario', $sel);
                 redirect(base_url('admin/home'));
                 break;
               default:

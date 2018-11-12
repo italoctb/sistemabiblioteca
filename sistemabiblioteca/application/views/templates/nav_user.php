@@ -8,8 +8,8 @@
                         <ul class="mobile-menu-nav">
                             <li><a data-toggle="collapse" data-target="#Charts" href="#">Início</a>
                                 <ul class="collapse dropdown-header-top">
-                                    <li><a href="index.html">Biblioteca</a></li>
-                                    <li><a href="index-2.html">Minhas reservas</a></li>
+                                    <li><a href="home">Biblioteca</a></li>
+        														<li><a href="minhasReservas">Minhas reservas</a></li>
                                 </ul>
                             </li>
                             <li><a data-toggle="collapse" data-target="#Charts" href="#">Sistema</a>
@@ -47,8 +47,8 @@
                 <div class="tab-content custom-menu-content">
                     <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
-                          <li><a href="index.html">Biblioteca</a></li>
-                          <li><a href="index-2.html">Minhas reservas</a></li>
+                          <li><a href="home">Biblioteca</a></li>
+                          <li><a href="minhasReservas">Minhas reservas</a></li>
                         </ul>
                     </div>
                     <div id="Forms" class="tab-pane notika-tab-menu-bg animated flipInX">
