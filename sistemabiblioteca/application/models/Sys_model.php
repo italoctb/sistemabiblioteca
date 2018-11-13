@@ -15,7 +15,7 @@ class Sys_model extends CI_Model {
         }
 
         public function consultaTitulos(){
-                $query = $this->db->query('select ISBN, titulo, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_HAS_AUTORES natural join AUTORES;');
+                $query = $this->db->query('select ISBN, titulo, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES;');
                 return $query->result();
         }
 
