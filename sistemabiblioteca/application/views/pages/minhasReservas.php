@@ -7,6 +7,7 @@
             <table id="" class="table table-striped">
               <thead>
                 <tr>
+                  <th><a class="fixing_bug" href="#data-table-basic">ISBN</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Título</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Data de reserva</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Data de devolução</a></th>
@@ -17,6 +18,7 @@
 
                   foreach ($title as $query) {?>
                     <tr>
+                      <td><?php echo $query->ISBN ?></td>
                       <td><?php echo $query->titulo ?></td>
                       <td><?php echo $query->data_reserva ?></td>
                       <td><?php echo $query->prazo_dev ?></td>
@@ -26,6 +28,7 @@
                 </tbody>
                 <tfoot>
                   <tr>
+                    <th><a class="fixing_bug" href="#data-table-basic">ISBN</a></th>
                     <th><a class="fixing_bug" href="#data-table-basic">Título</a></th>
                     <th><a class="fixing_bug" href="#data-table-basic">Data de reserva</a></th>
                     <th><a class="fixing_bug" href="#data-table-basic">Data de devolução</a></th>
