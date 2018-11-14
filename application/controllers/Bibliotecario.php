@@ -76,4 +76,9 @@ class Bibliotecario extends CI_Controller{
             $this->load->view('pages/minhasReservas', $data);
             $this->load->view('templates/footer.php');
           }
+
+          public function bib_logout(){
+            $this->session->sess_destroy();
+            redirect(base_url('/'), 'refresh');
+          }
 }
