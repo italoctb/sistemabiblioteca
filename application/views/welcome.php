@@ -1,3 +1,15 @@
+<?php
+	$user = $this->session->userdata('nivel_usuario');
+
+	if ($user == 'administrador') {
+	    redirect(base_url('admin/home'));
+	} elseif ($user == 'bibliotecario') {
+	    redirect(base_url('blib/home'));
+	} elseif ($user == 'usuario') {
+	    redirect(base_url('user/home'));
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +37,7 @@
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?=base_url('static/css/util_f.css')?>">
 	<link rel="stylesheet" type="text/css" href="<?=base_url('static/css/main_f.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?=base_url('static/css/bootstrap.min.css')?>">
 	<!--===============================================================================================-->
 </head>
 <body>
@@ -55,10 +68,19 @@
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="container-login100-form-btn" style="margin-top: 35px;">
-						<button class="login100-form-btn">
-							Entrar
-						</button>
+					<div class="row">
+						<div class="col-8">
+							<div class="container-login100-form-btn" style="margin-top: 35px;">
+								<button class="login100-form-btn">
+									Entrar
+								</button>
+							</div>
+						</div>
+						<div class="col-4">
+							<div class="container-login100-form-btn" style="margin-top: 35px;">
+								<a class="btn login100-form-btn btn-lg btn-secondary btn-block" href="<?= base_url('cadastro') ?>">Cadastro</a>
+							</div>
+						</div>
 					</div>
 
 				</form>

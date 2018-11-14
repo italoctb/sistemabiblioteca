@@ -1,3 +1,8 @@
+<?php
+    $user = $this->session->userdata('nivel_usuario');
+    if($user != 'administrador' && $user != 'bibliotecario'){redirect(base_url(''));}
+?>
+
 <div class="data-table-area">
   <div class="container">
     <div class="row">
