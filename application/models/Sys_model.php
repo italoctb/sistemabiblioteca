@@ -43,4 +43,10 @@ class Sys_model extends CI_Model {
                 $query = $this->db->query('select ISBN, titulo, data_reserva, prazo_dev from USUARIO natural join RESERVA natural join LIVROS where username = "'.$username.'";');
                 return $query->result();
         }
+
+//=============================================================================================
+        public function registro_usuario($user){
+                $this->db->insert('USUARIO', $user);
+        }
+
 }
