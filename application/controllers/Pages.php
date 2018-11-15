@@ -193,17 +193,16 @@ class Pages extends CI_Controller {
 
     public function reservaLivro($ident = NULL){
             $user = $this->session->userdata('usuario');
-           
-            $data['livros'] = $this->db->get("LIVROS")->result();
             $data = array(
                 'title' => $this->sys_model->consultaTitulos(),  
                 'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
                 'username' =>$this->sys_model->consulta_especifico_Usuario($user)->username,
                 'tipoUsuario' =>$this->sys_model->consulta_especifico_Usuario($user)->tipoUsuario,
-                'nivel_usuario' =>$this->sys_model->consulta_especifico_Usuario($user)->nivel_usuario
+                'livros' => $this->db->get("LIVROS")->result(),
+                'ISBN' => $ident,
+                'titulo' =>  $this->user_model->livroByISBN($ident)->titulo
             );
-            $data['ISBN'] = $ident;
-            $data['titulo'] =  $this->user_model->livroByISBN($ident)->titulo;
+            
             $this->load->view('templates/header.php');
             $this->load->view('pages/reservaLivro', $data);
             $this->load->view('templates/footer.php');

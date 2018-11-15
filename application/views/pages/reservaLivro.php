@@ -1,6 +1,5 @@
 <?php
     $user_id = $this->session->userdata('nivel_usuario');
-    $tipo= $this->session->userdata('tipoUsuario');
     if($user_id != 'usuario' && $user_id != 'bibliotecario' && $user_id != 'administrador'){redirect(base_url('sem_acesso'));}
 ?>
 
@@ -43,10 +42,11 @@
         if ($tipoUsuario == 'tipoProf'):
             $temp = 30;
         elseif ($tipoUsuario == 'tipoFunc'):
-            $temp == 21;
+            $temp = 21;
         elseif ($tipoUsuario == 'tipoAl'):
             $temp = 15;
         endif;
+
         $data = date('Y/m/d');
         $nData = strtotime($data."+ $temp days");
         $dev_data = date("Y/m/d",$nData);
