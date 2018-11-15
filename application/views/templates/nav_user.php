@@ -9,13 +9,13 @@
                             <li><a data-toggle="collapse" data-target="#Charts" href="#">Início</a>
                                 <ul class="collapse dropdown-header-top">
                                     <li><a href="home">Biblioteca</a></li>
-        							<li><a href="minhasReservas">Minhas reservas</a></li>
+        							<li><a href="<?=base_url('minhasReservas')?>">Minhas reservas</a></li>
                                     <li><a href="<?php echo base_url('user_logout')?>">Sair</a></li>
                                 </ul>
                             </li>
                             <li><a data-toggle="collapse" data-target="#Charts" href="#">Sistema</a>
                               <ul class="notika-main-menu-dropdown">
-                                <li><a href="consulta">Realizar empréstimos</a></li>
+                                <li><a href="<?=base_url('consulta')?>">Realizar empréstimos</a></li>
                               </ul>
                             </li>
                             <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Usuário</a>
@@ -49,13 +49,13 @@
                     <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
                           <li><a href="home">Biblioteca</a></li>
-                          <li><a href="minhasReservas">Minhas reservas</a></li>
+                          <li><a href="<?=base_url('minhasReservas')?>">Minhas reservas</a></li>
                           <li><a href="<?php echo base_url('user_logout')?>">Sair</a></li>
                         </ul>
                     </div>
                     <div id="Forms" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
-                          <li><a href="consulta">Realizar empréstimos</a></li>
+                          <li><a href="<?=base_url('consulta')?>">Realizar empréstimos</a></li>
                         </ul>
                     </div>
                     <div id="Page" class="tab-pane notika-tab-menu-bg animated flipInX">

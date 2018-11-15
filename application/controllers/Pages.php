@@ -266,7 +266,79 @@ class Pages extends CI_Controller {
         $this->load->view('templates/footer.php');
     }
 
+    public function finalizarEmprestimos(){
+        $user = $this->session->userdata('nivel_usuario');
+        $data = array(
+            'title' => $this->sys_model->consulta_minhasReservas($this->session->userdata('usuario')),
+            'usuarios' => $this->db->get("USUARIO")->result(),
+            'reserva' => $this->db->get("RESERVA")->result()
+        );
+        $this->load->view('templates/header.php');
+
+        if ($user === 'administrador'):
+            $nav = 'nav_adm';
+        elseif ($user === 'bibliotecario'):
+            $nav = 'nav_blib';
+        endif;
+
+        $this->load->view('templates/'.$nav);
+        $this->load->view('pages/finalizarEmprestimos', $data);
+        $this->load->view('templates/footer.php');
+    }
+
     public function sem_acesso(){
       $this->load->view('pages/error_page');
+    }
+
+    function baixaReserva($ident = NULL){
+        $user = $this->session->userdata('nivel_usuario');
+        $data = array(
+            'username' => $ident,
+            'title' => $this->sys_model->consulta_minhasReservas($this->session->userdata('usuario')),
+            'usuarios' => $this->db->get("USUARIO")->result(),
+            'reserva' => $this->db->get("RESERVA")->result()
+        );
+        
+        $this->load->view('templates/header.php');
+
+        if ($user === 'administrador'):
+            $nav = 'nav_adm';
+        elseif ($user === 'bibliotecario'):
+            $nav = 'nav_blib';
+        endif;
+
+        $this->load->view('templates/'.$nav);
+        $this->load->view('pages/baixaReserva', $data);
+        $this->load->view('templates/footer.php');
+    }
+
+    function devReserva($ident = NULL, $username = NULL){
+        $user = $this->session->userdata('nivel_usuario');
+        $data['livros'] = $this->db->get("LIVROS")->result();
+
+        if ( $user === 'bibliotecario' || $user === 'administrador') {
+            $this->user_model->inc_livro($ident);
+            $this->user_model->dec_user($username);
+            $this->db->where('ISBN',$ident);
+            $this->db->delete('RESERVA');
+            $this->session->set_flashdata('success_msg', 'Operação realizada!');
+            redirect(base_url('consultaReserva'));
+        }
+        else {
+            $this->session->set_flashdata('error_msg', 'Não foi possível realizar a solicitação');
+            redirect(base_url(''));
+        }
+
+        $this->load->view('templates/header.php');
+
+        if ($user === 'administrador'):
+            $nav = 'nav_adm';
+        elseif ($user === 'bibliotecario'):
+            $nav = 'nav_blib';
+        endif;
+
+        $this->load->view('templates/'.$nav);
+        $this->load->view('pages/baixaReserva', $data);
+        $this->load->view('templates/footer.php');
     }
 }

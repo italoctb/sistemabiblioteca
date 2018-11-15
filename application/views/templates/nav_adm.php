@@ -70,7 +70,7 @@
 	                        <ul class="notika-main-menu-dropdown">
 														<li><a href="<?=base_url('consulta')?>">Realizar empréstimos</a></li>
 														<li><a href="<?=base_url('')?>">Alterar empréstimos</a></li>
-														<li><a href="<?=base_url('')?>">Finalizar empréstimos</a></li>
+														<li><a href="<?=base_url('finalizarEmprestimos')?>">Finalizar empréstimos</a></li>
 	                        </ul>
 	                    </div>
 	                    <div id="Page" class="tab-pane notika-tab-menu-bg animated flipInX">

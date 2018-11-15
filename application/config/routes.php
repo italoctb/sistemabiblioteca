@@ -59,6 +59,11 @@ $route['cadastro'] 				= 'pages/cadastro';
 $route['addUsuario'] 			= 'pages/addUsuario';
 $route['envReserva'] 			= 'pages/envReserva';
 $route['minhasReservas'] 		= 'pages/minhasReservas';
+$route['finalizarEmprestimos']  = 'pages/finalizarEmprestimos';
+$route['baixaReserva'] 			= 'pages/baixaReserva';
+$route['baixaReserva/(:any)'] 	= 'pages/baixaReserva/$1';
+$route['devReserva'] 	= 'pages/devReserva';
+$route['devReserva/(:any)/(:any)'] 	= 'pages/devReserva/$1/$2';
 
 
 $route['user/(:any)'] = 'user/$1';
