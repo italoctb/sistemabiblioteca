@@ -8,7 +8,7 @@
 	                        <ul class="mobile-menu-nav">
 	                            <li><a data-toggle="collapse" data-target="#Charts" href="#">Início</a>
 	                                <ul class="collapse dropdown-header-top">
-																		<li><a href="home">Biblioteca</a></li>
+																		<li><a href="<?=base_url('admin/home')?>">Biblioteca</a></li>
 																		<li><a href="professores">Professores</a></li>
 																		<li><a href="consultaUsuario">Consulta usuários</a></li>
 																		<li><a href="consultaReserva">Consulta reservas</a></li>
@@ -53,11 +53,11 @@
 	                <div class="tab-content custom-menu-content">
 	                    <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
 	                        <ul class="notika-main-menu-dropdown">
-														<li><a href="home">Biblioteca</a></li>
-														<li><a href="professores">Professores</a></li>
-														<li><a href="consultaUsuario">Consulta usuários</a></li>
-														<li><a href="consultaReserva">Consulta reservas</a></li>
-														<li><a href="minhasReservas">Minhas reservas</a></li>
+														<li><a href="<?=base_url('admin/home')?>">Biblioteca</a></li>
+														<li><a href="<?=base_url('professores')?>">Professores</a></li>
+														<li><a href="<?=base_url('consultaUsuario')?>">Consulta usuários</a></li>
+														<li><a href="<?=base_url('consultaReserva')?>">Consulta reservas</a></li>
+														<li><a href="<?=base_url('minhasReservas')?>">Minhas reservas</a></li>
 														<li><a href="<?php echo base_url('bib_logout')?>">Sair</a></li>
 	                        </ul>
 	                    </div>
