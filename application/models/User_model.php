@@ -130,6 +130,22 @@
 
       }
 
+      public function getQntdByMat($tipo, $mat){
+          $this->db->select('*');
+          $this->db->from('USUARIO');
+          $this->db->where($tipo, $mat);
+          $this->db->where('qntd_livros',0);
+
+          if($query=$this->db->get()) {
+              return $query->row_array();
+          }
+
+          else{
+              return false;
+          }
+
+      }
+
       public function getQntdFunc($mat=null){
           $this->db->select('*');
           $this->db->from('USUARIO');

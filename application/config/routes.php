@@ -61,6 +61,7 @@ $route['consulta/(:any)'] = '/user/consulta/$1';
 $route['envReserva'] = '/user/envReserva';
 $route['reservaLivro'] = '/user/reservaLivro';
 $route['reservaLivro/(:num)'] = '/user/reservaLivro/$1';
+
 $route['admin_logout'] = '/administrador/admin_logout';
 $route['bib_logout'] = '/bibliotecario/bib_logout';
 
@@ -68,5 +69,8 @@ $route['cadastro'] = 'pages/cadastro';
 $route['addUsuario'] = '/pages/addUsuario';
 $route['registro_usuario'] = '/administrador/registro_usuario';
 $route['addCadastro'] = '/administrador/addCadastro';
+$route['editarUsuario'] = '/administrador/editarUsuario';
+$route['editarUsuario/(:any)'] = '/administrador/editarUsuario/$1';
+$route['updateUsuario'] = '/administrador/updateUsuario';
 
 

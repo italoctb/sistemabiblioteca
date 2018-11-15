@@ -8,6 +8,7 @@ class Pages extends CI_Controller {
               $this->load->model('func_model');
               $this->load->model('prof_model');
               $this->load->model('alu_model');
+              $this->load->model('sys_model');
               $this->load->helper('url');
               $this->load->helper('form');
               $this->load->library('session');
@@ -29,7 +30,6 @@ class Pages extends CI_Controller {
         public function aut_login(){
           $user = $this->input->post('username');
           $pass = $this->input->post('pass');
-          $this->load->model('sys_model');
           $result = $this->sys_model->validation($user, $pass);
           if($result){
             $sel = $this->sys_model->consulta_especifico_Usuario($user)->nivel_usuario;
@@ -70,7 +70,6 @@ class Pages extends CI_Controller {
 
         public function cadastro(){
             //$this->session->set_flashdata('success_msg', 'Cadastrar novo usuário');
-            $this->load->model('sys_model');
             $this->load->view('pages/cadastro');
         }
 

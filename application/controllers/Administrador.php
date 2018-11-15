@@ -10,6 +10,7 @@ class Administrador extends CI_Controller{
               $this->load->model('func_model');
               $this->load->model('prof_model');
               $this->load->model('alu_model');
+              $this->load->model('sys_model');
               $this->load->helper('url');
               $this->load->helper('form');
               $this->load->library('session');
@@ -30,13 +31,12 @@ class Administrador extends CI_Controller{
           }
 
           public function home(){
-            $this->load->model('sys_model');
             $user = $this->session->userdata('usuario');
             $data = array(
                 'title' => $this->sys_model->consultaTitulos(),
                 'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome
             );
-            $this->session->set_flashdata('success_msg', 'Bem-vindo ' . $data['nome']);
+            $this->session->set_flashdata('success_msg', 'Bem-vindo, ' . $data['nome']);
             $this->load->view('templates/header');
             $this->load->view('templates/nav_adm');
             $this->load->view('pages/home', $data);
@@ -44,7 +44,6 @@ class Administrador extends CI_Controller{
           }
 
           public function professores(){
-            $this->load->model('sys_model');
             $data = array(
               'title' => $this->sys_model->consultaProf()
             );
@@ -55,7 +54,6 @@ class Administrador extends CI_Controller{
           }
 
           public function consultaUsuario(){
-            $this->load->model('sys_model');
             $data = array(
               'title' => $this->sys_model->consultaUsuario()
             );
@@ -66,7 +64,6 @@ class Administrador extends CI_Controller{
           }
 
           public function consultaReserva(){
-            $this->load->model('sys_model');
             $data = array(
               'title' => $this->sys_model->consultaReserva()
             );
@@ -77,7 +74,6 @@ class Administrador extends CI_Controller{
           }
 
           public function minhasReservas(){
-            $this->load->model('sys_model');
             $data = array(
               'title' => $this->sys_model->consulta_minhasReservas($this->session->userdata('usuario'))
             );
@@ -89,7 +85,6 @@ class Administrador extends CI_Controller{
 
           public function addCadastro(){
             //$this->session->set_flashdata('success_msg', 'Cadastrar novo usuário');
-            $this->load->model('sys_model');
             $data = array(
               'title' => $this->sys_model->consulta_minhasReservas($this->session->userdata('usuario'))
             );
@@ -196,6 +191,68 @@ class Administrador extends CI_Controller{
                 }
             }
           }
+
+          public function editarUsuario($ident = NULL){
+              $user_id = $this->session->userdata('nivel_usuario');
+              $data['NOME'] = $this->user_model->sel_usuario();
+              if($user_id === 'administrador'){
+                  $this->db->where('username',$ident);
+                  $data['usuario'] = $this->db->get('USUARIO')->result();
+                  $this->load->view('templates/header');
+                  $this->load->view('pages/editarUsuario', $data);
+                  $this->load->view('templates/footer');
+              }
+              else{
+                  {redirect(base_url('admin/consultaUsuario'));}
+              }
+          }
+
+          public function updateUsuario(){
+            $user_id = $this->session->userdata('nivel_usuario');
+            $this->form_validation->set_rules('username', 'Usuário', 'trim|required');
+
+            if ($this->form_validation->run() == FALSE) {
+                $this->session->set_flashdata('error_msg', 'Preencha todos os campos.');
+            }
+
+            else{
+                    $nome = $this->input->post('nome');
+                    $mat = $this->input->post('matricula');
+                    $tipo = $this->input->post('tipoUsuario');
+
+                    if ($tipo == 'tipoFunc'):
+                      $mat_tipo = 'mat_func';
+                    elseif ($tipo == 'tipoAl'):
+                      $mat_tipo = 'mat_aluno';
+                    elseif ($tipo == 'tipoProf'):
+                      $mat_tipo = 'mat_siape';
+                    endif;
+
+                    $test = $this->user_model->getQntdByMat($mat_tipo, $mat);
+                    $LOGIN = array(
+                        'nome' => $this->input->post('nome'),
+                        'username' => $this->input->post('username'),
+                        'user_end' => $this->input->post('user_end')
+                    );
+
+                    if($test){
+
+                        $this->db->where($mat_tipo, $mat);
+                        if($this->db->update('USUARIO', $LOGIN) && $user_id==='administrador'){
+                            $this->session->set_flashdata('success_msg', 'Registro atualizado');
+                            redirect(base_url('admin/consultaUsuario'));
+                        }
+                       else{
+                           $this->session->set_flashdata('success_msg', 'Erro na atualização');
+                           redirect(base_url('admin/consultaUsuario'));
+                       }
+                    }
+                    else{
+                        $this->session->set_flashdata('error_msg', 'Usuário com débito não pode ser atualizado');
+                        redirect(base_url('admin/consultaUsuario'));
+                    }
+            }
+        }
 
           public function admin_logout(){
             $this->session->sess_destroy();

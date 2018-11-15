@@ -9,6 +9,7 @@ class User extends CI_Controller {
               $this->load->model('func_model');
               $this->load->model('prof_model');
               $this->load->model('alu_model');
+              $this->load->model('sys_model');
               $this->load->helper('url');
               $this->load->helper('form');
               $this->load->library('session');
@@ -30,13 +31,13 @@ class User extends CI_Controller {
           }
 
           public function home(){
-            $this->load->model('sys_model');
             $user = $this->session->userdata('usuario');
             $data = array(
                 'title' => $this->sys_model->consultaTitulos(),
                 'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome
             );
-            $this->session->set_flashdata('success_msg', 'Bem-vindo ' . $data['nome']);
+
+            $this->session->set_flashdata('success_msg', 'Bem-vindo, ' . $data['nome']);
             $this->load->view('templates/header.php');
             $this->load->view('templates/nav_user.php');
             $this->load->view('pages/home', $data);
@@ -44,7 +45,6 @@ class User extends CI_Controller {
           }
 
           public function professores(){
-            $this->load->model('sys_model');
             $data = array(
               'title' => $this->sys_model->consultaProf()
             );
@@ -55,7 +55,6 @@ class User extends CI_Controller {
           }
 
           public function consultaUsuario(){
-            $this->load->model('sys_model');
             $data = array(
               'title' => $this->sys_model->consultaUsuario()
             );
@@ -66,7 +65,6 @@ class User extends CI_Controller {
           }
 
            public function consulta(){
-            $this->load->model('sys_model');
             $data = array(
               'title' => $this->sys_model->consultaReserva(),
               'livros' => $this->db->get("LIVROS")->result()
@@ -78,7 +76,6 @@ class User extends CI_Controller {
           }
 
           public function reservaLivro($ident = NULL){
-            $this->load->model('sys_model');
             $user = $this->session->userdata('usuario');
            
             $data['livros'] = $this->db->get("LIVROS")->result();
@@ -97,7 +94,6 @@ class User extends CI_Controller {
           }
 
           public function consultaReserva(){
-            $this->load->model('sys_model');
             $data = array(
               'title' => $this->sys_model->consultaReserva()
             );
@@ -108,7 +104,6 @@ class User extends CI_Controller {
           }
 
           public function minhasReservas(){
-            $this->load->model('sys_model');
             $data = array(
               'title' => $this->sys_model->consulta_minhasReservas($this->session->userdata('usuario'))
             );

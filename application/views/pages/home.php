@@ -33,7 +33,7 @@
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="data-table-list">
           <div class="table-responsive">
-            <table id="" class="table table-striped">
+            <table id="tabela_livros" class="table table-striped">
               <thead>
                 
                 <tr>
@@ -48,18 +48,40 @@
               </thead>
               <tbody>
                 <?php
+                   $isbnTemp = 0;
+                   $autorTemp = 0;
+                   $cont = 0;
+                   $t_id = '';
+                    foreach ($title as $query) {
+                ?>
+                    <tr id="test">
+                      <td><?=$query->ISBN?></td>
+                      <td><?=$query->titulo?></td>
 
-                  foreach ($title as $query) {?>
-                    <tr>
-                      <td><?php echo $query->ISBN ?></td>
-                      <td><?php echo $query->titulo ?></td>
-                      <td><?php echo $query->nome_autor ?></td>
-                      <td><?php echo $query->ano_lançamento ?></td>
-                      <td><?php echo $query->editora ?></td>
-                      <td><?php echo $query->descricao ?></td>
-                      <td><?php echo $query->qtd_disp.'/'.$query->qtd_copias?></td>
+                      <td>
+                        <?php  
+                          
+                          if ($isbnTemp!=$query->ISBN){
+                            echo $query->nome_autor;
+                            $cont++;
+                          }
+                          elseif ($isbnTemp==$query->ISBN){
+                            echo $autorTemp.' / '.$query->nome_autor;
+                            '<script>Delete();</script>';
+                          }
+                        ?>
+                      </td>
+
+                      <td><?=$query->ano_lançamento?></td>
+                      <td><?=$query->editora?></td>
+                      <td><?=$query->descricao?></td>
+                      <td><?=$query->qtd_disp.'/'.$query->qtd_copias?></td>
                     </tr>
-                <?php  }?>
+                <?php
+                  $isbnTemp=$query->ISBN;
+                  $autorTemp=$query->nome_autor;
+                 }
+                ?>
 
                 </tbody>
                 <tfoot>
@@ -80,3 +102,14 @@
       </div>
     </div>
   </div>
+
+<script
+        src="https://code.jquery.com/jquery-3.0.0.slim.min.js"
+        integrity="sha256-Rf4BadfyCtsvHmO89BUZcbYvNNvZvOT08ALfEzvCsD0="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+
+</script>
+

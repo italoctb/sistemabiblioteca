@@ -1,3 +1,33 @@
+<span style="background-color:red;">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+                  <div class="panel-body">
+                      <?php
+                      $success_msg= $this->session->flashdata('success_msg');
+                      $error_msg= $this->session->flashdata('error_msg');
+
+                      if($success_msg){
+                          ?>
+                          <div class="alert alert-success">
+                                <?php echo $success_msg; ?>
+                              </div>
+                          <?php
+                      }
+                      if($error_msg){
+                          ?>
+                          <div class="alert alert-danger">
+                                <?php echo $error_msg; ?>
+                            </div>
+                          <?php
+                      }
+                      ?>
+                  </div>
+          </div>
+      </div>
+  </div>
+</span>
+
 <div class="data-table-area">
   <div class="container">
     <div class="row">
@@ -16,14 +46,25 @@
               <tbody>
                 <?php
 
-                  foreach ($title as $query) {?>
+                  foreach ($title as $query) {
+                    if ($query->username != 'admin'){
+                    ?>
+
                     <tr>
                       <td><?php echo $query->username ?></td>
                       <td><?php echo $query->nome ?></td>
                       <td><?php echo $query->tipoUsuario ?></td>
                       <td><?php echo $query->user_end ?></td>
+
+                      <td>
+                            <a class="btn bt-form btn-block" href="<?=base_url('editarUsuario/'.$query->username)?>";>Editar</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger bt-form btn-block" href="<?=base_url('deletarUsuario/'.$query->username)?>" onclick="return confirm('Tem certeza que deseja deletar o usuário?');">Deletar</a>
+                        </td>
+
                     </tr>
-                <?php  }?>
+                <?php  }}?>
 
                 </tbody>
                 <tfoot>

@@ -48,5 +48,4 @@ class Sys_model extends CI_Model {
         public function registro_usuario($user){
                 $this->db->insert('USUARIO', $user);
         }
-
 }
