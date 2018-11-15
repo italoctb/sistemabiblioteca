@@ -143,9 +143,17 @@
 
         <div class="row" style="margin-top: 50px;"></div>
 
-        <div  class="form-group">
-            <button type="submit" class="btn btn-success notika-btn-success" value="Cadastrar">Enviar</button>
-            <button id="limpar" type="reset" class="btn btn-info notika-btn-info" name="Limpar" value="Limpar">Limpar</button>
+        <div class="row">
+  
+            <div class="col-4">
+              <button type="submit" class="btn btn-success notika-btn-success" value="Cadastrar">Enviar</button>
+            </div>
+            <div class="col-4">
+              <button id="limpar" type="reset" class="btn btn-info notika-btn-info" name="Limpar" value="Limpar">Limpar</button>
+            </div>
+            <div class="col-4">
+              <a id="limpar" type="reset" class="btn btn-danger notika-btn-danger" name="Limpar" value="Limpar" href="<?=base_url('')?>"><--Voltar</a>
+            </div>
         </div>
         </form>
       </div>

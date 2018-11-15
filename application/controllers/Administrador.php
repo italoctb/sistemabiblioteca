@@ -148,14 +148,22 @@ class Administrador extends CI_Controller{
                       'user_end' => $this->input->post('user_end'),
                   );
                   $alu_check = $this->alu_model->alu_check($LOGIN['mat_aluno']);
-                  if ($alu_check) {
+                  $dataAluCheck = $this->alu_model->dataAluCheck($LOGIN['mat_aluno']);
+                  if ($alu_check && $dataAluCheck) {
                       $this->user_model->reg_usuario($LOGIN);
                       $this->session->set_flashdata('success_msg', 'Aluno registrado com sucesso!');
                       redirect(base_url('addCadastro'));
                   }
                   else {
-                      $this->session->set_flashdata('error_msg', 'Erro no registro, verifique se os dados estão corretos');
-                      redirect(base_url('addCadastro'));
+                      if(!$dataAluCheck){
+                        $this->session->set_flashdata('error_msg', 'Desculpe, o aluno não pode ser cadastrado.');
+                        redirect(base_url('addCadastro'));
+                    }
+
+                    else{
+                    $this->session->set_flashdata('error_msg', 'Erro no registro, verifique se sua Matrícula está correta');
+                        redirect(base_url('addCadastro'));
+                    }
                   }
               }
 

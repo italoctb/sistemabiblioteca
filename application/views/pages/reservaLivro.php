@@ -47,9 +47,9 @@
             $temp = 15;
         endif;
 
-        $data = date('Y/m/d');
+        $data = date('Y-m-d');
         $nData = strtotime($data."+ $temp days");
-        $dev_data = date("Y/m/d",$nData);
+        $dev_data = date("Y-m-d",$nData);
     ?>
 
 <div class="container">

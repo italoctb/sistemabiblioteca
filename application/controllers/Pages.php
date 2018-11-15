@@ -125,14 +125,23 @@ class Pages extends CI_Controller {
                     'user_end' => $this->input->post('user_end'),
                 );
                 $alu_check = $this->alu_model->alu_check($LOGIN['mat_aluno']);
-                if ($alu_check) {
+                $dataAluCheck = $this->alu_model->dataAluCheck($LOGIN['mat_aluno']);
+                if ($alu_check && $dataAluCheck) {
                     $this->user_model->reg_usuario($LOGIN);
                     $this->session->set_flashdata('success_msg', 'Aluno registrado com sucesso!');
                     redirect(base_url('cadastro'));
                 }
                 else {
+
+                    if(!$dataAluCheck){
+                        $this->session->set_flashdata('error_msg', 'Desculpe, você não pode mais utilizar os serviços da biblioteca.');
+                        redirect(base_url('cadastro'));
+                    }
+
+                    else{
                     $this->session->set_flashdata('error_msg', 'Erro no registro, verifique se sua Matrícula está correta');
-                    redirect(base_url('cadastro'));
+                        redirect(base_url('cadastro'));
+                    }
                 }
             }
 

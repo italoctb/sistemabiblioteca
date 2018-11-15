@@ -49,46 +49,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] 	= 'pages/view';
-$route['autenticate'] 		 	= 'pages/aut_login';
-$route['sem_acesso'] 			= 'pages/error_page';
-$route['consulta'] 				= 'pages/consulta';
-$route['reservaLivro'] 			= 'pages/reservaLivro';
-$route['reservaLivro/(:num)'] 	= 'pages/reservaLivro/$1';
-$route['cadastro'] 				= 'pages/cadastro';
-$route['addUsuario'] 			= 'pages/addUsuario';
-$route['envReserva'] 			= 'pages/envReserva';
-$route['minhasReservas'] 		= 'pages/minhasReservas';
-$route['finalizarEmprestimos']  = 'pages/finalizarEmprestimos';
-$route['baixaReserva'] 			= 'pages/baixaReserva';
-$route['baixaReserva/(:any)'] 	= 'pages/baixaReserva/$1';
-$route['devReserva'] 	= 'pages/devReserva';
+
+$route['default_controller'] 		= 'pages/view';
+$route['autenticate'] 		 		= 'pages/aut_login';
+$route['sem_acesso'] 				= 'pages/error_page';
+$route['consulta'] 					= 'pages/consulta';
+$route['reservaLivro'] 				= 'pages/reservaLivro';
+$route['reservaLivro/(:num)'] 		= 'pages/reservaLivro/$1';
+$route['cadastro'] 					= 'pages/cadastro';
+$route['addUsuario'] 				= 'pages/addUsuario';
+$route['envReserva'] 				= 'pages/envReserva';
+$route['minhasReservas'] 			= 'pages/minhasReservas';
+$route['finalizarEmprestimos'] 	 	= 'pages/finalizarEmprestimos';
+$route['baixaReserva'] 				= 'pages/baixaReserva';
+$route['baixaReserva/(:any)'] 		= 'pages/baixaReserva/$1';
+$route['devReserva'] 				= 'pages/devReserva';
 $route['devReserva/(:any)/(:any)'] 	= 'pages/devReserva/$1/$2';
 
-
-$route['user/(:any)'] = 'user/$1';
-$route['blib/(:any)'] = 'bibliotecario/$1';
+$route['user/(:any)']  = 'user/$1';
+$route['blib/(:any)']  = 'bibliotecario/$1';
 $route['admin/(:any)'] = 'administrador/$1';
 
-$route['professores'] = 'administrador/professores';
-$route['consultaUsuario'] = 'administrador/consultaUsuario';
-$route['consultaReserva'] = 'administrador/consultaReserva';
+$route['professores'] 		= 'administrador/professores';
+$route['consultaUsuario'] 	= 'administrador/consultaUsuario';
+$route['consultaReserva'] 	= 'administrador/consultaReserva';
 
-$route['admin/home'] = '/administrador/home';
-$route['user/home'] = '/user/home';
-$route['blib/home'] = '/bibliotecario/home';
+$route['user/home']		= '/user/home';
+$route['user_logout']	= '/user/user_logout';
 
-$route['user_logout'] = '/user/user_logout';
+$route['blib/home']		= '/bibliotecario/home';
+$route['bib_logout']	= '/bibliotecario/bib_logout';
 
-$route['admin_logout'] = '/administrador/admin_logout';
-$route['bib_logout'] = '/bibliotecario/bib_logout';
-
-$route['registro_usuario'] = '/administrador/registro_usuario';
-$route['addCadastro'] = '/administrador/addCadastro';
-$route['editarUsuario'] = '/administrador/editarUsuario';
-$route['editarUsuario/(:any)'] = '/administrador/editarUsuario/$1';
-$route['deletarUsuario'] = '/administrador/deletarUsuario';
-$route['deletarUsuario/(:any)'] = '/administrador/deletarUsuario/$1';
-$route['updateUsuario'] = '/administrador/updateUsuario';
+$route['admin/home']			= '/administrador/home';
+$route['registro_usuario']		= '/administrador/registro_usuario';
+$route['addCadastro']			= '/administrador/addCadastro';
+$route['editarUsuario']			= '/administrador/editarUsuario';
+$route['editarUsuario/(:any)']	= '/administrador/editarUsuario/$1';
+$route['deletarUsuario']		= '/administrador/deletarUsuario';
+$route['deletarUsuario/(:any)']	= '/administrador/deletarUsuario/$1';
+$route['updateUsuario']			= '/administrador/updateUsuario';
+$route['admin_logout']			= '/administrador/admin_logout';
 
 

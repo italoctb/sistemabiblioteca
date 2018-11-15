@@ -22,6 +22,26 @@
 
       }
 
+      public function dataAluCheck($matricula){
+          $query = $this->db->get_where("ALUNOS","mat_aluno='$matricula'")->result();
+          $date = strtotime(date("Y-m-d"));
+
+          foreach ($query as $row)
+          {
+              $dataConc = $row->data_de_conclusao_prev;
+              
+          }
+          $nData = strtotime("$dataConc");
+
+          if($nData > $date) {
+            return true;
+          }
+
+          else{
+            return false;
+          }
+      }
+
       public function alu_check($mat_aluno) {
           $query  =  $this->db->get_where(
               'ALUNOS',
