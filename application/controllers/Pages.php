@@ -170,4 +170,8 @@ class Pages extends CI_Controller {
         }
 
     }
+
+    public function sem_acesso(){
+      $this->load->view('pages/error_page');
+    }
 }

@@ -17,7 +17,7 @@
   <link rel="stylesheet" type="text/css" href="<?=base_url('static/css/util_f.css')?>">
   <link rel="stylesheet" type="text/css" href="<?=base_url('static/css/main_f.css')?>">
   <link rel="stylesheet" type="text/css" href="<?=base_url('static/css/bootstrap.min.css')?>">
-
+  <link rel="stylesheet" type="text/css" href="<?=base_url('static/css/dashboard.css')?>">
 </head>
 
 
@@ -25,7 +25,6 @@
   <div class="container">
       <div class="row">
           <div class="col-md-10 col-md-offset-1">
-              <div class="login-panel panel panel-success">
                   <div class="panel-body">
                       <?php
                       $success_msg= $this->session->flashdata('success_msg');
@@ -47,7 +46,6 @@
                       }
                       ?>
                   </div>
-              </div>
           </div>
       </div>
   </div>

@@ -54,8 +54,13 @@ $route['blib/(:any)'] = 'bibliotecario/$1';
 $route['admin/(:any)'] = 'administrador/$1';
 $route['default_controller'] = 'pages/view';
 $route['autenticate'] = 'pages/aut_login';
+$route['sem_acesso'] = 'pages/error_page';
 
 $route['user_logout'] = '/user/user_logout';
+$route['consulta/(:any)'] = '/user/consulta/$1';
+$route['envReserva'] = '/user/envReserva';
+$route['reservaLivro'] = '/user/reservaLivro';
+$route['reservaLivro/(:num)'] = '/user/reservaLivro/$1';
 $route['admin_logout'] = '/administrador/admin_logout';
 $route['bib_logout'] = '/bibliotecario/bib_logout';
 

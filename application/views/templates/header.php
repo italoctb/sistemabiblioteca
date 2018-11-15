@@ -56,6 +56,7 @@
 	<link rel="stylesheet" href="<?=base_url('static/css/responsive.css')?>">
 
 	<link rel="stylesheet" href="<?=base_url('static/css/adjust_styles.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?=base_url('static/css/dashboard.css')?>">
 	<!-- modernizr JS
 	============================================ -->
 	<script src="<?=base_url('static/js/vendor/modernizr-2.8.3.min.js')?>"></script>

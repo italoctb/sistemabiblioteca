@@ -1,3 +1,32 @@
+  <span style="background-color:red;">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+                  <div class="panel-body">
+                      <?php
+                      $success_msg= $this->session->flashdata('success_msg');
+                      $error_msg= $this->session->flashdata('error_msg');
+
+                      if($success_msg){
+                          ?>
+                          <div class="alert alert-success">
+                                <?php echo $success_msg; ?>
+                              </div>
+                          <?php
+                      }
+                      if($error_msg){
+                          ?>
+                          <div class="alert alert-danger">
+                                <?php echo $error_msg; ?>
+                            </div>
+                          <?php
+                      }
+                      ?>
+                  </div>
+          </div>
+      </div>
+  </div>
+</span>
 <div class="data-table-area">
   <div class="container">
     <div class="row">
@@ -6,6 +35,7 @@
           <div class="table-responsive">
             <table id="" class="table table-striped">
               <thead>
+                
                 <tr>
                   <th><a class="fixing_bug" href="#data-table-basic">ISBN</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Nome da obra</a></th>

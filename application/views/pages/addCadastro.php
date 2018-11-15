@@ -6,7 +6,6 @@
   <div class="container">
       <div class="row">
           <div class="col-md-10 col-md-offset-1">
-              <div class="login-panel panel panel-success">
                   <div class="panel-body">
                       <?php
                       $success_msg= $this->session->flashdata('success_msg');
@@ -28,7 +27,6 @@
                       }
                       ?>
                   </div>
-              </div>
           </div>
       </div>
   </div>
