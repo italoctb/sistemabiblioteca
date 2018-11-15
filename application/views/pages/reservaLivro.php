@@ -1,7 +1,7 @@
 <?php
     $user_id = $this->session->userdata('nivel_usuario');
     $tipo= $this->session->userdata('tipoUsuario');
-    if($user_id != 'usuario' && $user_id != 'bibliotecario'){redirect(base_url('sem_acesso'));}
+    if($user_id != 'usuario' && $user_id != 'bibliotecario' && $user_id != 'administrador'){redirect(base_url('sem_acesso'));}
 ?>
 
 <div class="data-table-area">
@@ -88,7 +88,7 @@
 
         <div  class="form-group">
             <button type="submit" class="btn btn-success notika-btn-success" value="Reservar"/>Revervar</button>
-            <a class="btn login100-form-btn btn-lg btn-secondary" href="<?= base_url('user/consulta') ?>"> <-Voltar</a>
+            <a class="btn login100-form-btn btn-lg btn-secondary" href="<?= base_url('consulta') ?>"> <-Voltar</a>
         </div>
 
 

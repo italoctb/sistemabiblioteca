@@ -254,6 +254,31 @@ class Administrador extends CI_Controller{
             }
         }
 
+        public function deletarUsuario($ident = NULL){
+            $user_id = $this->session->userdata('nivel_usuario');
+            if($user_id === 'administrador'){
+                $test = $this->user_model->getQntdByUsername($ident);
+                if($test) {
+                    $this->db->where('username',$ident);
+                    if ($this->db->delete('USUARIO')):
+                        $this->session->set_flashdata('success_msg', 'Registro deletado');
+                        redirect(base_url('admin/consultaUsuario'));
+                    else:
+                        $this->session->set_flashdata('error_msg', 'Erro ao deletar registro');
+                        redirect(base_url('admin/consultaUsuario'));
+                    endif;
+                }
+                else {
+                    $this->session->set_flashdata('error_msg', 'Usuário com débito não pode ser deletado');
+                    redirect(base_url('admin/consultaUsuario'));
+                }
+            }
+            else{
+                {redirect(base_url('admin/home'));}
+            }
+
+        }
+
           public function admin_logout(){
             $this->session->sess_destroy();
             redirect(base_url('/'), 'refresh');

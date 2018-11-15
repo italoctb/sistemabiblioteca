@@ -9,19 +9,19 @@
 	                        <ul class="mobile-menu-nav">
 	                            <li><a data-toggle="collapse" data-target="#Charts" href="#">Início</a>
 	                                <ul class="collapse dropdown-header-top">
-																		<li><a href="home">Biblioteca</a></li>
-																		<li><a href="professores">Professores</a></li>
-																		<li><a href="consultaUsuario">Consulta usuários</a></li>
-																		<li><a href="consultaReserva">Consulta reservas</a></li>
-																		<li><a href="minhasReservas">Minhas reservas</a></li>
-																		<li><a href="<?php echo base_url('user_logout')?>">Sair</a></li>
+																		<li><a href="<?=base_url('home')?>">Biblioteca</a></li>
+																		<li><a href="<?=base_url('professores')?>">Professores</a></li>
+																		<li><a href="<?=base_url('consultaUsuario')?>">Consulta usuários</a></li>
+																		<li><a href="<?=base_url('consultaReserva')?>">Consulta reservas</a></li>
+																		<li><a href="<?=base_url('minhasReservas')?>">Minhas reservas</a></li>
+																		<li><a href="<?=base_url('user_logout')?>">Sair</a></li>
 	                                </ul>
 	                            </li>
 															<li><a data-toggle="collapse" data-target="#Charts" href="#">Sistema</a>
 																<ul class="notika-main-menu-dropdown">
-																	<li><a href="form-elements.html">Realizar empréstimos</a></li>
-																	<li><a href="form-components.html">Alterar empréstimos</a></li>
-																	<li><a href="form-examples.html">Finalizar empréstimos</a></li>
+																	<li><a href="<?=base_url('consultaAdmin')?>">Realizar empréstimos</a></li>
+																	<li><a href="<?=base_url('')?>">Alterar empréstimos</a></li>
+																	<li><a href="<?=base_url('')?>">Finalizar empréstimos</a></li>
 																</ul>
 	                            </li>
 	                            <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Usuário</a>
@@ -41,6 +41,7 @@
 	        </div>
 	    </div>
 	</div>
+
 	<!--  NavBar Computador-->
 	<div class="main-menu-area mg-tb-40">
 	    <div class="container">
@@ -57,19 +58,19 @@
 	                <div class="tab-content custom-menu-content">
 	                    <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
 	                        <ul class="notika-main-menu-dropdown">
-														<li><a href="home">Biblioteca</a></li>
-														<li><a href="professores">Professores</a></li>
-														<li><a href="consultaUsuario">Consulta usuários</a></li>
-														<li><a href="consultaReserva">Consulta reservas</a></li>
-														<li><a href="minhasReservas">Minhas reservas</a></li>
-														<li><a href="<?php echo base_url('admin_logout')?>">Sair</a></li>
+																		<li><a href="<?=base_url('admin/home')?>">Biblioteca</a></li>
+																		<li><a href="<?=base_url('admin/professores')?>">Professores</a></li>
+																		<li><a href="<?=base_url('admin/consultaUsuario')?>">Consulta usuários</a></li>
+																		<li><a href="<?=base_url('admin/consultaReserva')?>">Consulta reservas</a></li>
+																		<li><a href="<?=base_url('admin/minhasReservas')?>">Minhas reservas</a></li>
+																		<li><a href="<?=base_url('admin_logout')?>">Sair</a></li>
 	                        </ul>
 	                    </div>
 	                    <div id="Forms" class="tab-pane notika-tab-menu-bg animated flipInX">
 	                        <ul class="notika-main-menu-dropdown">
-														<li><a href="realizarEmprestimo">Realizar empréstimos</a></li>
-														<li><a href="alterarEmprestimo">Alterar empréstimos</a></li>
-														<li><a href="finalizarEmprestimo">Finalizar empréstimos</a></li>
+														<li><a href="<?=base_url('consulta')?>">Realizar empréstimos</a></li>
+														<li><a href="<?=base_url('')?>">Alterar empréstimos</a></li>
+														<li><a href="<?=base_url('')?>">Finalizar empréstimos</a></li>
 	                        </ul>
 	                    </div>
 	                    <div id="Page" class="tab-pane notika-tab-menu-bg animated flipInX">
