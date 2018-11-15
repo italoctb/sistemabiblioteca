@@ -80,17 +80,17 @@ class User extends CI_Controller {
           public function reservaLivro($ident = NULL){
             $this->load->model('sys_model');
             $user = $this->session->userdata('usuario');
+           
+            $data['livros'] = $this->db->get("LIVROS")->result();
             $data = array(
-                'title' => $this->sys_model->consultaTitulos(),
+                'title' => $this->sys_model->consultaTitulos(),  
                 'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
                 'username' =>$this->sys_model->consulta_especifico_Usuario($user)->username,
                 'tipoUsuario' =>$this->sys_model->consulta_especifico_Usuario($user)->tipoUsuario,
                 'nivel_usuario' =>$this->sys_model->consulta_especifico_Usuario($user)->nivel_usuario
             );
             $data['ISBN'] = $ident;
-            $data['livros'] = $this->db->get("LIVROS")->result();
-            $data['title'] = 'Home';
-            $data['icon'] = 'home';
+            $data['titulo'] =  $this->user_model->livroByISBN($ident)->titulo;
             $this->load->view('templates/header.php');
             $this->load->view('pages/reservaLivro', $data);
             $this->load->view('templates/footer.php');
@@ -139,8 +139,15 @@ class User extends CI_Controller {
                   redirect(base_url('user/minhasReservas'));
               }
               else {
-                  $this->session->set_flashdata('error_msg', 'Usuário não pode realizar esta reserva');
-                  redirect(base_url('reservaLivro'));
+                if($res_check_l){
+                    $this->session->set_flashdata('error_msg', 'Usuário já realizou este empréstimo');
+                    redirect(base_url('reservaLivro/'.$RESERVA['ISBN']));
+                  }
+                elseif($qtd_check){
+                    $this->session->set_flashdata('error_msg', 'Usuário já realizou o número máximo de empréstimos');
+                    redirect(base_url('reservaLivro/'.$RESERVA['ISBN']));
+                }
+                  
               }
               $this->load->view('templates/header.php');
               $this->load->view('templates/nav_user.php');

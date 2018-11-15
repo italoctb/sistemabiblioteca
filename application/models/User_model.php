@@ -104,6 +104,15 @@
               return false;
           }
       }
+      public function livroByISBN($ISBN){
+                $query = $this->db->query('select titulo FROM LIVROS where ISBN = "'.$ISBN.'";');
+                return $query->row_object();
+        }
+
+       // public function livroByISBN($ISBN){
+       //          $query = $this->db->query('select * from LIVROS where ISBN ="'.$ISBN.'";');
+       //          return $query->row_object();
+       //  }
 
       public function getQntdByName($nome=null){
           $this->db->select('*');

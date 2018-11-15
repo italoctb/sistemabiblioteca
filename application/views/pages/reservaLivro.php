@@ -75,13 +75,15 @@
                 <input type="hidden" class="form-control" name="prazo_dev" id="prazo_dev" value="<?=$dev_data?>" size="40" >
             </div>
         </div>
+
           <div class="container">
+            <h4>Dados do empréstimo:</h4>
             <pre>
-            Dados de emprétimo:<br>
-            Usuário: <?=$username?><br>
-            Data de emprétimo: <?=$data?><br>
-            Data de devolução: <?=$dev_data?><br>
-          </pre>
+              Usuário: <?=$username?><br>
+              Livro: <?=$titulo?><br>
+              Data de empréstimo: <?=$data?><br>
+              Data de devolução: <?=$dev_data?><br>
+            </pre>
           </div>
 
         <div  class="form-group">
