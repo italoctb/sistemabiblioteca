@@ -66,112 +66,26 @@
 </head>
 
 <body>
-<span style="background-color:red;">
-  <div class="container">
-      <div class="row">
-          <div class="col-md-10 col-md-offset-1">
-                  <div class="panel-body">
-                      <?php
-                      $success_msg= $this->session->flashdata('success_msg');
-                      $error_msg= $this->session->flashdata('error_msg');
-
-                      if($success_msg){
-                          ?>
-                          <div class="alert alert-success">
-                                <?php echo $success_msg; ?>
-                              </div>
-                          <?php
-                      }
-                      if($error_msg){
-                          ?>
-                          <div class="alert alert-danger">
-                                <?php echo $error_msg; ?>
-                            </div>
-                          <?php
-                      }
-                      ?>
-                  </div>
-          </div>
-      </div>
-  </div>
-</span>
-
-    <div class="login-content">
-        <div class="nk-block toggled">
-            <form class="login100-form validate-form" action="<?=base_url('addUsuario')?>" method="post">
-                <div class="nk-form">
-                    <?php
-                        $nivel = array(
-                            'usuario'         => 'Usuário',
-                        );
-
-                        $tipo = array(
-                            'tipoFunc' => 'Funcionário',
-                            'tipoProf' => 'Professor',
-                            'tipoAl'   => 'Aluno',
-                        );
-                    ?>
-
-                    <div class="input-group">
-                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
-                        <div class="nk-int-st">
-                            <input type="text" name="nome" class="form-control" placeholder="Nome" required>
-                        </div>
-                    </div>
-
-                    <div class="input-group mg-t-15">
-                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
-                        <div class="nk-int-st">
-                            <input type="text" name="matricula" class="form-control" placeholder="Matrícula" required>
-                        </div>
-                    </div>
-
-                    <div class="input-group mg-t-15">
-                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
-                        <div class="nk-int-st">
-                            <input type="text" name="username" class="form-control" placeholder="Usuário" required>
-                        </div>
-                    </div>
-
-                    <div class="input-group mg-t-15">
-                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-tax"></i></span>
-                        <div class="nk-int-st">
-                            <input type="password" name="password" class="form-control" placeholder="Password" required>
-                        </div>
-                    </div>
-
-                    <div class="input-group mg-t-15">
-                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-map"></i></span>
-                        <div class="nk-int-st">
-                            <input type="text" name="user_end" class="form-control" placeholder="Endereço" required>
-                        </div>
-                    </div>
-
-                    <div class="input-group mg-t-15">
-                        <div class="nk-int-st">
-                            <div class="row">
-                                <div class="form-group col-md-6" style="display:none;">
-                                    <?=form_dropdown('nivel_usuario', $nivel, '',array('class' => "selectpicker"));?>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label for="usuario">Tipo de Usuário</label><br>
-                                    <?=form_dropdown('tipoUsuario', $tipo, '',array('class' => "selectpicker"));?>
-                                </div>
-                            </div> 
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-login btn-success btn-float" value="Cadastrar"><i class="notika-icon notika-right-arrow right-arrow-ant"></i></button>
-                </div>
-
-                <div class="nk-navigation nk-lg-ic">
-                    <a href="<?=base_url('')?>" data-ma-block="#l-register"><i class="notika-icon notika-left-arrow"></i><span style="margin-left: 5px;">Voltar</span></a>
-                </div>
-            </form>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- 404 Page area Start-->
+    <div class="error-page-area">
+        <div class="error-page-wrap">
+            <i class="notika-icon notika-close"></i>
+            <h2>ERROR <span class="counter">404</span></h2>
+            <p>Desculpe, mas esta página não se encontra disponível. Verifique se a URL está correta e tente novamente.</p>
+            <a href="<?=base_url('')?>" class="btn">Voltar à página inicial</a>
         </div>
     </div>
+    <!-- 404 Page area End-->
+    <!-- jquery
+		============================================ -->
+<script src="<?=base_url('static/js/vendor/jquery-1.12.4.min.js')?>"></script>
 
-    <script src="<?=base_url('static/js/vendor/jquery-1.12.4.min.js')?>"></script>
+    
+    <!-- bootstrap JS
+    ============================================ -->
     <script src="<?=base_url('static/js/bootstrap.min.js')?>"></script>
     <!-- wow JS
     ============================================ -->

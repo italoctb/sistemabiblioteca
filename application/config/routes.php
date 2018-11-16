@@ -87,3 +87,6 @@ $route['editarUsuario/(:any)']	= '/administrador/editarUsuario/$1';
 $route['deletarUsuario']		= '/administrador/deletarUsuario';
 $route['deletarUsuario/(:any)']	= '/administrador/deletarUsuario/$1';
 $route['updateUsuario']			= '/administrador/updateUsuario';
+
+$route['semAcesso'] = 'pages/semAcesso';
+$route['404_override'] = 'pages/erro404';

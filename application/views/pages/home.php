@@ -1,31 +1,42 @@
 <span style="background-color:red;">
   <div class="container">
       <div class="row">
-          <div class="col-md-10 col-md-offset-1">
-                  <div class="panel-body">
+          <div class="col-md-4 col-md-offset-4">
+                  <div class="alert alert-warning-body">
                       <?php
-                      $success_msg= $this->session->flashdata('success_msg');
-                      $error_msg= $this->session->flashdata('error_msg');
-                      if($success_msg){
-                          ?>
-                          <div class="alert alert-success">
+                        $success_msg= $this->session->flashdata('success_msg');
+                        $error_msg= $this->session->flashdata('error_msg');
+                        $other_msg= $this->session->flashdata('other_msg');
+
+                        if($success_msg){
+                            ?>
+                              <div class="alert alert-success" role="alert">
                                 <?php echo $success_msg; ?>
                               </div>
-                          <?php
-                      }
-                      if($error_msg){
-                          ?>
-                          <div class="alert alert-danger">
-                                <?php echo $error_msg; ?>
-                            </div>
-                          <?php
-                      }
+                            <?php
+                        }
+                        if($error_msg){
+                            ?>
+                              <div class="alert alert-danger">
+                                  <?php echo $error_msg; ?>
+                              </div>
+                            <?php
+                        }
+
+                        if($other_msg){
+                            ?>
+                              <div class="alert alert-info" role="alert">
+                                <?php echo $other_msg; ?>
+                              </div>
+                            <?php
+                        }
                       ?>
                   </div>
           </div>
       </div>
   </div>
 </span>
+
 <div class="data-table-area">
   <div class="container">
     <div class="row">

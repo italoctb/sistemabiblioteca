@@ -355,4 +355,12 @@ class Pages extends CI_Controller {
         $this->session->sess_destroy();
         redirect(base_url('/'), 'refresh');
     }
+
+    public function erro404(){
+       $this->load->view('pages/erro404');
+    }
+
+    public function semAcesso(){
+       $this->load->view('pages/semAcesso');
+    }
 }

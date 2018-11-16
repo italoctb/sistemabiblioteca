@@ -38,7 +38,7 @@ class Administrador extends CI_Controller{
                 'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
                 'autor' => $this->db->get("AUTORES")->result()
             );
-            $this->session->set_flashdata('success_msg', 'Bem-vindo, ' . $data['nome']);
+            $this->session->set_flashdata('other_msg', 'Bem-vindo, ' . $data['nome']);
             $this->load->view('templates/header');
             $this->load->view('templates/nav_adm');
             $this->load->view('pages/home', $data);
