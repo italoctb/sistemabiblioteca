@@ -218,7 +218,12 @@ class Pages extends CI_Controller {
     }
 
     public function envReserva($ident = NULL){
-            $data['livros'] = $this->db->get("LIVROS")->result();
+            $user = $this->session->userdata('usuario');
+            $data = array(
+                'title' => $this->sys_model->consultaTitulos(),  
+                'tipoUsuario' =>$this->sys_model->consulta_especifico_Usuario($user)->tipoUsuario,
+                'livros' => $this->db->get("LIVROS")->result()
+            );
             $RESERVA = array(
             'ISBN' => $this->input->post('ISBN'),
             'username' => $this->input->post('username'),
@@ -230,7 +235,7 @@ class Pages extends CI_Controller {
               $res_check = $this->user_model->check_reserva($ident);
               $res_check_l = $this->user_model->check_reserva_usuario($this->input->post('ISBN'),$this->input->post('username'));
               $res_check_qtd = $this->user_model->getQtdMax($this->input->post('username'));
-              if (!$res_check && !$res_check_l && $res_check_qtd &&  $qtd_check) {
+              if (!$res_check && !$res_check_l && $res_check_qtd && $qtd_check) {
                   $this->user_model->reg_reserva($RESERVA);
                   $this->user_model->dec_livro($this->input->post('ISBN'));
                   $this->user_model->inc_user($this->input->post('username'));
@@ -238,15 +243,18 @@ class Pages extends CI_Controller {
                   redirect(base_url('minhasReservas'));
               }
               else {
-                if($res_check_l){
+                if(!$qtd_check){
+                    $this->session->set_flashdata('error_msg', 'Não existem exemplares disponíveis');
+                    redirect(base_url('reservaLivro/'.$RESERVA['ISBN']));
+                }
+                elseif($res_check_l){
                     $this->session->set_flashdata('error_msg', 'Usuário já realizou este empréstimo');
                     redirect(base_url('reservaLivro/'.$RESERVA['ISBN']));
-                  }
-                elseif($qtd_check){
+                }
+                elseif(!$res_check_qtd){
                     $this->session->set_flashdata('error_msg', 'Usuário já realizou o número máximo de empréstimos');
                     redirect(base_url('reservaLivro/'.$RESERVA['ISBN']));
                 }
-                  
               }
               $this->load->view('templates/header.php');
               $this->load->view('templates/nav_user.php');

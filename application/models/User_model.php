@@ -250,7 +250,7 @@
           {
               $result_qtd = $row->qtd_disp;
           }
-          if($result_qtd>=0){
+          if($result_qtd>0){
               return $result_qtd;
           }
           else{
