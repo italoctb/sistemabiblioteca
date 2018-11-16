@@ -73,7 +73,7 @@
 						<a href="#"><img src="<?=base_url('static/img/logo/logo_bibli_2.png')?>" alt="" /></a>
 					</div>
 				</div>
-				<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<div class="header-top-menu">
 						<ul class="nav navbar-nav notika-top-nav">
 							<li class="nav-item dropdown">

@@ -152,7 +152,7 @@
               <button id="limpar" type="reset" class="btn btn-info notika-btn-info" name="Limpar" value="Limpar">Limpar</button>
             </div>
             <div class="col-4">
-              <a id="limpar" type="reset" class="btn btn-danger notika-btn-danger" name="Limpar" value="Limpar" href="<?=base_url('')?>"><--Voltar</a>
+              <a id="voltar" type="" class="btn btn-danger notika-btn-danger" name="Limpar" value="Limpar" href="<?=base_url('')?>"><--Voltar</a>
             </div>
         </div>
         </form>

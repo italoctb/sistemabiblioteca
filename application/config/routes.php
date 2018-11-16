@@ -65,6 +65,7 @@ $route['baixaReserva'] 				= 'pages/baixaReserva';
 $route['baixaReserva/(:any)'] 		= 'pages/baixaReserva/$1';
 $route['devReserva'] 				= 'pages/devReserva';
 $route['devReserva/(:any)/(:any)'] 	= 'pages/devReserva/$1/$2';
+$route['logout'] 	= 'pages/logout';
 
 $route['user/(:any)']  = 'user/$1';
 $route['blib/(:any)']  = 'bibliotecario/$1';
@@ -75,10 +76,8 @@ $route['consultaUsuario'] 	= 'administrador/consultaUsuario';
 $route['consultaReserva'] 	= 'administrador/consultaReserva';
 
 $route['user/home']		= '/user/home';
-$route['user_logout']	= '/user/user_logout';
 
 $route['blib/home']		= '/bibliotecario/home';
-$route['bib_logout']	= '/bibliotecario/bib_logout';
 
 $route['admin/home']			= '/administrador/home';
 $route['registro_usuario']		= '/administrador/registro_usuario';
@@ -88,6 +87,3 @@ $route['editarUsuario/(:any)']	= '/administrador/editarUsuario/$1';
 $route['deletarUsuario']		= '/administrador/deletarUsuario';
 $route['deletarUsuario/(:any)']	= '/administrador/deletarUsuario/$1';
 $route['updateUsuario']			= '/administrador/updateUsuario';
-$route['admin_logout']			= '/administrador/admin_logout';
-
-

@@ -180,6 +180,7 @@ class Pages extends CI_Controller {
     }
 
     public function consulta(){
+            $this->session->set_flashdata('success_msg', '');
             $user = $this->session->userdata('nivel_usuario');
             $data = array(
               'title' => $this->sys_model->consultaReserva(),
@@ -194,7 +195,6 @@ class Pages extends CI_Controller {
             elseif ($user === 'bibliotecario'):
                 $nav = 'nav_blib';
             endif;
-
             $this->load->view('templates/'.$nav);
             $this->load->view('pages/consulta', $data);
             $this->load->view('templates/footer.php');
@@ -348,5 +348,10 @@ class Pages extends CI_Controller {
         $this->load->view('templates/'.$nav);
         $this->load->view('pages/baixaReserva', $data);
         $this->load->view('templates/footer.php');
+    }
+
+    public function logout(){
+        $this->session->sess_destroy();
+        redirect(base_url('/'), 'refresh');
     }
 }

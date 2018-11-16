@@ -34,7 +34,7 @@ class Administrador extends CI_Controller{
             $user = $this->session->userdata('usuario');
             $data = array(
                 'title' => $this->sys_model->consultaTitulos(),
-                'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome
+                'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome           
             );
             $this->session->set_flashdata('success_msg', 'Bem-vindo, ' . $data['nome']);
             $this->load->view('templates/header');
@@ -286,10 +286,5 @@ class Administrador extends CI_Controller{
             }
 
         }
-
-          public function admin_logout(){
-            $this->session->sess_destroy();
-            redirect(base_url('/'), 'refresh');
-          }
 
 }

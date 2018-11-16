@@ -251,5 +251,23 @@
           }
           return $options;
       }
+
+      public function checkAutores($isbn){
+          $query = $this->db->get_where("LIVROS_has_AUTORES","ISBN='$isbn'")->result();
+
+          foreach ($query as $row)
+          {
+              $dataConc = $row->cpf;
+          }
+          $nData = strtotime("$dataConc");
+
+          if($dataConc) {
+             return $query->row_object();
+          }
+
+          else{
+            return false;
+          }
+      }
   }
 ?>

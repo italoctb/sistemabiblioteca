@@ -47,27 +47,33 @@
                 </tr>
               </thead>
               <tbody>
+
                 <?php
                    $isbnTemp = 0;
                    $autorTemp = 0;
                    $cont = 0;
-                   $t_id = '';
                     foreach ($title as $query) {
+                      if ($isbnTemp!=$query->ISBN){
+                        $aux = 0;
                 ?>
-                    <tr id="test">
+                    <tr>
                       <td><?=$query->ISBN?></td>
                       <td><?=$query->titulo?></td>
 
                       <td>
-                        <?php  
-                          
-                          if ($isbnTemp!=$query->ISBN){
-                            echo $query->nome_autor;
-                            $cont++;
-                          }
-                          elseif ($isbnTemp==$query->ISBN){
-                            echo $autorTemp.' / '.$query->nome_autor;
-                            '<script>Delete();</script>';
+                        <?php
+                          foreach ($cpf as $cpf_query){
+                            if ($query->ISBN == $cpf_query->ISBN){
+                              $aux++;
+                              foreach ($autor as $autor_query) {
+                                if ($cpf_query->cpf == $autor_query->cpf){
+                                  if ($aux>=2){
+                                    echo " / ";
+                                  }
+                                  echo $autor_query->nome_autor;
+                                }
+                              }
+                            }
                           }
                         ?>
                       </td>
@@ -80,7 +86,7 @@
                 <?php
                   $isbnTemp=$query->ISBN;
                   $autorTemp=$query->nome_autor;
-                 }
+                 }}
                 ?>
 
                 </tbody>
@@ -113,3 +119,13 @@
 
 </script>
 
+
+
+<!-- if ($isbnTemp!=$query->ISBN){
+                            echo $query->nome_autor;
+                            $cont++;
+                          }
+                          elseif ($isbnTemp==$query->ISBN){
+                            echo $autorTemp.' / '.$query->nome_autor;
+                            '<script>Delete();</script>';
+                          } -->

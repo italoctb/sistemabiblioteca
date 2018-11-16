@@ -34,7 +34,9 @@ class User extends CI_Controller {
             $user = $this->session->userdata('usuario');
             $data = array(
                 'title' => $this->sys_model->consultaTitulos(),
-                'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome
+                'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
+                'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
+                'autor' => $this->db->get("AUTORES")->result()
             );
 
             $this->session->set_flashdata('success_msg', 'Bem-vindo, ' . $data['nome']);
@@ -72,10 +74,5 @@ class User extends CI_Controller {
             $this->load->view('templates/nav_user.php');
             $this->load->view('pages/consultaReserva', $data);
             $this->load->view('templates/footer.php');
-          }
-
-          public function user_logout(){
-            $this->session->sess_destroy();
-            redirect(base_url('/'), 'refresh');
           }
 }
