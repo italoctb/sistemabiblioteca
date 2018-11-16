@@ -328,6 +328,7 @@ class Pages extends CI_Controller {
             $this->user_model->inc_livro($ident);
             $this->user_model->dec_user($username);
             $this->db->where('ISBN',$ident);
+            $this->db->where('username',$username);
             $this->db->delete('RESERVA');
             $this->session->set_flashdata('success_msg', 'Operação realizada!');
             redirect(base_url('consultaReserva'));

@@ -33,8 +33,8 @@
                       <td><?php echo $liv->editora ?></td>
                       <td><?php echo $liv->qtd_disp.'/'.$liv->qtd_copias?></td>
                       <td>
-                        <a class="btn bt-form btn-block" href="<?=base_url('reservaLivro/'.$liv->ISBN)?>";>Reservar</a>
-                        </td>
+                        <a class="btn btn-primary notika-btn-primary" href="<?=base_url('reservaLivro/'.$liv->ISBN)?>";>Reservar</a>
+                      </td>
                     </tr>
                 <?php  }?>
 

@@ -26,7 +26,7 @@
                         <td><?=$res->prazo_dev?></td>
 
                         <td>
-                            <a class="btn bt-form btn-block" href="<?=base_url('devReserva/'.$res->ISBN.'/'.$res->username)?>" onclick="return confirm('Deseja realmente dar baixa no registro?');">Dar Baixa</a>
+                            <a class="btn btn-danger notika-btn-danger" href="<?=base_url('devReserva/'.$res->ISBN.'/'.$res->username)?>" onclick="return confirm('Deseja realmente dar baixa no registro?');">Encerrar</a>
                         </td>
                     </tr>
                 <?php

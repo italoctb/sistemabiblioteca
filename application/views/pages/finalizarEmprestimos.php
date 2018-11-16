@@ -18,10 +18,17 @@
               <tbody>
                 <?php
                   foreach ($usuarios as $cat):
-                  if ($cat->tipoUsuario == 'tipoFunc' && $cat->qntd_livros>0):
+                    if ($cat->tipoUsuario == 'tipoFunc'):
+                      $matricula = $cat->mat_func;
+                    elseif ($cat->tipoUsuario == 'tipoProf'):
+                      $matricula = $cat->mat_siape;
+                    elseif ($cat->tipoUsuario == 'tipoAl'):
+                      $matricula = $cat->mat_aluno;
+                    endif;
+                  if ($cat->qntd_livros>0):
                 ?>
                     <tr>
-                        <td><?=$cat->mat_func?></td>
+                        <td><?=$matricula?></td>
                         <td><?=$cat->nome?></td>
                         <td><?=$cat->username?></td>
                         <td><?=$cat->nivel_usuario?></td>
@@ -29,7 +36,7 @@
                         <td><?=$cat->qntd_livros_max?></td>
 
                         <td>
-                            <a class="btn bt-form btn-block" href="<?=base_url('baixaReserva/'.$cat->username)?>";>Visualisar</a>
+                            <a class="btn btn-primary notika-btn-primary" href="<?=base_url('baixaReserva/'.$cat->username)?>";>Visualisar</a>
                         </td>
                     </tr>
 
