@@ -50,22 +50,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-$route['default_controller'] 		= 'pages/view';
-$route['autenticate'] 		 		= 'pages/aut_login';
-$route['sem_acesso'] 				= 'pages/error_page';
-$route['consulta'] 					= 'pages/consulta';
-$route['reservaLivro'] 				= 'pages/reservaLivro';
-$route['reservaLivro/(:num)'] 		= 'pages/reservaLivro/$1';
-$route['cadastro'] 					= 'pages/cadastro';
-$route['addUsuario'] 				= 'pages/addUsuario';
-$route['envReserva'] 				= 'pages/envReserva';
-$route['minhasReservas'] 			= 'pages/minhasReservas';
-$route['finalizarEmprestimos'] 	 	= 'pages/finalizarEmprestimos';
-$route['baixaReserva'] 				= 'pages/baixaReserva';
-$route['baixaReserva/(:any)'] 		= 'pages/baixaReserva/$1';
-$route['devReserva'] 				= 'pages/devReserva';
-$route['devReserva/(:any)/(:any)'] 	= 'pages/devReserva/$1/$2';
-$route['logout'] 	= 'pages/logout';
+$route['default_controller'] 			= 'pages/view';
+$route['autenticate'] 		 			= 'pages/aut_login';
+$route['sem_acesso'] 					= 'pages/error_page';
+$route['consulta'] 						= 'pages/consulta';
+$route['reservaLivro'] 					= 'pages/reservaLivro';
+$route['reservaLivro/(:num)'] 			= 'pages/reservaLivro/$1';
+$route['cadastro'] 						= 'pages/cadastro';
+$route['addUsuario'] 					= 'pages/addUsuario';
+$route['envReserva'] 					= 'pages/envReserva';
+$route['minhasReservas'] 				= 'pages/minhasReservas';
+$route['alterarEmprestimos'] 	 		= 'pages/alterarEmprestimos';
+$route['editarReserva'] 				= 'pages/editarReserva';
+$route['editarReserva/(:any)/(:any)']	= 'pages/editarReserva/$1/$2';
+$route['updateReserva'] 				= 'pages/updateReserva';
+$route['baixaReserva'] 					= 'pages/baixaReserva';
+$route['baixaReserva/(:any)'] 			= 'pages/baixaReserva/$1';
+$route['devReserva'] 					= 'pages/devReserva';
+$route['devReserva/(:any)/(:any)'] 		= 'pages/devReserva/$1/$2';
+$route['logout'] 						= 'pages/logout';
 
 $route['user/(:any)']  = 'user/$1';
 $route['blib/(:any)']  = 'bibliotecario/$1';

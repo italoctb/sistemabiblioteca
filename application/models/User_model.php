@@ -68,6 +68,21 @@
           }
       }
 
+      public function checkDataReserva($ISBN, $username){
+          $this->db->select('*');
+          $this->db->from('RESERVA');
+          $this->db->where('ISBN',$ISBN);
+          $this->db->where('username',$username);
+
+          if($query=$this->db->get()) {
+              return $query->row_object();;
+          }
+
+          else{
+              return false;
+          }
+      }
+
       public function login_user($username,$password,$usuario){
           $this->db->select('*');
           $this->db->from('USUARIO');
@@ -268,6 +283,17 @@
           else{
             return false;
           }
+      }
+
+      public function checkDataAtual($data){
+        $data_atual = strtotime(date("Y-m-d"));
+        $data_ver = strtotime("$data");
+        if ($data_atual >= $data_ver){
+          return true;
+        }
+        else{
+          return false;
+        }
       }
   }
 ?>

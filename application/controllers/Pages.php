@@ -274,7 +274,7 @@ class Pages extends CI_Controller {
         $this->load->view('templates/footer.php');
     }
 
-    public function finalizarEmprestimos(){
+    public function alterarEmprestimos(){
         $user = $this->session->userdata('nivel_usuario');
         $data = array(
             'title' => $this->sys_model->consulta_minhasReservas($this->session->userdata('usuario')),
@@ -293,6 +293,71 @@ class Pages extends CI_Controller {
         $this->load->view('pages/finalizarEmprestimos', $data);
         $this->load->view('templates/footer.php');
     }
+
+    public function editarReserva($isbn = NULL, $username = NULL){
+        $user_id = $this->session->userdata('nivel_usuario');
+        if($user_id === 'administrador' || $user_id === 'bibliotecario'){
+            $this->db->where('username',$username);
+            $data['reserva'] = $this->db->get('RESERVA')->result();
+            $data['username'] = $username;
+            $data['isbn'] = $isbn;
+            $data['titulo'] = $this->sys_model->consulta_especifico_LIVRO($isbn)->titulo;
+            $data['nome'] = $this->sys_model->consulta_especifico_USUARIO($username)->nome;
+            $data['reserva'] = $this->user_model->checkDataReserva($isbn, $username)->data_reserva;
+            $data['dev'] = $this->user_model->checkDataReserva($isbn, $username)->prazo_dev;
+
+            $this->load->view('templates/header');
+            $this->load->view('pages/editarReserva', $data);
+            $this->load->view('templates/footer');
+        }
+        else{
+            redirect(base_url('alterarEmprestimos'));
+        }
+    }
+
+    public function updateReserva(){
+            $user_id = $this->session->userdata('nivel_usuario');
+            $this->form_validation->set_rules('data_reserva', 'Data de Reserva', 'trim|required');
+            $this->form_validation->set_rules('prazo_dev', 'Prazo de Devolução', 'trim|required');
+            $this->form_validation->set_rules('username', 'Nome de usuário', 'trim|required');
+            $this->form_validation->set_rules('isbn', 'ISBN', 'trim|required');
+
+            if ($this->form_validation->run() == FALSE) {
+                $this->session->set_flashdata('error_msg', 'Preencha todos os campos.');
+            }
+
+            else{
+                    $data_reserva = $this->input->post('data_reserva');
+                    $prazo_dev = $this->input->post('prazo_dev');
+                    $isbn = $this->input->post('isbn');
+                    $username = $this->input->post('username');
+                    
+                    $test1 = $this->user_model->checkDataAtual($data_reserva);
+                    $test2 = $this->user_model->checkDataAtual($prazo_dev);
+
+                    $DATA = array(
+                        'data_reserva' => $data_reserva,
+                        'prazo_dev' => $prazo_dev
+                    );
+
+                    if($test1 && !$test2){
+                        $this->db->where('ISBN', $isbn);
+                        $this->db->where('username', $username);
+                        if($this->db->update('RESERVA', $DATA)){
+                            $this->session->set_flashdata('success_msg', 'Registro atualizado');
+                            redirect(base_url('consultaReserva'));
+                        }
+                       else{
+                           $this->session->set_flashdata('success_msg', 'Erro na atualização');
+                           redirect(base_url('consultaReserva'));
+                       }
+                    }
+                    else{
+                        $this->session->set_flashdata('error_msg', 'Não foi possível atualizar o registro');
+                        redirect(base_url('baixaReserva/'.$username));
+                    }
+            }
+        }
 
     public function sem_acesso(){
       $this->load->view('pages/error_page');

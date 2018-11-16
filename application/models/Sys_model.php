@@ -24,6 +24,12 @@ class Sys_model extends CI_Model {
                 return $query->row_object();
         }
 
+        public function consulta_especifico_Livro($isbn){
+                $query = $this->db->query('select * from LIVROS where isbn ="'.$isbn.'";');
+                return $query->row_object();
+        }
+
+
         public function consultaProf(){
                 $query = $this->db->query('select mat_siape, nome, nome_curso from PROFESSORES natural join USUARIO natural join CURSO;');
                 return $query->result();

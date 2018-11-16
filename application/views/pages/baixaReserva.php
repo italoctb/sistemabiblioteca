@@ -1,3 +1,34 @@
+<span style="background-color:red;">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+                  <div class="panel-body">
+                      <?php
+                      $success_msg= $this->session->flashdata('success_msg');
+                      $error_msg= $this->session->flashdata('error_msg');
+
+                      if($success_msg){
+                          ?>
+                          <div class="alert alert-success">
+                                <?php echo $success_msg; ?>
+                              </div>
+                          <?php
+                      }
+                      if($error_msg){
+                          ?>
+                          <div class="alert alert-danger">
+                                <?php echo $error_msg; ?>
+                            </div>
+                          <?php
+                      }
+                      ?>
+                  </div>
+          </div>
+      </div>
+  </div>
+</span>
+
+
 <div class="data-table-area">
   <div class="container">
     <div class="row">
@@ -26,7 +57,11 @@
                         <td><?=$res->prazo_dev?></td>
 
                         <td>
-                            <a class="btn btn-danger notika-btn-danger" href="<?=base_url('devReserva/'.$res->ISBN.'/'.$res->username)?>" onclick="return confirm('Deseja realmente dar baixa no registro?');">Encerrar</a>
+                          <a class="btn btn-primary notika-btn-primary" href="<?=base_url('editarReserva/'.$res->ISBN.'/'.$res->username)?>";>Editar</a>
+                        </td>
+
+                        <td>
+                            <a class="btn btn-success notika-btn-success" href="<?=base_url('devReserva/'.$res->ISBN.'/'.$res->username)?>" onclick="return confirm('Deseja realmente dar baixa no registro?');">Encerrar</a>
                         </td>
                     </tr>
                 <?php
