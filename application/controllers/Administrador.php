@@ -75,6 +75,16 @@ class Administrador extends CI_Controller{
             $this->load->view('templates/footer');
           }
 
+		public function consultaReserva(){
+			$data = array(
+				'title' => $this->sys_model->consultaReserva()
+			);
+			$this->load->view('templates/header');
+			$this->load->view('templates/nav_adm');
+			$this->load->view('pages/consultaReserva', $data);
+			$this->load->view('templates/footer');
+		}
+
           public function meusEmprestimos(){
             $data = array(
               'title' => $this->sys_model->consulta_meusEmprestimos($this->session->userdata('usuario'))

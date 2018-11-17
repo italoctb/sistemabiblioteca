@@ -45,6 +45,11 @@ class Sys_model extends CI_Model {
                 return $query->result();
         }
 
+	public function consultaReserva(){
+		$query = $this->db->query('select username, nome, titulo, data_reserva from USUARIO natural join RESERVA natural join LIVROS;');
+		return $query->result();
+	}
+
         public function consulta_meusEmprestimos($username){
                 $query = $this->db->query('select ISBN, titulo, data_reserva, prazo_dev from USUARIO natural join EMPRESTIMOS natural join LIVROS where username = "'.$username.'";');
                 return $query->result();

@@ -82,6 +82,7 @@ $route['admin/(:any)'] = 'administrador/$1';
 $route['professores'] 		= 'administrador/professores';
 $route['consultaUsuario'] 	= 'administrador/consultaUsuario';
 $route['consultaEmprestimo'] 	= 'administrador/consultaEmprestimo';
+$route['consultaReserva'] 	= 'administrador/consultaReserva';
 
 $route['user/home']		= '/user/home';
 
