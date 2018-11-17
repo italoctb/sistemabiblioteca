@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'tecuser',
-	'password' => 'tecweb123',
+	'hostname' => '',
+	'username' => '',
+	'password' => '',
 	'database' => 'equipe385116',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
