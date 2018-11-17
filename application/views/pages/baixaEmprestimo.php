@@ -46,9 +46,8 @@
               </thead>
               <tbody>
                 <?php
-                  foreach (emprestimo as $res):
+                  foreach ($emprestimo as $res):
                   if ($res->username == $username):
-                    echo $username;
                 ?>
                     <tr>
                         <td><?=$res->ISBN?></td>

@@ -68,7 +68,7 @@
           }
       }
 
-      public function checkDataReserva($ISBN, $username){
+      public function checkDataEmprestimo($ISBN, $username){
           $this->db->select('*');
           $this->db->from('EMPRESTIMOS');
           $this->db->where('ISBN',$ISBN);

@@ -36,7 +36,7 @@
                         <td><?=$cat->qntd_livros_max?></td>
 
                         <td>
-                            <a class="btn btn-primary notika-btn-primary" href="<?=base_url('baixaReserva/'.$cat->username)?>";>Visualisar</a>
+                            <a class="btn btn-primary notika-btn-primary" href="<?=base_url('baixaEmprestimo/'.$cat->username)?>";>Visualisar</a>
                         </td>
                     </tr>
 

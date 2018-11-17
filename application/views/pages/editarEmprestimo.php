@@ -33,7 +33,7 @@
   <div class="data-table-area">
     <div class="container">
 
-      <form action="<?=base_url('updateReserva')?>" method="post" class="form-signin">
+      <form action="<?=base_url('updateEmprestimo')?>" method="post" class="form-signin">
 
         <h2 class="h3 mb-3 font-weight-normal">Editar Reserva</h2>
 
