@@ -85,6 +85,86 @@ class Administrador extends CI_Controller{
 			$this->load->view('templates/footer');
 		}
 
+		public function alterarReserva(){
+			$user = $this->session->userdata('nivel_usuario');
+			$data = array(
+				'consulta' => $this->sys_model->consultaReserva(),
+				'usuarios' => $this->db->get("USUARIO")->result(),
+				'reserva' => $this->db->get("RESERVA")->result()
+			);
+			$this->load->view('templates/header.php');
+
+			if ($user === 'administrador'):
+				$nav = 'nav_adm';
+			elseif ($user === 'bibliotecario'):
+				$nav = 'nav_blib';
+			endif;
+
+			$this->load->view('templates/'.$nav);
+			$this->load->view('pages/alterarReserva', $data);
+			$this->load->view('templates/footer.php');
+		}
+
+	function emprestimoReserva($ident = NULL, $username = NULL){
+		$user = $this->session->userdata('nivel_usuario');
+		$data['reserva'] = $this->db->get("RESERVA")->result();
+
+		if ( $user === 'administrador') {
+			$this->user_model->dec_livro($ident);
+			$this->user_model->inc_user($username);
+			$this->db->where('ISBN',$ident);
+			$this->db->where('username',$username);
+			$this->db->delete('RESERVA');
+			$this->session->set_flashdata('success_msg', 'Operação realizada!');
+			redirect(base_url('consultaEmprestimo'));
+		}
+		else {
+			$this->session->set_flashdata('error_msg', 'Não foi possível realizar a solicitação');
+			redirect(base_url(''));
+		}
+
+		$this->load->view('templates/header.php');
+
+		if ($user === 'administrador'):
+			$nav = 'nav_adm';
+		elseif ($user === 'bibliotecario'):
+			$nav = 'nav_blib';
+		endif;
+
+		$this->load->view('templates/'.$nav);
+		$this->load->view('pages/alterarReserva', $data);
+		$this->load->view('templates/footer.php');
+	}
+
+	function cancelReserva($ident = NULL, $username = NULL){
+		$user = $this->session->userdata('nivel_usuario');
+		$data['reserva'] = $this->db->get("RESERVA")->result();
+
+		if ( $user === 'administrador') {
+			$this->db->where('ISBN',$ident);
+			$this->db->where('username',$username);
+			$this->db->delete('RESERVA');
+			$this->session->set_flashdata('success_msg', 'Operação realizada!');
+			redirect(base_url('alterarReserva'));
+		}
+		else {
+			$this->session->set_flashdata('error_msg', 'Não foi possível realizar a solicitação');
+			redirect(base_url(''));
+		}
+
+		$this->load->view('templates/header.php');
+
+		if ($user === 'administrador'):
+			$nav = 'nav_adm';
+		elseif ($user === 'bibliotecario'):
+			$nav = 'nav_blib';
+		endif;
+
+		$this->load->view('templates/'.$nav);
+		$this->load->view('pages/alterarReserva', $data);
+		$this->load->view('templates/footer.php');
+	}
+
           public function meusEmprestimos(){
             $data = array(
               'title' => $this->sys_model->consulta_meusEmprestimos($this->session->userdata('usuario'))

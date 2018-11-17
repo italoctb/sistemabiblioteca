@@ -76,7 +76,7 @@
 								<li><a href="<?=base_url('consulta')?>">Realizar empréstimo</a></li>
 								<li><a href="<?=base_url('reserva')?>">Realizar reserva</a></li>
 								<li><a href="<?=base_url('alterarEmprestimos')?>">Alterar empréstimos</a></li>
-								<li><a href="<?=base_url('')?>">Alterar Reservas</a></li>
+								<li><a href="<?=base_url('alterarReserva')?>">Alterar Reservas</a></li>
 	                        </ul>
 	                    </div>
 
