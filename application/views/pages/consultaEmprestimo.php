@@ -40,7 +40,7 @@
                   <th><a class="fixing_bug" href="#data-table-basic">Usuário</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Nome</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Título</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Data de reserva</a></th>
+                  <th><a class="fixing_bug" href="#data-table-basic">Data de empréstimo</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Data de devolução</a></th>
                 </tr>
               </thead>
@@ -63,7 +63,7 @@
                     <th><a class="fixing_bug" href="#data-table-basic">Usuário</a></th>
                     <th><a class="fixing_bug" href="#data-table-basic">Nome</a></th>
                     <th><a class="fixing_bug" href="#data-table-basic">Título</a></th>
-                    <th><a class="fixing_bug" href="#data-table-basic">Data de reserva</a></th>
+                    <th><a class="fixing_bug" href="#data-table-basic">Data de empréstimo</a></th>
                     <th><a class="fixing_bug" href="#data-table-basic">Data de devolução</a></th>
                   </tr>
                 </tfoot>

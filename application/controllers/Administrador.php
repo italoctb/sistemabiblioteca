@@ -65,30 +65,30 @@ class Administrador extends CI_Controller{
             $this->load->view('templates/footer');
           }
 
-          public function consultaReserva(){
+          public function consultaEmprestimo(){
             $data = array(
-              'title' => $this->sys_model->consultaReserva()
+              'title' => $this->sys_model->consultaEmprestimo()
             );
             $this->load->view('templates/header');
             $this->load->view('templates/nav_adm');
-            $this->load->view('pages/consultaReserva', $data);
+            $this->load->view('pages/consultaEmprestimo', $data);
             $this->load->view('templates/footer');
           }
 
-          public function minhasReservas(){
+          public function meusEmprestimos(){
             $data = array(
-              'title' => $this->sys_model->consulta_minhasReservas($this->session->userdata('usuario'))
+              'title' => $this->sys_model->consulta_meusEmprestimos($this->session->userdata('usuario'))
             );
             $this->load->view('templates/header');
             $this->load->view('templates/nav_adm');
-            $this->load->view('pages/minhasReservas', $data);
+            $this->load->view('pages/meusEmprestimos', $data);
             $this->load->view('templates/footer');
           }
 
           public function addCadastro(){
             //$this->session->set_flashdata('success_msg', 'Cadastrar novo usuário');
             $data = array(
-              'title' => $this->sys_model->consulta_minhasReservas($this->session->userdata('usuario'))
+              'title' => $this->sys_model->consulta_meusEmprestimos($this->session->userdata('usuario'))
             );
             $this->load->view('templates/header');
             $this->load->view('templates/nav_adm');

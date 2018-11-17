@@ -19,7 +19,7 @@
                   <th><a class="fixing_bug" href="#data-table-basic">Ano de publicação</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Editora</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Disponibilidade</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Realizar reserva</a></th>
+                  <th><a class="fixing_bug" href="#data-table-basic">Realizar empréstimo</a></th>
                 </tr>
               </thead>
               <tbody>
@@ -33,7 +33,7 @@
                       <td><?php echo $liv->editora ?></td>
                       <td><?php echo $liv->qtd_disp.'/'.$liv->qtd_copias?></td>
                       <td>
-                        <a class="btn btn-primary notika-btn-primary" href="<?=base_url('reservaLivro/'.$liv->ISBN)?>";>Reservar</a>
+                        <a class="btn btn-primary notika-btn-primary" href="<?=base_url('emprestimoLivro/'.$liv->ISBN)?>";>Reservar</a>
                       </td>
                     </tr>
                 <?php  }?>
@@ -46,7 +46,7 @@
                     <th><a class="fixing_bug" href="#data-table-basic">Ano de publicação</a></th>
                     <th><a class="fixing_bug" href="#data-table-basic">Editora</a></th>
                     <th><a class="fixing_bug" href="#data-table-basic">Disponibilidade</a></th>
-                    <th><a class="fixing_bug" href="#data-table-basic">Realizar reserva</a></th>
+                    <th><a class="fixing_bug" href="#data-table-basic">Realizar empréstimo</a></th>
                   </tr>
                 </tfoot>
               </table>

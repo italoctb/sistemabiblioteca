@@ -9,8 +9,8 @@
           $this->db->insert('USUARIO', $user);
       }
 
-      public function reg_reserva($RESERVA){
-          $this->db->insert('RESERVA', $RESERVA);
+      public function reg_emprestimo($EMPRESTIMOS){
+          $this->db->insert('EMPRESTIMOS', $EMPRESTIMOS);
       }
 
       public function dec_livro($ISBN){
@@ -37,7 +37,7 @@
           $this->db->update('USUARIO');
       }
 
-      public function check_reserva($ISBN){
+      public function check_emprestimo($ISBN){
           $this->db->select('*');
           $this->db->from('LIVROS');
           $this->db->where('ISBN',$ISBN);
@@ -53,9 +53,9 @@
 
       }
 
-      public function check_reserva_usuario($ISBN, $username){
+      public function check_emprestimo_usuario($ISBN, $username){
           $this->db->select('*');
-          $this->db->from('RESERVA');
+          $this->db->from('EMPRESTIMOS');
           $this->db->where('ISBN',$ISBN);
           $this->db->where('username',$username);
 
@@ -70,7 +70,7 @@
 
       public function checkDataReserva($ISBN, $username){
           $this->db->select('*');
-          $this->db->from('RESERVA');
+          $this->db->from('EMPRESTIMOS');
           $this->db->where('ISBN',$ISBN);
           $this->db->where('username',$username);
 

@@ -46,7 +46,7 @@
               </thead>
               <tbody>
                 <?php
-                  foreach ($reserva as $res):
+                  foreach (emprestimo as $res):
                   if ($res->username == $username):
                     echo $username;
                 ?>
@@ -57,11 +57,11 @@
                         <td><?=$res->prazo_dev?></td>
 
                         <td>
-                          <a class="btn btn-primary notika-btn-primary" href="<?=base_url('editarReserva/'.$res->ISBN.'/'.$res->username)?>";>Editar</a>
+                          <a class="btn btn-primary notika-btn-primary" href="<?=base_url('editarEmprestimo/'.$res->ISBN.'/'.$res->username)?>";>Editar</a>
                         </td>
 
                         <td>
-                            <a class="btn btn-success notika-btn-success" href="<?=base_url('devReserva/'.$res->ISBN.'/'.$res->username)?>" onclick="return confirm('Deseja realmente dar baixa no registro?');">Encerrar</a>
+                            <a class="btn btn-success notika-btn-success" href="<?=base_url('devEmprestimo/'.$res->ISBN.'/'.$res->username)?>" onclick="return confirm('Deseja realmente dar baixa no registro?');">Encerrar</a>
                         </td>
                     </tr>
                 <?php

@@ -9,7 +9,7 @@
                             <li><a data-toggle="collapse" data-target="#Charts" href="#">Início</a>
                                 <ul class="collapse dropdown-header-top">
                                     <li><a href="<?=base_url('user/home')?>">Biblioteca</a></li>
-        							<li><a href="<?=base_url('minhasReservas')?>">Minhas reservas</a></li>
+        							<li><a href="<?=base_url('meusEmpréstimos')?>">Minhas empréstimos</a></li>
                                     <li><a href="<?php echo base_url('logout')?>">Sair</a></li>
                                 </ul>
                             </li>
@@ -49,7 +49,7 @@
                     <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
                           <li><a href="<?=base_url('user/home')?>">Biblioteca</a></li>
-                          <li><a href="<?=base_url('minhasReservas')?>">Minhas reservas</a></li>
+                          <li><a href="<?=base_url('meusEmpréstimos')?>">Minhas empréstimos</a></li>
                           <li><a href="<?php echo base_url('logout')?>">Sair</a></li>
                         </ul>
                     </div>

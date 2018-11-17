@@ -53,7 +53,7 @@
     ?>
 
 <div class="container">
-    <form action="<?=base_url('envReserva')?>" method="post" class="form-signin">
+    <form action="<?=base_url('envEmprestimo')?>" method="post" class="form-signin">
 
         <h2 class="h3 mb-3 font-weight-normal">Reservar Livro</h2>
 

@@ -78,7 +78,7 @@
                 </div>
                 <div class="nk-int-st">
                   <label for="data_reserva">Data de Reverva:</label>
-                  <input type="text" name="data_reserva" class="form-control" placeholder="Data de Reserva" value="<?=$reserva?>" required>
+                  <input type="text" name="data_reserva" class="form-control" placeholder="Data de Reserva" value="<?=$emprestimo?>" required>
                 </div>
               </div>
             </div>

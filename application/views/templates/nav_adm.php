@@ -14,8 +14,8 @@
 										<li><a href="<?=base_url('home')?>">Biblioteca</a></li>
 										<li><a href="<?=base_url('professores')?>">Professores</a></li>
 										<li><a href="<?=base_url('consultaUsuario')?>">Consulta usuários</a></li>
-										<li><a href="<?=base_url('consultaReserva')?>">Consulta reservas</a></li>
-										<li><a href="<?=base_url('minhasReservas')?>">Minhas reservas</a></li>
+										<li><a href="<?=base_url('consultaEmprestimo')?>">Consulta empréstimos</a></li>
+										<li><a href="<?=base_url('meusEmprestimos')?>">Meus empréstimos</a></li>
 										<li><a href="<?=base_url('logout')?>">Sair</a></li>
 	                                </ul>
 	                            </li>
@@ -64,8 +64,8 @@
 								<li><a href="<?=base_url('admin/home')?>">Biblioteca</a></li>
 								<li><a href="<?=base_url('admin/professores')?>">Professores</a></li>
 								<li><a href="<?=base_url('admin/consultaUsuario')?>">Consulta usuários</a></li>
-								<li><a href="<?=base_url('admin/consultaReserva')?>">Consulta reservas</a></li>
-								<li><a href="<?=base_url('admin/minhasReservas')?>">Minhas reservas</a></li>
+								<li><a href="<?=base_url('admin/consultaEmprestimo')?>">Consulta empréstimos</a></li>
+								<li><a href="<?=base_url('admin/meusEmprestimos')?>">Meus empréstimos</a></li>
 								<li><a href="<?=base_url('logout')?>">Sair</a></li>
 	                        </ul>
 	                    </div>

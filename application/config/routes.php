@@ -54,20 +54,20 @@ $route['default_controller'] 			= 'pages/view';
 $route['autenticate'] 		 			= 'pages/aut_login';
 $route['sem_acesso'] 					= 'pages/error_page';
 $route['consulta'] 						= 'pages/consulta';
-$route['reservaLivro'] 					= 'pages/reservaLivro';
-$route['reservaLivro/(:num)'] 			= 'pages/reservaLivro/$1';
+$route['emprestimoLivro'] 					= 'pages/emprestimoLivro';
+$route['emprestimoLivro/(:num)'] 			= 'pages/emprestimoLivro/$1';
 $route['cadastro'] 						= 'pages/cadastro';
 $route['addUsuario'] 					= 'pages/addUsuario';
-$route['envReserva'] 					= 'pages/envReserva';
-$route['minhasReservas'] 				= 'pages/minhasReservas';
+$route['envEmprestimo'] 					= 'pages/envEmprestimo';
+$route['meusEmprestimos'] 				= 'pages/meusEmprestimos';
 $route['alterarEmprestimos'] 	 		= 'pages/alterarEmprestimos';
-$route['editarReserva'] 				= 'pages/editarReserva';
-$route['editarReserva/(:any)/(:any)']	= 'pages/editarReserva/$1/$2';
-$route['updateReserva'] 				= 'pages/updateReserva';
-$route['baixaReserva'] 					= 'pages/baixaReserva';
-$route['baixaReserva/(:any)'] 			= 'pages/baixaReserva/$1';
-$route['devReserva'] 					= 'pages/devReserva';
-$route['devReserva/(:any)/(:any)'] 		= 'pages/devReserva/$1/$2';
+$route['editarEmprestimo'] 				= 'pages/editarEmprestimo';
+$route['editarEmprestimo/(:any)/(:any)']	= 'pages/editarEmprestimo/$1/$2';
+$route['updateEmprestimo'] 				= 'pages/updateEmprestimo';
+$route['baixaEmprestimo'] 					= 'pages/baixaEmprestimo';
+$route['baixaEmprestimo/(:any)'] 			= 'pages/baixaEmprestimo/$1';
+$route['devEmprestimo'] 					= 'pages/devEmprestimo';
+$route['devEmprestimo/(:any)/(:any)'] 		= 'pages/devEmprestimo/$1/$2';
 $route['logout'] 						= 'pages/logout';
 
 $route['user/(:any)']  = 'user/$1';
@@ -76,7 +76,7 @@ $route['admin/(:any)'] = 'administrador/$1';
 
 $route['professores'] 		= 'administrador/professores';
 $route['consultaUsuario'] 	= 'administrador/consultaUsuario';
-$route['consultaReserva'] 	= 'administrador/consultaReserva';
+$route['consultaEmprestimo'] 	= 'administrador/consultaEmprestimo';
 
 $route['user/home']		= '/user/home';
 

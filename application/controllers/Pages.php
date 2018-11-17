@@ -183,7 +183,7 @@ class Pages extends CI_Controller {
             $this->session->set_flashdata('success_msg', '');
             $user = $this->session->userdata('nivel_usuario');
             $data = array(
-              'title' => $this->sys_model->consultaReserva(),
+              'title' => $this->sys_model->consultaEmprestimo(),
               'livros' => $this->db->get("LIVROS")->result()
             );
             $this->load->view('templates/header.php');
@@ -200,7 +200,7 @@ class Pages extends CI_Controller {
             $this->load->view('templates/footer.php');
           }
 
-    public function reservaLivro($ident = NULL){
+    public function emprestimoLivro($ident = NULL){
             $user = $this->session->userdata('usuario');
             $data = array(
                 'title' => $this->sys_model->consultaTitulos(),  
@@ -213,18 +213,18 @@ class Pages extends CI_Controller {
             );
             
             $this->load->view('templates/header.php');
-            $this->load->view('pages/reservaLivro', $data);
+            $this->load->view('pages/emprestimoLivro', $data);
             $this->load->view('templates/footer.php');
     }
 
-    public function envReserva($ident = NULL){
+    public function envEmprestimo($ident = NULL){
             $user = $this->session->userdata('usuario');
             $data = array(
                 'title' => $this->sys_model->consultaTitulos(),  
                 'tipoUsuario' =>$this->sys_model->consulta_especifico_Usuario($user)->tipoUsuario,
                 'livros' => $this->db->get("LIVROS")->result()
             );
-            $RESERVA = array(
+            $EMPRESTIMOS = array(
             'ISBN' => $this->input->post('ISBN'),
             'username' => $this->input->post('username'),
             'data_reserva' => $this->input->post('data_reserva'),
@@ -232,28 +232,28 @@ class Pages extends CI_Controller {
             );
 
               $qtd_check= $this->user_model->getQtdLivros($this->input->post('ISBN'));
-              $res_check = $this->user_model->check_reserva($ident);
-              $res_check_l = $this->user_model->check_reserva_usuario($this->input->post('ISBN'),$this->input->post('username'));
+              $res_check = $this->user_model->check_emprestimo($ident);
+              $res_check_l = $this->user_model->check_emprestimo_usuario($this->input->post('ISBN'),$this->input->post('username'));
               $res_check_qtd = $this->user_model->getQtdMax($this->input->post('username'));
               if (!$res_check && !$res_check_l && $res_check_qtd && $qtd_check) {
-                  $this->user_model->reg_reserva($RESERVA);
+                  $this->user_model->reg_emprestimo($EMPRESTIMOS);
                   $this->user_model->dec_livro($this->input->post('ISBN'));
                   $this->user_model->inc_user($this->input->post('username'));
-                  $this->session->set_flashdata('success_msg', 'Reserva realizada com sucesso!');
-                  redirect(base_url('minhasReservas'));
+                  $this->session->set_flashdata('success_msg', 'Emprestimo realizado com sucesso!');
+                  redirect(base_url('meusEmprestimos'));
               }
               else {
                 if(!$qtd_check){
                     $this->session->set_flashdata('error_msg', 'Não existem exemplares disponíveis');
-                    redirect(base_url('reservaLivro/'.$RESERVA['ISBN']));
+                    redirect(base_url('emprestimoLivro/'.$EMPRESTIMOS['ISBN']));
                 }
                 elseif($res_check_l){
                     $this->session->set_flashdata('error_msg', 'Usuário já realizou este empréstimo');
-                    redirect(base_url('reservaLivro/'.$RESERVA['ISBN']));
+                    redirect(base_url('emprestimoLivro/'.$EMPRESTIMOS['ISBN']));
                 }
                 elseif(!$res_check_qtd){
                     $this->session->set_flashdata('error_msg', 'Usuário já realizou o número máximo de empréstimos');
-                    redirect(base_url('reservaLivro/'.$RESERVA['ISBN']));
+                    redirect(base_url('emprestimoLivro/'.$EMPRESTIMOS['ISBN']));
                 }
               }
               $this->load->view('templates/header.php');
@@ -262,10 +262,10 @@ class Pages extends CI_Controller {
               $this->load->view('templates/footer.php');
     }
 
-    public function minhasReservas(){
+    public function meusEmprestimos(){
         $user = $this->session->userdata('nivel_usuario');
         $data = array(
-            'title' => $this->sys_model->consulta_minhasReservas($this->session->userdata('usuario'))
+            'title' => $this->sys_model->consulta_meusEmprestimos($this->session->userdata('usuario'))
         );
         $this->load->view('templates/header.php');
 
@@ -278,16 +278,16 @@ class Pages extends CI_Controller {
         endif;
 
         $this->load->view('templates/'.$nav);
-        $this->load->view('pages/minhasReservas', $data);
+        $this->load->view('pages/meusEmprestimos', $data);
         $this->load->view('templates/footer.php');
     }
 
     public function alterarEmprestimos(){
         $user = $this->session->userdata('nivel_usuario');
         $data = array(
-            'title' => $this->sys_model->consulta_minhasReservas($this->session->userdata('usuario')),
+            'title' => $this->sys_model->consulta_meusEmprestimos($this->session->userdata('usuario')),
             'usuarios' => $this->db->get("USUARIO")->result(),
-            'reserva' => $this->db->get("RESERVA")->result()
+            'emprestimo' => $this->db->get("EMPRESTIMOS")->result()
         );
         $this->load->view('templates/header.php');
 
@@ -302,20 +302,20 @@ class Pages extends CI_Controller {
         $this->load->view('templates/footer.php');
     }
 
-    public function editarReserva($isbn = NULL, $username = NULL){
+    public function editarEmprestimo($isbn = NULL, $username = NULL){
         $user_id = $this->session->userdata('nivel_usuario');
         if($user_id === 'administrador' || $user_id === 'bibliotecario'){
             $this->db->where('username',$username);
-            $data['reserva'] = $this->db->get('RESERVA')->result();
+            $data['emprestimo'] = $this->db->get('EMPRESTIMOS')->result();
             $data['username'] = $username;
             $data['isbn'] = $isbn;
             $data['titulo'] = $this->sys_model->consulta_especifico_LIVRO($isbn)->titulo;
             $data['nome'] = $this->sys_model->consulta_especifico_USUARIO($username)->nome;
-            $data['reserva'] = $this->user_model->checkDataReserva($isbn, $username)->data_reserva;
-            $data['dev'] = $this->user_model->checkDataReserva($isbn, $username)->prazo_dev;
+            $data['emprestimo'] = $this->user_model->checkDataEmprestimo($isbn, $username)->data_reserva;
+            $data['dev'] = $this->user_model->checkDataEmprestimo($isbn, $username)->prazo_dev;
 
             $this->load->view('templates/header');
-            $this->load->view('pages/editarReserva', $data);
+            $this->load->view('pages/editarEmprestimo', $data);
             $this->load->view('templates/footer');
         }
         else{
@@ -323,9 +323,9 @@ class Pages extends CI_Controller {
         }
     }
 
-    public function updateReserva(){
+    public function updateEmprestimo(){
             $user_id = $this->session->userdata('nivel_usuario');
-            $this->form_validation->set_rules('data_reserva', 'Data de Reserva', 'trim|required');
+            $this->form_validation->set_rules('data_reserva', 'Data de Emprestimo', 'trim|required');
             $this->form_validation->set_rules('prazo_dev', 'Prazo de Devolução', 'trim|required');
             $this->form_validation->set_rules('username', 'Nome de usuário', 'trim|required');
             $this->form_validation->set_rules('isbn', 'ISBN', 'trim|required');
@@ -351,18 +351,18 @@ class Pages extends CI_Controller {
                     if($test1 && !$test2){
                         $this->db->where('ISBN', $isbn);
                         $this->db->where('username', $username);
-                        if($this->db->update('RESERVA', $DATA)){
+                        if($this->db->update('EMPRESTIMOS', $DATA)){
                             $this->session->set_flashdata('success_msg', 'Registro atualizado');
-                            redirect(base_url('consultaReserva'));
+                            redirect(base_url('consultaEmprestimo'));
                         }
                        else{
                            $this->session->set_flashdata('success_msg', 'Erro na atualização');
-                           redirect(base_url('consultaReserva'));
+                           redirect(base_url('consultaEmprestimo'));
                        }
                     }
                     else{
                         $this->session->set_flashdata('error_msg', 'Não foi possível atualizar o registro');
-                        redirect(base_url('baixaReserva/'.$username));
+                        redirect(base_url('baixaEmprestimo/'.$username));
                     }
             }
         }
@@ -371,13 +371,13 @@ class Pages extends CI_Controller {
       $this->load->view('pages/error_page');
     }
 
-    function baixaReserva($ident = NULL){
+    function baixaEmprestimo($ident = NULL){
         $user = $this->session->userdata('nivel_usuario');
         $data = array(
             'username' => $ident,
-            'title' => $this->sys_model->consulta_minhasReservas($this->session->userdata('usuario')),
+            'title' => $this->sys_model->consulta_meusEmprestimos($this->session->userdata('usuario')),
             'usuarios' => $this->db->get("USUARIO")->result(),
-            'reserva' => $this->db->get("RESERVA")->result()
+            'emprestimo' => $this->db->get("EMPRESTIMOS")->result()
         );
         
         $this->load->view('templates/header.php');
@@ -389,11 +389,11 @@ class Pages extends CI_Controller {
         endif;
 
         $this->load->view('templates/'.$nav);
-        $this->load->view('pages/baixaReserva', $data);
+        $this->load->view('pages/baixaEmprestimo', $data);
         $this->load->view('templates/footer.php');
     }
 
-    function devReserva($ident = NULL, $username = NULL){
+    function devEmprestimo($ident = NULL, $username = NULL){
         $user = $this->session->userdata('nivel_usuario');
         $data['livros'] = $this->db->get("LIVROS")->result();
 
@@ -402,9 +402,9 @@ class Pages extends CI_Controller {
             $this->user_model->dec_user($username);
             $this->db->where('ISBN',$ident);
             $this->db->where('username',$username);
-            $this->db->delete('RESERVA');
+            $this->db->delete('EMPRESTIMOS');
             $this->session->set_flashdata('success_msg', 'Operação realizada!');
-            redirect(base_url('consultaReserva'));
+            redirect(base_url('consultaEmprestimo'));
         }
         else {
             $this->session->set_flashdata('error_msg', 'Não foi possível realizar a solicitação');
@@ -420,7 +420,7 @@ class Pages extends CI_Controller {
         endif;
 
         $this->load->view('templates/'.$nav);
-        $this->load->view('pages/baixaReserva', $data);
+        $this->load->view('pages/baixaEmprestimo', $data);
         $this->load->view('templates/footer.php');
     }
 
