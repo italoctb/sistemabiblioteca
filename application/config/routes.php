@@ -50,25 +50,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-$route['default_controller'] 			= 'pages/view';
-$route['autenticate'] 		 			= 'pages/aut_login';
-$route['sem_acesso'] 					= 'pages/error_page';
-$route['consulta'] 						= 'pages/consulta';
+$route['default_controller'] 				= 'pages/view';
+$route['autenticate'] 		 				= 'pages/aut_login';
+$route['sem_acesso'] 						= 'pages/error_page';
+$route['consulta'] 							= 'pages/consulta';
+$route['reserva'] 							= 'pages/reserva';
 $route['emprestimoLivro'] 					= 'pages/emprestimoLivro';
 $route['emprestimoLivro/(:num)'] 			= 'pages/emprestimoLivro/$1';
-$route['cadastro'] 						= 'pages/cadastro';
-$route['addUsuario'] 					= 'pages/addUsuario';
+$route['reservaLivro'] 						= 'pages/reservaLivro';
+$route['reservaLivro/(:num)'] 				= 'pages/reservaLivro/$1';
+$route['cadastro'] 							= 'pages/cadastro';
+$route['addUsuario'] 						= 'pages/addUsuario';
 $route['envEmprestimo'] 					= 'pages/envEmprestimo';
-$route['meusEmprestimos'] 				= 'pages/meusEmprestimos';
-$route['alterarEmprestimos'] 	 		= 'pages/alterarEmprestimos';
-$route['editarEmprestimo'] 				= 'pages/editarEmprestimo';
+$route['envReserva'] 						= 'pages/envReserva';
+$route['meusEmprestimos'] 					= 'pages/meusEmprestimos';
+$route['minhasReservas'] 					= 'pages/minhasReservas';
+$route['alterarEmprestimos'] 	 			= 'pages/alterarEmprestimos';
+$route['editarEmprestimo'] 					= 'pages/editarEmprestimo';
 $route['editarEmprestimo/(:any)/(:any)']	= 'pages/editarEmprestimo/$1/$2';
-$route['updateEmprestimo'] 				= 'pages/updateEmprestimo';
+$route['updateEmprestimo'] 					= 'pages/updateEmprestimo';
 $route['baixaEmprestimo'] 					= 'pages/baixaEmprestimo';
 $route['baixaEmprestimo/(:any)'] 			= 'pages/baixaEmprestimo/$1';
 $route['devEmprestimo'] 					= 'pages/devEmprestimo';
 $route['devEmprestimo/(:any)/(:any)'] 		= 'pages/devEmprestimo/$1/$2';
-$route['logout'] 						= 'pages/logout';
+$route['logout'] 							= 'pages/logout';
 
 $route['user/(:any)']  = 'user/$1';
 $route['blib/(:any)']  = 'bibliotecario/$1';

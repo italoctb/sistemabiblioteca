@@ -198,7 +198,7 @@ class Pages extends CI_Controller {
             $this->load->view('templates/'.$nav);
             $this->load->view('pages/consulta', $data);
             $this->load->view('templates/footer.php');
-          }
+    }
 
     public function emprestimoLivro($ident = NULL){
             $user = $this->session->userdata('usuario');
@@ -423,6 +423,99 @@ class Pages extends CI_Controller {
         $this->load->view('pages/baixaEmprestimo', $data);
         $this->load->view('templates/footer.php');
     }
+
+	public function reserva(){
+		$user = $this->session->userdata('nivel_usuario');
+		$data = array(
+			'title' => $this->sys_model->consultaEmprestimo(),
+			'livros' => $this->db->get("LIVROS")->result()
+		);
+		$this->load->view('templates/header.php');
+
+		if ($user === 'administrador'):
+			$nav = 'nav_adm';
+		elseif ($user === 'usuario'):
+			$nav = 'nav_user';
+		elseif ($user === 'bibliotecario'):
+			$nav = 'nav_blib';
+		endif;
+		$this->load->view('templates/'.$nav);
+		$this->load->view('pages/reserva', $data);
+		$this->load->view('templates/footer.php');
+	}
+
+	public function reservaLivro($ident = NULL){
+		$user = $this->session->userdata('usuario');
+		$data = array(
+			'title' => $this->sys_model->consultaTitulos(),
+			'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
+			'username' =>$this->sys_model->consulta_especifico_Usuario($user)->username,
+			'tipoUsuario' =>$this->sys_model->consulta_especifico_Usuario($user)->tipoUsuario,
+			'livros' => $this->db->get("LIVROS")->result(),
+			'ISBN' => $ident,
+			'titulo' =>  $this->user_model->livroByISBN($ident)->titulo
+		);
+
+		$this->load->view('templates/header.php');
+		$this->load->view('pages/reservaLivro', $data);
+		$this->load->view('templates/footer.php');
+	}
+
+	public function envReserva($ident = NULL){
+		$user = $this->session->userdata('usuario');
+		$data = array(
+			'title' => $this->sys_model->consultaTitulos(),
+			'tipoUsuario' =>$this->sys_model->consulta_especifico_Usuario($user)->tipoUsuario,
+			'livros' => $this->db->get("LIVROS")->result()
+		);
+		$RESERVA = array(
+			'ISBN' => $this->input->post('ISBN'),
+			'username' => $this->input->post('username'),
+			'data_reserva' => $this->input->post('data_reserva'),
+		);
+
+		$res_check = $this->user_model->check_reserva_usuario($this->input->post('ISBN'),$this->input->post('username'));
+		$emp_check = $this->user_model->check_emprestimo_usuario($this->input->post('ISBN'),$this->input->post('username'));
+		if (!$res_check && !$emp_check) {
+			$this->user_model->reg_reserva($RESERVA);
+			$this->session->set_flashdata('success_msg', 'Reserva realizada com sucesso!');
+			redirect(base_url('minhasReservas'));
+		}
+		else {
+			if($res_check) {
+				$this->session->set_flashdata('error_msg', 'Usuário já realizou esta reserva');
+				redirect(base_url('reservaLivro/' . $RESERVA['ISBN']));
+			}
+			elseif($emp_check) {
+				$this->session->set_flashdata('error_msg', 'Usuário encontra-se com o livro alugado');
+				redirect(base_url('reservaLivro/' . $RESERVA['ISBN']));
+			}
+		}
+		$this->load->view('templates/header.php');
+		$this->load->view('templates/nav_user.php');
+		$this->load->view('pages/home', $data);
+		$this->load->view('templates/footer.php');
+	}
+
+	public function minhasReservas(){
+		$user = $this->session->userdata('nivel_usuario');
+		$data = array(
+			'title' => $this->sys_model->consulta_minhasReservas($this->session->userdata('usuario'))
+		);
+		$this->load->view('templates/header.php');
+
+		if ($user === 'administrador'):
+			$nav = 'nav_adm';
+		elseif ($user === 'usuario'):
+			$nav = 'nav_user';
+		elseif ($user === 'bibliotecario'):
+			$nav = 'nav_blib';
+		endif;
+
+		$this->load->view('templates/'.$nav);
+		$this->load->view('pages/minhasReservas', $data);
+		$this->load->view('templates/footer.php');
+	}
 
     public function logout(){
         $this->session->sess_destroy();

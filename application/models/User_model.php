@@ -13,6 +13,10 @@
           $this->db->insert('EMPRESTIMOS', $EMPRESTIMOS);
       }
 
+	  public function reg_reserva($EMPRESTIMOS){
+		  $this->db->insert('RESERVA', $EMPRESTIMOS);
+	  }
+
       public function dec_livro($ISBN){
           $this->db->set('qtd_disp', 'qtd_disp-1',FALSE);
           $this->db->where('ISBN', $ISBN);
@@ -67,6 +71,21 @@
               return false;
           }
       }
+
+	  public function check_reserva_usuario($ISBN, $username){
+		  $this->db->select('*');
+		  $this->db->from('RESERVA');
+		  $this->db->where('ISBN',$ISBN);
+		  $this->db->where('username',$username);
+
+		  if($query=$this->db->get()) {
+			  return $query->row_array();
+		  }
+
+		  else{
+			  return false;
+		  }
+	  }
 
       public function checkDataEmprestimo($ISBN, $username){
           $this->db->select('*');
