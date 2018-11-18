@@ -203,7 +203,7 @@ class Pages extends CI_Controller {
     public function emprestimoLivro($ident = NULL){
             $user = $this->session->userdata('usuario');
             $data = array(
-                'title' => $this->sys_model->consultaTitulos(),  
+                'title' => $this->sys_model->consultaTitulos(),
                 'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
                 'username' =>$this->sys_model->consulta_especifico_Usuario($user)->username,
                 'tipoUsuario' =>$this->sys_model->consulta_especifico_Usuario($user)->tipoUsuario,
@@ -211,7 +211,7 @@ class Pages extends CI_Controller {
                 'ISBN' => $ident,
                 'titulo' =>  $this->user_model->livroByISBN($ident)->titulo
             );
-            
+
             $this->load->view('templates/header.php');
             $this->load->view('pages/emprestimoLivro', $data);
             $this->load->view('templates/footer.php');
@@ -220,7 +220,7 @@ class Pages extends CI_Controller {
     public function envEmprestimo($ident = NULL){
             $user = $this->session->userdata('usuario');
             $data = array(
-                'title' => $this->sys_model->consultaTitulos(),  
+                'title' => $this->sys_model->consultaTitulos(),
                 'tipoUsuario' =>$this->sys_model->consulta_especifico_Usuario($user)->tipoUsuario,
                 'livros' => $this->db->get("LIVROS")->result()
             );
@@ -339,7 +339,7 @@ class Pages extends CI_Controller {
                     $prazo_dev = $this->input->post('prazo_dev');
                     $isbn = $this->input->post('isbn');
                     $username = $this->input->post('username');
-                    
+
                     $test1 = $this->user_model->checkDataAtual($data_reserva);
                     $test2 = $this->user_model->checkDataAtual($prazo_dev);
 
@@ -379,7 +379,7 @@ class Pages extends CI_Controller {
             'usuarios' => $this->db->get("USUARIO")->result(),
             'emprestimo' => $this->db->get("EMPRESTIMOS")->result()
         );
-        
+
         $this->load->view('templates/header.php');
 
         if ($user === 'administrador'):
@@ -528,5 +528,48 @@ class Pages extends CI_Controller {
 
     public function semAcesso(){
        $this->load->view('pages/semAcesso');
+    }
+
+    public function caixaPesquisa(){
+      $data = array(
+        'title' => $this->sys_model->buscar($_POST),
+        'nome' =>$this->sys_model->buscar($_POST),
+        'cpf' => $this->sys_model->buscar($_POST),
+        'autor' => $this->sys_model->buscar($_POST)
+      );
+      $this->load->view('templates/header');
+      $this->load->view('templates/nav_adm');
+      $this->load->view('pages/resultPesquisa', $data);
+      $this->load->view('templates/footer');
+    }
+
+    public function rconsultaUsuario(){
+      $data = array(
+        'title' => $this->sys_model->buscarUsuario($_POST)
+      );
+      $this->load->view('templates/header');
+      $this->load->view('templates/nav_adm');
+      $this->load->view('pages/rconsultaUsuario', $data);
+      $this->load->view('templates/footer');
+    }
+
+    public function rconsultaReserva(){
+      $data = array(
+        'title' => $this->sys_model->buscarReserva($_POST)
+      );
+      $this->load->view('templates/header');
+      $this->load->view('templates/nav_adm');
+      $this->load->view('pages/rconsultaReserva', $data);
+      $this->load->view('templates/footer');
+    }
+
+    public function rconsultaProfs(){
+      $data = array(
+        'title' => $this->sys_model->buscarProfs($_POST)
+      );
+      $this->load->view('templates/header');
+      $this->load->view('templates/nav_adm');
+      $this->load->view('pages/rconsultaProfs', $data);
+      $this->load->view('templates/footer');
     }
 }

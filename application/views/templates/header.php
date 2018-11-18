@@ -56,7 +56,7 @@
 	<link rel="stylesheet" href="<?=base_url('static/css/responsive.css')?>">
 
 	<link rel="stylesheet" href="<?=base_url('static/css/adjust_styles.css')?>">
-	
+
 	<link rel="stylesheet" type="text/css" href="<?=base_url('static/css/dashboard.css')?>">
 	<!-- modernizr JS
 	============================================ -->
@@ -81,8 +81,10 @@
 								<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-search" id="adjust_position_finder"></i></span></a>
 								<div role="menu" class="dropdown-menu search-dd animated flipInX">
 									<div class="search-input">
-										<i class="notika-icon notika-left-arrow"></i>
-										<input type="text" placeholder="Qual obra você procura ?"/>
+										<form action="<?=base_url('caixa')?>" method="POST">
+										<input type="text" name="caixap" id="caixap" placeholder="Encontre aqui a obra por nome ou por autor(a)">
+										<button type="submit" class="btn btn-primary">Pesquisar</button>
+									</form>
 									</div>
 								</div>
 							</li>

@@ -74,6 +74,10 @@ $route['baixaEmprestimo/(:any)'] 			= 'pages/baixaEmprestimo/$1';
 $route['devEmprestimo'] 					= 'pages/devEmprestimo';
 $route['devEmprestimo/(:any)/(:any)'] 		= 'pages/devEmprestimo/$1/$2';
 $route['logout'] 							= 'pages/logout';
+$route['caixa']     = 'pages/caixaPesquisa';
+$route['rconsultaUsuario']  = 'pages/rconsultaUsuario';
+$route['rconsultaReserva']  = 'pages/rconsultaReserva';
+$route['rconsultaProfs'] = 'pages/rconsultaProfs';
 
 $route['user/(:any)']  = 'user/$1';
 $route['blib/(:any)']  = 'bibliotecario/$1';

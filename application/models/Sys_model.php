@@ -64,4 +64,40 @@ class Sys_model extends CI_Model {
         public function registro_usuario($user){
                 $this->db->insert('USUARIO', $user);
         }
+
+        public function buscar($busca){
+          $busca = $this->input->post('caixap');
+          if (empty($busca)) {
+            return array();
+          }
+          $query = $this->db->query("select ISBN, titulo, nome_autor, ano_lançamento, editora, cpf, qtd_disp, qtd_copias, descricao from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES where titulo like '%".$busca."%' or nome_autor like '%".$busca."%';");
+          return $query->result();
+        }
+
+        public function buscarUsuario($busca){
+          $busca = $this->input->post('caixap1');
+          if (empty($busca)) {
+            return array();
+          }
+          $query = $this->db->query("select username, nome, tipoUsuario, user_end from USUARIO where username like '%".$busca."%' or nome like '%".$busca."%' or tipoUsuario like '%".$busca."%';");
+          return $query->result();
+        }
+
+        public function buscarReserva($busca){
+          $busca = $this->input->post('caixap2');
+          if (empty($busca)) {
+            return array();
+          }
+          $query = $this->db->query("select username, nome, tipoUsuario, user_end from USUARIO where username like '%".$busca."%' or nome like '%".$busca."%' or tipoUsuario like '%".$busca."%';");
+          return $query->result();
+        }
+
+        public function buscarProfs($busca){
+          $busca = $this->input->post('caixap3');
+          if (empty($busca)) {
+            return array();
+          }
+          $query = $this->db->query("select mat_siape, nome, nome_curso from PROFESSORES natural join USUARIO natural join CURSO where nome like '%".$busca."%' or nome_curso like '%".$busca."%' or mat_siape like '%".$busca."%';");
+          return $query->result();
+        }
 }
