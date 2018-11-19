@@ -49,31 +49,36 @@
                   <th><a class="fixing_bug" href="#data-table-basic">Usuário</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Nome</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">tipoUsuario</a></th>
+                  <th><a class="fixing_bug" href="#data-table-basic">Matrícula</a></th>
+                  <th><a class="fixing_bug" href="#data-table-basic">Nivel de acesso</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Endereço</a></th>
+                  <th><a class="fixing_bug" href="#data-table-basic">Livros alugados</a></th>
                 </tr>
               </thead>
               <tbody>
                 <?php
 
-                  foreach ($title as $query) {
-                    if ($query->username != 'admin'){
-                    ?>
+                  foreach ($title as $query) {?>
 
                     <tr>
                       <td><?php echo $query->username ?></td>
                       <td><?php echo $query->nome ?></td>
                       <td><?php echo $query->tipoUsuario ?></td>
+                      <?php if ($query->tipoUsuario == 'tipoAl'): ?>
+                        <td><?php echo $query->mat_aluno ?></td>
+                      <?php endif; ?>
+                      <?php if ($query->tipoUsuario == 'tipoFunc'): ?>
+                        <td><?php echo $query->mat_func ?></td>
+                      <?php endif; ?>
+                      <?php if ($query->tipoUsuario == 'tipoProf'): ?>
+                        <td><?php echo "(SIAPE) $query->mat_siape" ?></td>
+                      <?php endif; ?>
+                      <td><?php echo $query->nivel_usuario ?></td>
                       <td><?php echo $query->user_end ?></td>
-
-                      <td>
-                            <a class="btn bt-form btn-block" href="<?=base_url('editarUsuario/'.$query->username)?>";>Editar</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-danger bt-form btn-block" href="<?=base_url('deletarUsuario/'.$query->username)?>" onclick="return confirm('Tem certeza que deseja deletar o usuário?');">Deletar</a>
-                        </td>
+                      <td><?php echo $query->qntd_livros ?></td>
 
                     </tr>
-                <?php  }}?>
+                <?php  }?>
 
                 </tbody>
                 <tfoot>
@@ -81,7 +86,10 @@
                     <th><a class="fixing_bug" href="#data-table-basic">Usuário</a></th>
                     <th><a class="fixing_bug" href="#data-table-basic">Nome</a></th>
                     <th><a class="fixing_bug" href="#data-table-basic">tipoUsuario</a></th>
+                    <th><a class="fixing_bug" href="#data-table-basic">Matrícula</a></th>
+                    <th><a class="fixing_bug" href="#data-table-basic">Nivel de acesso</a></th>
                     <th><a class="fixing_bug" href="#data-table-basic">Endereço</a></th>
+                    <th><a class="fixing_bug" href="#data-table-basic">Livros alugados</a></th>
                   </tr>
                 </tfoot>
               </table>
