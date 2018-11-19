@@ -45,7 +45,7 @@
           <div class="table-responsive">
             <table id="tabela_livros" class="table table-striped">
               <thead>
-                
+
                 <tr>
                   <th><a class="fixing_bug" href="#data-table-basic">ISBN</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Nome da obra</a></th>
