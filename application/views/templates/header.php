@@ -42,6 +42,7 @@
 	<!-- notika icon CSS
 	============================================ -->
 	<link rel="stylesheet" href="<?=base_url('static/css/notika-custom-icon.css')?>">
+	<link rel="stylesheet" href="<?=base_url('static/css/bootstrap-select/bootstrap-select.css')?>">
 	<!-- wave CSS
 	============================================ -->
 	<link rel="stylesheet" href="<?=base_url('static/css/wave/waves.min.css')?>">
@@ -56,12 +57,12 @@
 	<link rel="stylesheet" href="<?=base_url('static/css/responsive.css')?>">
 
 	<link rel="stylesheet" href="<?=base_url('static/css/adjust_styles.css')?>">
-	
+
 	<link rel="stylesheet" type="text/css" href="<?=base_url('static/css/dashboard.css')?>">
 	<!-- modernizr JS
 	============================================ -->
 	<script src="<?=base_url('static/js/vendor/modernizr-2.8.3.min.js')?>"></script>
-
+	<link rel="stylesheet" type="text/css" href="<?=base_url('static/css/perso.css')?>"></script>
 
 </head>
 <body>
@@ -71,7 +72,7 @@
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="logo-area">
-						<a href="#"><img src="<?=base_url('static/img/logo/logo_bibli_2.png')?>" alt="" /></a>
+						<a href="<?=base_url('/')?>"><img src="<?=base_url('static/img/logo/logo_bibli_2.png')?>" alt="" /></a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">

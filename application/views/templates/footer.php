@@ -2,7 +2,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <div class="footer-copy-right" style="height:30px;">
+          <div class="footer-copy-right" style="height:50px;">
             </div>
           </div>
         </div>
@@ -11,12 +11,13 @@
     <!-- End Footer area-->
     <!-- jquery
     ============================================ -->
-    <script src="<?=base_url('static/js/vendor/jquery-1.12.4.min.js')?>"></script>
 
-    
+    <script src="<?=base_url('static/js/vendor/jquery-1.12.4.min.js')?>"></script>
     <!-- bootstrap JS
     ============================================ -->
     <script src="<?=base_url('static/js/bootstrap.min.js')?>"></script>
+    <script src="<?=base_url('static/js/bootstrap-select/bootstrap-select.js')?>"></script>
+
     <!-- wow JS
     ============================================ -->
     <script src="<?=base_url('static/js/wow.min.js')?>"></script>
@@ -82,5 +83,8 @@
     <!-- main JS
     ============================================ -->
     <script src="<?=base_url('static/js/main.js')?>"></script>
+    <script src="<?=base_url('static/js/perso.js')?>"></script>
+
+
   </body>
 </html>
