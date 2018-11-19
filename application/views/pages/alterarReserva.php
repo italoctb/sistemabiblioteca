@@ -39,7 +39,8 @@
 							<tr>
 								<th><a class="fixing_bug" href="#data-table-basic">Usuário</a></th>
 								<th><a class="fixing_bug" href="#data-table-basic">Nome</a></th>
-								<th><a class="fixing_bug" href="#data-table-basic">ISBNS</a></th>
+                <th><a class="fixing_bug" href="#data-table-basic">Título</a></th>
+								<th><a class="fixing_bug" href="#data-table-basic">ISBN</a></th>
 								<th><a class="fixing_bug" href="#data-table-basic">Data de reserva</a></th>
 							</tr>
 							</thead>
@@ -47,27 +48,28 @@
 							<?php
 
 							foreach ($consulta as $query) {
-							foreach ($reserva as $res) {
 								?>
 								<tr>
-									<td><?php echo $res->username ?></td>
+									<td><?php echo $query->username ?></td>
 									<td><?php echo $query->nome ?></td>
-									<td><?php echo $res->ISBN ?></td>
-									<td><?php echo $res->data_reserva ?></td>
+                  <td><?php echo $query->titulo?></td>
+									<td><?php echo $query->ISBN ?></td>
+									<td><?php echo $query->data_reserva ?></td>
 									<td>
-										<a class="btn btn-success notika-btn-success" href="<?=base_url('devEmprestimo/'.$res->ISBN.'/'.$res->username)?>" onclick="return confirm('Deseja realmente adicionar empréstimo?');">Realizar Empréstimo</a>
+										<a class="btn btn-success notika-btn-success" style="position:relative; bottom: 8px;"href="<?=base_url('emprestimoLivro/'.$query->ISBN.'/'.$query->username)?>" onclick="return confirm('Deseja realmente adicionar empréstimo?');">Realizar Empréstimo</a>
 									</td>
 									<td>
-										<a class="btn btn-danger notika-btn-danger" href="<?=base_url('cancelReserva/'.$res->ISBN.'/'.$res->username)?>" onclick="return confirm('Deseja realmente cancelar a reserva?');">Cancelar Reserva</a>
+										<a class="btn btn-danger notika-btn-danger" style="position:relative; bottom: 8px;" href="<?=base_url('cancelReserva/'.$query->ISBN.'/'.$query->username)?>" onclick="return confirm('Deseja realmente cancelar a reserva?');">Cancelar Reserva</a>
 									</td>
 								</tr>
-							<?php  }}?>
+							<?php  }?>
 
 							</tbody>
 							<tfoot>
 							<tr>
-								<th><a class="fixing_bug" href="#data-table-basic">Usuário</a></th>
+                <th><a class="fixing_bug" href="#data-table-basic">Usuário</a></th>
 								<th><a class="fixing_bug" href="#data-table-basic">Nome</a></th>
+                <th><a class="fixing_bug" href="#data-table-basic">Título</a></th>
 								<th><a class="fixing_bug" href="#data-table-basic">ISBN</a></th>
 								<th><a class="fixing_bug" href="#data-table-basic">Data de reserva</a></th>
 							</tr>
