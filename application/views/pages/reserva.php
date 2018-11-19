@@ -12,7 +12,7 @@
           <div class="table-responsive">
             <table id="" class="table table-striped">
               <thead>
-                
+
                 <tr>
                   <th><a class="fixing_bug" href="#data-table-basic">ISBN</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Nome da obra</a></th>
@@ -31,7 +31,7 @@
                       <td><?php echo $liv->ano_lançamento ?></td>
                       <td><?php echo $liv->editora ?></td>
                       <td>
-                        <a class="btn btn-primary notika-btn-primary" href="<?=base_url('reservaLivro/'.$liv->ISBN)?>";>Reservar</a>
+                        <a class="btn btn-success notika-btn-success" style="position: relative; bottom:4px;" href="<?=base_url('reservaLivro/'.$liv->ISBN)?>";>Reservar</a>
                       </td>
                     </tr>
                 <?php  }?>
