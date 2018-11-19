@@ -4,6 +4,8 @@ class Pages extends CI_Controller {
               parent::__construct();
               $user = $this->session->userdata('usuario');
               $nivel = $this->session->userdata('nivel_usuario');
+              $tuser = $this->session->userdata('select tipoUsuario from USUARIO;');
+              $usern = $this->session->userdata('username');
               $this->load->model('user_model');
               $this->load->model('func_model');
               $this->load->model('prof_model');
@@ -572,4 +574,18 @@ class Pages extends CI_Controller {
       $this->load->view('pages/rconsultaProfs', $data);
       $this->load->view('templates/footer');
     }
+
+    public function meuPerfil(){
+      //$tuser = $this->session->userdata('tipo_usuario');
+      $user = $this->session->userdata('usuario');
+      $data = array(
+        'title' => $this->sys_model->meuPerfil($user),
+        'title2' => $this->sys_model->meuPerfilFone($user)
+      );
+      $this->load->view('templates/header');
+      $this->load->view('templates/nav_adm');
+      $this->load->view('pages/meuPerfil', $data);
+      $this->load->view('templates/footer');
+    }
+
 }

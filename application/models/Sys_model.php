@@ -100,4 +100,44 @@ class Sys_model extends CI_Model {
           $query = $this->db->query("select mat_siape, nome, nome_curso from PROFESSORES natural join USUARIO natural join CURSO where nome like '%".$busca."%' or nome_curso like '%".$busca."%' or mat_siape like '%".$busca."%';");
           return $query->result();
         }
+
+
+        public function meuPerfil($user){
+          $q = $this->db->query('select tipoUsuario from USUARIO where username ="'.$user.'";')->row_object();
+          switch ($q->tipoUsuario) {
+            case 'tipoAl':
+              $query = $this->db->query("select * from  CURSO natural join ALUNOS natural join USUARIO where username = '".$user."';");
+              break;
+            case 'tipoProf':
+              $query = $this->db->query("select * from CURSO natural join PROFESSORES natural join USUARIO where username = '".$user."';");
+            break;
+            case 'tipoFunc':
+              $query = $this->db->query("select * from FUNCIONARIOS natural join USUARIO where username = '".$user."';");
+              break;
+            default:
+              $query = array();
+              break;
+          }
+          return $query->result();
+        }
+
+        public function meuPerfilFone($user){
+          $q = $this->db->query('select tipoUsuario from USUARIO where username ="'.$user.'";')->row_object();
+          switch ($q->tipoUsuario) {
+            case 'tipoAl':
+              $query = $this->db->query("select fone_aluno from  CURSO natural join ALUNOS natural join FONE_ALUNOS natural join USUARIO where username = '".$user."';");
+              break;
+            case 'tipoProf':
+              $query = $this->db->query("select * from CURSO natural join PROFESSORES natural join USUARIO where username = '".$user."';");
+            break;
+            case 'tipoFunc':
+              $query = $this->db->query("select fone_func from FUNCIONARIOS natural join FONE_FUNC natural join USUARIO where username = '".$user."';");
+              break;
+            default:
+              $query = array();
+              break;
+          }
+          return $query->result();
+        }
+
 }

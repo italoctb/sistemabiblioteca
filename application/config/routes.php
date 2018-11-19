@@ -78,6 +78,7 @@ $route['caixa']     = 'pages/caixaPesquisa';
 $route['rconsultaUsuario']  = 'pages/rconsultaUsuario';
 $route['rconsultaReserva']  = 'pages/rconsultaReserva';
 $route['rconsultaProfs'] = 'pages/rconsultaProfs';
+$route['meuPerfil'] = 'pages/meuPerfil';
 
 $route['user/(:any)']  = 'user/$1';
 $route['blib/(:any)']  = 'bibliotecario/$1';

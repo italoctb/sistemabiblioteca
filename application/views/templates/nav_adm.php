@@ -30,8 +30,8 @@
 
 	                            <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Usuário</a>
 	                                <ul id="Pagemob" class="collapse dropdown-header-top">
-										<li><a href="<?=base_url('')?>">Meu perfil</a></li>
-										<li><a href="<?=base_url('')?>">Editar perfil</a></li>
+										<li><a href="<?=base_url('meuPerfil')?>">Meu perfil</a></li>
+										<li><a href="<?=base_url('editarUsuario/')?>">Editar perfil</a></li>
 										<li><a href="<?=base_url('')?>">Adicionar cadastro</a></li>
 										<li><a href="<?=base_url('')?>">Cancelar cadastro</a></li>
 	                                </ul>
