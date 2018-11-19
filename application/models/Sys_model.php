@@ -25,10 +25,14 @@ class Sys_model extends CI_Model {
         }
 
         public function consulta_especifico_Livro($isbn){
-                $query = $this->db->query('select * from LIVROS where isbn ="'.$isbn.'";');
+                $query = $this->db->query('select * from LIVROS where ISBN ="'.$isbn.'";');
                 return $query->row_object();
         }
 
+        public function consulta_especifico_ISBN($titulo){
+                $query = $this->db->query('select ISBN from LIVROS where titulo ="'.$titulo.'";');
+                return $query->row_object();
+        }
 
         public function consultaProf(){
                 $query = $this->db->query('select mat_siape, nome, nome_curso from PROFESSORES natural join USUARIO natural join CURSO;');
@@ -36,19 +40,23 @@ class Sys_model extends CI_Model {
         }
 
         public function consultaUsuario(){
-                $query = $this->db->query('select username, nome, tipoUsuario, user_end from USUARIO;');
+                $query = $this->db->query('select * from USUARIO;');
                 return $query->result();
         }
 
         public function consultaEmprestimo(){
-                $query = $this->db->query('select username, nome, titulo, data_reserva, prazo_dev from USUARIO natural join EMPRESTIMOS natural join LIVROS;');
+                $query = $this->db->query('select username, nome, titulo, ISBN, data_reserva, prazo_dev from USUARIO natural join EMPRESTIMOS natural join LIVROS;');
                 return $query->result();
         }
 
-	public function consultaReserva(){
-		$query = $this->db->query('select username, nome, titulo, data_reserva from USUARIO natural join RESERVA natural join LIVROS;');
-		return $query->result();
-	}
+      	public function consultaReserva($ISBN = NULL, $user = NULL){
+          if($ISBN == NULL || $user == NULL){
+            $query = $this->db->query('select username, nome, titulo, ISBN, data_reserva from USUARIO natural join RESERVA natural join LIVROS;');
+        		return $query->result();
+          }
+          $query = $this->db->query('select username, nome, titulo, ISBN, data_reserva from USUARIO natural join RESERVA natural join LIVROS where username = "'.$user.'" and ISBN = "'.$ISBN.'";');
+          return $query->row_object();
+      	}
 
         public function consulta_meusEmprestimos($username){
                 $query = $this->db->query('select ISBN, titulo, data_reserva, prazo_dev from USUARIO natural join EMPRESTIMOS natural join LIVROS where username = "'.$username.'";');
