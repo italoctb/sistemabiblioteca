@@ -292,6 +292,29 @@ class Administrador extends CI_Controller{
             }
           }
 
+          public function removerCadastro(){
+                  $user = $this->session->userdata('nivel_usuario');
+                  $data = array(
+                      'title' => $this->sys_model->consultaUsuario(),
+                  );
+                  $this->load->view('templates/header.php');
+                  if ($user === 'administrador'):
+                      $nav = 'nav_adm';
+                  elseif ($user === 'usuario'):
+                      $nav = 'nav_user';
+                  elseif ($user === 'bibliotecario'):
+                      $nav = 'nav_blib';
+                  endif;
+                  $this->load->view('templates/'.$nav);
+                  $this->load->view('pages/removerCadastro', $data);
+                  $this->load->view('templates/footer.php');
+          }
+
+          public function trataRemover(){
+            $user = $this->input->post('username');
+            redirect(base_url('deletarUsuario/'.$user));
+          }
+
           public function editarUsuario($ident = NULL){
               $user_id = $this->session->userdata('nivel_usuario');
               $data['NOME'] = $this->user_model->sel_usuario();

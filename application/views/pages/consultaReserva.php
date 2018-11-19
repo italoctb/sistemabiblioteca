@@ -36,8 +36,8 @@
           <div class="table-responsive">
             <div class="searc-input">
               <form action="<?=base_url('rconsultaReserva')?>" method="POST">
-              <input type="text" name="caixap2" id="caixap2" placeholder="Pesquisar"/>
-              <button type="submit" class="notika-icon notika-right-arrow"></button>
+              <input type="text" class="caixaPclass" name="caixap2" id="caixap2" placeholder="Pesquisar"/>
+              <button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
             </form>
           </div>
             <table id="" class="table table-striped">

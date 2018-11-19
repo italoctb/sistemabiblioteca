@@ -1,0 +1,39 @@
+.caixaPclass{
+  width: 35%;
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-color: black;
+
+  margin-bottom: 30px;
+  margin-left: 15px;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-style: solid;
+}
+.caixaPclass:focus{
+  border-color: yellow;
+}
+
+.buttonPesq{
+  height: 40px;
+  width: 44px;
+  position: relative;
+  bottom: 1px;
+}
+
+@media (min-width: 1281px) {
+
+  .form-add{
+    height: 306px;
+  }
+}
+
+.a-align{
+  position: relative;;
+  bottom: 8px;
+}

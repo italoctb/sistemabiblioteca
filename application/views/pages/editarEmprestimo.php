@@ -54,7 +54,7 @@
                   <input type="hidden" name="username" class="form-control" placeholder="Usuário" value="<?=$username?>" required>
 
                   <input type="hidden" name="isbn" class="form-control" placeholder="ISBN" value="<?=$isbn?>" required>
-                  
+
         <div class="row">
 
           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -68,8 +68,8 @@
                 </div>
               </div>
             </div>
-                  
-            
+
+
 
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
               <div class="form-group ic-cmp-int">
@@ -99,11 +99,11 @@
 
         <div  class="form-group">
             <button type="submit" class="btn btn-success notika-btn-success" value="Cadastrar">Atualizar</button>
-            <a class="btn btn-primary notika-btn-primary" href="<?= base_url('baixaReserva/'.$username) ?>">Voltar</a>
+            <a class="btn btn-primary notika-btn-primary" href="<?= base_url('baixaEmprestimo/'.$username) ?>">Voltar</a>
         </div>
 
     </form>
-      
+
     </div>
   </div>
 </div>

@@ -43,7 +43,13 @@
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="data-table-list">
           <div class="table-responsive">
-            <table id="data-table-basic" class="table table-striped">
+            <div class="searc-input">
+              <form action="<?=base_url('rconsultaProfs')?>" method="POST">
+              <input type="text" class="caixaPclass" name="caixap3" id="caixap3" placeholder="pesquisar"/>
+              <button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
+              </form>
+            </div>
+            <table id="" class="table table-striped">
               <thead>
 
                 <tr>

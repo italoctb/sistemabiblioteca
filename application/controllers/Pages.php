@@ -76,75 +76,75 @@ class Pages extends CI_Controller {
         }
 
         public function addUsuario(){
-        $this->form_validation->set_rules('nome', 'Nome', 'trim|required|required');
-        $this->form_validation->set_rules('username', 'Nome de Usuário', 'trim|required');
-        $this->form_validation->set_rules('password', 'Senha', 'trim|required');
-        $this->form_validation->set_rules('tipoUsuario', 'Tipo de usuário', 'trim|required');
-        $this->form_validation->set_rules('matricula', 'Matrícula', 'trim|required');
-        $this->form_validation->set_rules('user_end', 'Endereço', 'trim|required');
+          $this->form_validation->set_rules('nome', 'Nome', 'trim|required|required');
+          $this->form_validation->set_rules('username', 'Nome de Usuário', 'trim|required');
+          $this->form_validation->set_rules('password', 'Senha', 'trim|required');
+          $this->form_validation->set_rules('tipoUsuario', 'Tipo de usuário', 'trim|required');
+          $this->form_validation->set_rules('matricula', 'Matrícula', 'trim|required');
+          $this->form_validation->set_rules('user_end', 'Endereço', 'trim|required');
 
 
-        if ($this->form_validation->run() == FALSE) {
-            redirect(base_url('cadastro'));
-            $this->session->set_flashdata('error_msg', 'Preencha todos os campos.');
-        }
+          if ($this->form_validation->run() == FALSE) {
+              redirect(base_url('cadastro'));
+              $this->session->set_flashdata('error_msg', 'Preencha todos os campos.');
+          }
 
-        else{
-            if ($this->input->post('tipoUsuario') == 'tipoProf'){
-                $LOGIN = array(
-                    'nome' => $this->input->post('nome'),
-                    'username' => $this->input->post('username'),
-                    'password' => sha1($this->input->post('password')),
-                    'tipoUsuario' => $this->input->post('tipoUsuario'),
-                    'mat_siape' => $this->input->post('matricula'),
-                    'nivel_usuario' => ('usuario'),
-                    'qntd_livros_max' => ('5'),
-                    'qntd_livros' => ('0'),
-                    'user_end' => $this->input->post('user_end'),
-                );
-                $prof_check = $this->prof_model->prof_check($LOGIN['mat_siape']);
-                if ($prof_check) {
-                    $this->user_model->reg_usuario($LOGIN);
-                    $this->session->set_flashdata('success_msg', 'Professor registrado com sucesso!');
-                    redirect(base_url('cadastro'));
-                }
-                else {
-                    $this->session->set_flashdata('error_msg', 'Erro no registro, verifique se sua Matrícula está correta');
-                    redirect(base_url('cadastro'));
-                }
-            }
+          else{
+              if ($this->input->post('tipoUsuario') == 'tipoProf'){
+                  $LOGIN = array(
+                      'nome' => $this->input->post('nome'),
+                      'username' => $this->input->post('username'),
+                      'password' => sha1($this->input->post('password')),
+                      'tipoUsuario' => $this->input->post('tipoUsuario'),
+                      'mat_siape' => $this->input->post('matricula'),
+                      'nivel_usuario' => ('usuario'),
+                      'qntd_livros_max' => ('5'),
+                      'qntd_livros' => ('0'),
+                      'user_end' => $this->input->post('user_end'),
+                  );
+                  $prof_check = $this->prof_model->prof_check($LOGIN['mat_siape']);
+                  if ($prof_check) {
+                      $this->user_model->reg_usuario($LOGIN);
+                      $this->session->set_flashdata('success_msg', 'Professor registrado com sucesso!');
+                      redirect(base_url('cadastro'));
+                  }
+                  else {
+                      $this->session->set_flashdata('error_msg', 'Erro no registro, verifique se sua Matrícula está correta');
+                      redirect(base_url('cadastro'));
+                  }
+              }
 
-            elseif ($this->input->post('tipoUsuario') == 'tipoAl'){
-                $LOGIN = array(
-                    'nome' => $this->input->post('nome'),
-                    'username' => $this->input->post('username'),
-                    'password' => sha1($this->input->post('password')),
-                    'tipoUsuario' => $this->input->post('tipoUsuario'),
-                    'mat_aluno' => $this->input->post('matricula'),
-                    'nivel_usuario' => ('usuario'),
-                    'qntd_livros_max' => ('3'),
-                    'qntd_livros' => ('0'),
-                    'user_end' => $this->input->post('user_end'),
-                );
-                $alu_check = $this->alu_model->alu_check($LOGIN['mat_aluno']);
-                $dataAluCheck = $this->alu_model->dataAluCheck($LOGIN['mat_aluno']);
-                if ($alu_check && $dataAluCheck) {
-                    $this->user_model->reg_usuario($LOGIN);
-                    $this->session->set_flashdata('success_msg', 'Aluno registrado com sucesso!');
-                    redirect(base_url('cadastro'));
-                }
-                else {
+              elseif ($this->input->post('tipoUsuario') == 'tipoAl'){
+                  $LOGIN = array(
+                      'nome' => $this->input->post('nome'),
+                      'username' => $this->input->post('username'),
+                      'password' => sha1($this->input->post('password')),
+                      'tipoUsuario' => $this->input->post('tipoUsuario'),
+                      'mat_aluno' => $this->input->post('matricula'),
+                      'nivel_usuario' => ('usuario'),
+                      'qntd_livros_max' => ('3'),
+                      'qntd_livros' => ('0'),
+                      'user_end' => $this->input->post('user_end'),
+                  );
+                  $alu_check = $this->alu_model->alu_check($LOGIN['mat_aluno']);
+                  $dataAluCheck = $this->alu_model->dataAluCheck($LOGIN['mat_aluno']);
+                  if ($alu_check && $dataAluCheck) {
+                      $this->user_model->reg_usuario($LOGIN);
+                      $this->session->set_flashdata('success_msg', 'Aluno registrado com sucesso!');
+                      redirect(base_url('cadastro'));
+                  }
+                  else {
 
-                    if(!$dataAluCheck){
-                        $this->session->set_flashdata('error_msg', 'Desculpe, você não pode mais utilizar os serviços da biblioteca.');
-                        redirect(base_url('cadastro'));
-                    }
+                      if(!$dataAluCheck){
+                          $this->session->set_flashdata('error_msg', 'Desculpe, você não pode mais utilizar os serviços da biblioteca.');
+                          redirect(base_url('cadastro'));
+                      }
 
-                    else{
-                    $this->session->set_flashdata('error_msg', 'Erro no registro, verifique se sua Matrícula está correta');
-                        redirect(base_url('cadastro'));
-                    }
-                }
+                      else{
+                      $this->session->set_flashdata('error_msg', 'Erro no registro, verifique se sua Matrícula está correta');
+                          redirect(base_url('cadastro'));
+                      }
+                  }
             }
 
             elseif ($this->input->post('tipoUsuario') == 'tipoFunc'){
@@ -181,6 +181,7 @@ class Pages extends CI_Controller {
 
     }
 
+
     public function consulta(){
             $this->session->set_flashdata('success_msg', '');
             $user = $this->session->userdata('nivel_usuario');
@@ -201,14 +202,27 @@ class Pages extends CI_Controller {
             $this->load->view('pages/consulta', $data);
             $this->load->view('templates/footer.php');
     }
-
-    public function emprestimoLivro($ident = NULL){
+    public function trataEmprestimoLivro(){
+      $user = $this->input->post('username');
+      $isbn = $this->input->post('isbnEmp');
+      if(!$isbn){
+        $isbn = $this->sys_model->consulta_especifico_ISBN($this->input->post('nomeObra'))->ISBN;
+      }
+      redirect(base_url('emprestimoLivro/'.$isbn.'/'.$user));
+    }
+    public function emprestimoLivro($ident = NULL, $usuario = NULL){
+            if($usuario == NULL){
+              $usuario = $this->session->userdata('usuario');
+            }
             $user = $this->session->userdata('usuario');
             $data = array(
                 'title' => $this->sys_model->consultaTitulos(),
-                'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
-                'username' =>$this->sys_model->consulta_especifico_Usuario($user)->username,
-                'tipoUsuario' =>$this->sys_model->consulta_especifico_Usuario($user)->tipoUsuario,
+                'nome' =>$this->sys_model->consulta_especifico_Usuario($usuario)->nome,
+                'username' =>$this->sys_model->consulta_especifico_Usuario($usuario)->username,
+                'tipoUsuario' =>$this->sys_model->consulta_especifico_Usuario($usuario)->tipoUsuario,
+                'nome' =>$this->sys_model->consulta_especifico_Usuario($usuario)->nome,
+                'username' =>$this->sys_model->consulta_especifico_Usuario($usuario)->username,
+                'tipoUsuario' =>$this->sys_model->consulta_especifico_Usuario($usuario)->tipoUsuario,
                 'livros' => $this->db->get("LIVROS")->result(),
                 'ISBN' => $ident,
                 'titulo' =>  $this->user_model->livroByISBN($ident)->titulo
@@ -237,11 +251,18 @@ class Pages extends CI_Controller {
               $res_check = $this->user_model->check_emprestimo($ident);
               $res_check_l = $this->user_model->check_emprestimo_usuario($this->input->post('ISBN'),$this->input->post('username'));
               $res_check_qtd = $this->user_model->getQtdMax($this->input->post('username'));
+              $res_check_reserv = $this->sys_model->consultaReserva($this->input->post('ISBN'), $this->input->post('username'));
               if (!$res_check && !$res_check_l && $res_check_qtd && $qtd_check) {
                   $this->user_model->reg_emprestimo($EMPRESTIMOS);
                   $this->user_model->dec_livro($this->input->post('ISBN'));
                   $this->user_model->inc_user($this->input->post('username'));
                   $this->session->set_flashdata('success_msg', 'Emprestimo realizado com sucesso!');
+                  if($res_check_reserv){
+                    $this->db->get("RESERVA");
+                    $this->db->where('ISBN',$this->input->post('ISBN'));
+                    $this->db->where('username',$this->input->post('username'));
+                    $this->db->delete('RESERVA');
+                  }
                   redirect(base_url('meusEmprestimos'));
               }
               else {
@@ -379,7 +400,7 @@ class Pages extends CI_Controller {
             'username' => $ident,
             'title' => $this->sys_model->consulta_meusEmprestimos($this->session->userdata('usuario')),
             'usuarios' => $this->db->get("USUARIO")->result(),
-            'emprestimo' => $this->db->get("EMPRESTIMOS")->result()
+            'emprestimo' => $this->sys_model->consultaEmprestimo()
         );
 
         $this->load->view('templates/header.php');

@@ -42,6 +42,7 @@
 	<!-- notika icon CSS
 	============================================ -->
 	<link rel="stylesheet" href="<?=base_url('static/css/notika-custom-icon.css')?>">
+	<link rel="stylesheet" href="<?=base_url('static/css/bootstrap-select/bootstrap-select.css')?>">
 	<!-- wave CSS
 	============================================ -->
 	<link rel="stylesheet" href="<?=base_url('static/css/wave/waves.min.css')?>">
@@ -61,7 +62,7 @@
 	<!-- modernizr JS
 	============================================ -->
 	<script src="<?=base_url('static/js/vendor/modernizr-2.8.3.min.js')?>"></script>
-
+	<link rel="stylesheet" type="text/css" href="<?=base_url('static/css/perso.css')?>"></script>
 
 </head>
 <body>
@@ -71,7 +72,7 @@
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="logo-area">
-						<a href="#"><img src="<?=base_url('static/img/logo/logo_bibli_2.png')?>" alt="" /></a>
+						<a href="<?=base_url('/')?>"><img src="<?=base_url('static/img/logo/logo_bibli_2.png')?>" alt="" /></a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -82,8 +83,14 @@
 								<div role="menu" class="dropdown-menu search-dd animated flipInX">
 									<div class="search-input">
 										<form action="<?=base_url('caixa')?>" method="POST">
-										<input type="text" name="caixap" id="caixap" placeholder="Encontre aqui a obra por nome ou por autor(a)">
-										<button type="submit" class="btn btn-primary">Pesquisar</button>
+											<div class="row">
+												<div class="col-md-1">
+													<button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
+												</div>
+												<div class="col-md-11">
+													<input type="text" name="caixap" id="caixap" placeholder="Encontre aqui a obra por nome ou por autor(a)">
+												</div>
+											</div>
 									</form>
 									</div>
 								</div>
