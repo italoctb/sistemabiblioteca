@@ -1,0 +1,11 @@
+@media (min-width: 1281px) {
+
+  .form-add{
+    height: 306px;
+  }
+}
+
+.a-align{
+  position: relative;;
+  bottom: 8px;
+}
