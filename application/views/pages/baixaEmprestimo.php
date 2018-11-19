@@ -38,10 +38,12 @@
             <table id="" class="table table-striped">
               <thead>
                 <tr>
-                  <th><a class="fixing_bug" href="#data-table-basic">ISBN</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Usuário</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Data de reserva</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Data de devolução</a></th>
+  								<th><a class="fixing_bug" href="#data-table-basic">Nome</a></th>
+                  <th><a class="fixing_bug" href="#data-table-basic">Título</a></th>
+  								<th><a class="fixing_bug" href="#data-table-basic">ISBN</a></th>
+                  <th><a class="fixing_bug" href="#data-table-basic">Data de empréstimo</a></th>
+  								<th><a class="fixing_bug" href="#data-table-basic">Data de devolução</a></th>
                 </tr>
               </thead>
               <tbody>
@@ -50,17 +52,19 @@
                   if ($res->username == $username):
                 ?>
                     <tr>
-                        <td><?=$res->ISBN?></td>
                         <td><?=$res->username?></td>
+                        <td><?=$res->nome?></td>
+                        <td><?=$res->titulo?></td>
+                        <td><?=$res->ISBN?></td>
                         <td><?=$res->data_reserva?></td>
                         <td><?=$res->prazo_dev?></td>
 
                         <td>
-                          <a class="btn btn-primary notika-btn-primary" href="<?=base_url('editarEmprestimo/'.$res->ISBN.'/'.$res->username)?>";>Editar</a>
+                          <a class="btn btn-primary notika-btn-primary" style="position: relative; bottom:8px;" href="<?=base_url('editarEmprestimo/'.$res->ISBN.'/'.$res->username)?>";>Editar</a>
                         </td>
 
                         <td>
-                            <a class="btn btn-success notika-btn-success" href="<?=base_url('devEmprestimo/'.$res->ISBN.'/'.$res->username)?>" onclick="return confirm('Deseja realmente dar baixa no registro?');">Encerrar</a>
+                            <a class="btn btn-danger notika-btn-danger" style="position: relative; bottom:8px;" href="<?=base_url('devEmprestimo/'.$res->ISBN.'/'.$res->username)?>" onclick="return confirm('Deseja realmente dar baixa no registro?');">Encerrar</a>
                         </td>
                     </tr>
                 <?php
@@ -71,10 +75,12 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th><a class="fixing_bug" href="#data-table-basic">ISBN</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Usuário</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Data de reserva</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Data de devolução</a></th>
+                    <th><a class="fixing_bug" href="#data-table-basic">Usuário</a></th>
+    								<th><a class="fixing_bug" href="#data-table-basic">Nome</a></th>
+                    <th><a class="fixing_bug" href="#data-table-basic">Título</a></th>
+    								<th><a class="fixing_bug" href="#data-table-basic">ISBN</a></th>
+                    <th><a class="fixing_bug" href="#data-table-basic">Data de empréstimo</a></th>
+    								<th><a class="fixing_bug" href="#data-table-basic">Data de devolução</a></th>
                   </tr>
                 </tfoot>
               </table>
