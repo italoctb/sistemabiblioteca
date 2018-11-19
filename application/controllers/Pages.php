@@ -218,6 +218,9 @@ class Pages extends CI_Controller {
                 'nome' =>$this->sys_model->consulta_especifico_Usuario($usuario)->nome,
                 'username' =>$this->sys_model->consulta_especifico_Usuario($usuario)->username,
                 'tipoUsuario' =>$this->sys_model->consulta_especifico_Usuario($usuario)->tipoUsuario,
+                'nome' =>$this->sys_model->consulta_especifico_Usuario($usuario)->nome,
+                'username' =>$this->sys_model->consulta_especifico_Usuario($usuario)->username,
+                'tipoUsuario' =>$this->sys_model->consulta_especifico_Usuario($usuario)->tipoUsuario,
                 'livros' => $this->db->get("LIVROS")->result(),
                 'ISBN' => $ident,
                 'titulo' =>  $this->user_model->livroByISBN($ident)->titulo
@@ -546,5 +549,48 @@ class Pages extends CI_Controller {
 
     public function semAcesso(){
        $this->load->view('pages/semAcesso');
+    }
+
+    public function caixaPesquisa(){
+      $data = array(
+        'title' => $this->sys_model->buscar($_POST),
+        'nome' =>$this->sys_model->buscar($_POST),
+        'cpf' => $this->sys_model->buscar($_POST),
+        'autor' => $this->sys_model->buscar($_POST)
+      );
+      $this->load->view('templates/header');
+      $this->load->view('templates/nav_adm');
+      $this->load->view('pages/resultPesquisa', $data);
+      $this->load->view('templates/footer');
+    }
+
+    public function rconsultaUsuario(){
+      $data = array(
+        'title' => $this->sys_model->buscarUsuario($_POST)
+      );
+      $this->load->view('templates/header');
+      $this->load->view('templates/nav_adm');
+      $this->load->view('pages/rconsultaUsuario', $data);
+      $this->load->view('templates/footer');
+    }
+
+    public function rconsultaReserva(){
+      $data = array(
+        'title' => $this->sys_model->buscarReserva($_POST)
+      );
+      $this->load->view('templates/header');
+      $this->load->view('templates/nav_adm');
+      $this->load->view('pages/rconsultaReserva', $data);
+      $this->load->view('templates/footer');
+    }
+
+    public function rconsultaProfs(){
+      $data = array(
+        'title' => $this->sys_model->buscarProfs($_POST)
+      );
+      $this->load->view('templates/header');
+      $this->load->view('templates/nav_adm');
+      $this->load->view('pages/rconsultaProfs', $data);
+      $this->load->view('templates/footer');
     }
 }
