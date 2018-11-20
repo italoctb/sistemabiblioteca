@@ -1,7 +1,7 @@
 <?php
 class Administrador extends CI_Controller{
 
-          function __construct(){
+          function __construct(){ //Meu primeiro comentário
               parent::__construct();
               $user = $this->session->userdata('usuario');
               $nome = $this->session->userdata('nome');
@@ -451,12 +451,12 @@ class Administrador extends CI_Controller{
           $this->load->view('templates/nav_adm');
           $this->load->view('pages/solicitaRemocao', $data);
           $this->load->view('templates/footer');
-      
+
         }
 
 
         public function confirmaSolicitacao($ident = NULL){  //Recebe o username do usuário a ser removido.
-   
+
                 $test = $this->user_model->getQntdByUsername($ident); //Verifica se o usuário possui alguma pendência.
                 if($test) { //Sem pendências na biblioteca.
                   $this->db->where('username',$ident);
@@ -464,9 +464,9 @@ class Administrador extends CI_Controller{
 
                       $this->db->where('username',$ident);
                       $this->db->delete('USUARIO'); //Remove o usuário do sistema.
-                     
-                      $this->session->set_flashdata('success_msg', 'Registro deletado');   
-                      redirect(base_url('solicitaRemocao'));   
+
+                      $this->session->set_flashdata('success_msg', 'Registro deletado');
+                      redirect(base_url('solicitaRemocao'));
                   else:
                       $this->session->set_flashdata('error_msg', 'Erro ao deletar registro');
                       redirect(base_url('solicitaRemocao'));
@@ -475,10 +475,10 @@ class Administrador extends CI_Controller{
                     $this->session->set_flashdata('error_msg', 'Usuário com débito não pode ser deletado');
                     redirect(base_url('solicitaRemocao'));
                 }
-    
-           
-          
-      
+
+
+
+
         }
 
 
