@@ -44,8 +44,8 @@
         <div class="data-table-list">
           <div class="table-responsive">
             <div class="searc-input">
-              <form action="<?=base_url('rconsultaProfs')?>" method="POST">
-              <input type="text" class="caixaPclass" name="caixap3" id="caixap3" placeholder="pesquisar"/>
+              <form action="<?=base_url('tratarConsultaHome')?>" method="POST">
+              <input type="text" class="caixaPclass" name="caixaHome" id="caixaHome" placeholder="pesquisar"/>
               <button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
               </form>
             </div>
@@ -53,13 +53,13 @@
               <thead>
 
                 <tr>
-                  <th><a class="fixing_bug" href="#data-table-basic">ISBN</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Nome da obra</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Autor</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Ano de publicação</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Editora</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Categoria</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Disponibilidade</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaISBN')?>">ISBN</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaNomeObra')?>">Nome da obra</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaNomeAutor')?>">Autor</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaAno')?>">Ano de publicação</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaEdit')?>">Editora</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaCategoria')?>">Categoria</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaDisp')?>">Disponibilidade</a></th>
                 </tr>
 
               </thead>
@@ -80,10 +80,10 @@
 
                       <td>
                         <?php
-                          foreach ($cpf as $cpf_query){
+                          foreach ($title->cpf as $cpf_query){
                             if ($query->ISBN == $cpf_query->ISBN){
                               $aux++;
-                              foreach ($autor as $autor_query) {
+                              foreach ($title->autor as $autor_query) {
                                 if ($cpf_query->cpf == $autor_query->cpf){
                                   if ($aux>=2){
                                     echo " / ";

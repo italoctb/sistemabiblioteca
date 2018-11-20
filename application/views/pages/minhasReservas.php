@@ -34,6 +34,12 @@
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="data-table-list">
           <div class="table-responsive">
+            <div class="searc-input">
+              <form action="<?=base_url('minhasReservas')?>" method="POST">
+              <input type="text" class="caixaPclass" name="caixaMinhaR" id="caixaMinhaR" placeholder="Pesquisar"/>
+              <button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
+            </form>
+          </div>
             <table id="" class="table table-striped">
               <thead>
                 <tr>

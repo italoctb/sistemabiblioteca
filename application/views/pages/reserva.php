@@ -4,6 +4,8 @@
     if($user_id != 'usuario' && $user_id != 'bibliotecario' && $user_id != 'administrador'){redirect(base_url('sem_acesso'));}
 ?>
 
+<script src="./ordena/sorttable.js"></script>
+
 <div class="data-table-area">
   <div class="container">
     <div class="row">
