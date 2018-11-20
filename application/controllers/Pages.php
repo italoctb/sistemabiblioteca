@@ -210,6 +210,7 @@ class Pages extends CI_Controller {
               'liv' => $this->sys_model->buscarIC($categoria),
               'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
               'autor' => $this->db->get("AUTORES")->result()
+               
             );
             $this->load->view('templates/header.php');
 
