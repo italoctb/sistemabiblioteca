@@ -61,7 +61,7 @@
 
 	                    <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
 	                        <ul class="notika-main-menu-dropdown">
-								<li><a href="<?=base_url('consultaHome')?>">Biblioteca</a></li>
+								<li><a href="<?=base_url('admin/home')?>">Biblioteca</a></li>
 								<li><a href="<?=base_url('consultaProf')?>">Professores</a></li>
 								<li><a href="<?=base_url('consultaUsuario')?>">Consultar usuários</a></li>
 								<li><a href="<?=base_url('admin/consultaEmprestimo')?>">Consultar empréstimos</a></li>

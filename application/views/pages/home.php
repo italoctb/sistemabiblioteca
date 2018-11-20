@@ -53,13 +53,13 @@
               <thead>
 
                 <tr>
-                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaISBN')?>">ISBN</a></th>
-                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaNomeObra')?>">Nome da obra</a></th>
-                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaNomeAutor')?>">Autor</a></th>
-                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaAno')?>">Ano de publicação</a></th>
-                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaEdit')?>">Editora</a></th>
-                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaCategoria')?>">Categoria</a></th>
-                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaDisp')?>">Disponibilidade</a></th>
+                  <th><a class="fixing_bug" href="<?=base_url('ordenaISBN')?>">ISBN</a></th>
+                  <th><a class="fixing_bug" href="<?=base_url('ordenaNomeObra')?>">Nome da obra</a></th>
+                  <th><a class="fixing_bug" href="<?=base_url('ordenaNomeAutor')?>">Autor</a></th>
+                  <th><a class="fixing_bug" href="<?=base_url('ordenaAno')?>">Ano de publicação</a></th>
+                  <th><a class="fixing_bug" href="<?=base_url('ordenaEdit')?>">Editora</a></th>
+                  <th><a class="fixing_bug" href="<?=base_url('ordenaCategoria')?>">Categoria</a></th>
+                  <th><a class="fixing_bug" href="<?=base_url('ordenaDisp')?>">Disponibilidade</a></th>
                 </tr>
 
               </thead>
@@ -80,10 +80,10 @@
 
                       <td>
                         <?php
-                          foreach ($title->cpf as $cpf_query){
+                          foreach ($cpf as $cpf_query){
                             if ($query->ISBN == $cpf_query->ISBN){
                               $aux++;
-                              foreach ($title->autor as $autor_query) {
+                              foreach ($autor as $autor_query) {
                                 if ($cpf_query->cpf == $autor_query->cpf){
                                   if ($aux>=2){
                                     echo " / ";
