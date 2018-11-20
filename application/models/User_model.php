@@ -171,8 +171,8 @@
           $this->db->where('username',$usernome);
           $this->db->where('qntd_livros',0);
 
-          if($query=$this->db->get()) {
-              return $query->row_array();
+          if($query==$this->db->get()) {
+              return true;
           }
 
           else{
@@ -314,5 +314,7 @@
           return false;
         }
       }
+
+   
   }
 ?>
