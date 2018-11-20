@@ -266,6 +266,20 @@ CREATE TABLE IF NOT EXISTS `equipe385116`.`RESERVA` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `equipe385116`.`REQUISICAO` (
+  `id_req` INT NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  INDEX `usernombre_idx` (`username` ASC) ,
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) ,
+  UNIQUE INDEX `id_req_UNIQUE` (`id_req` ASC) ,
+  PRIMARY KEY (`id_req`),
+  CONSTRAINT `usernombre`
+    FOREIGN KEY (`username`)
+    REFERENCES `equipe385116`.`USUARIO` (`username`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -423,5 +437,11 @@ INSERT INTO `equipe385116`.`EMPRESTIMOS` (`ISBN`, `username`, `data_reserva`, `p
 INSERT INTO `equipe385116`.`EMPRESTIMOS` (`ISBN`, `username`, `data_reserva`, `prazo_dev`) VALUES (175624, 'mumu', '2018-09-30', '2018-10-30');
 INSERT INTO `equipe385116`.`EMPRESTIMOS` (`ISBN`, `username`, `data_reserva`, `prazo_dev`) VALUES (159478, 'italobarros', '2018-10-06', '2018-10-21');
 INSERT INTO `equipe385116`.`EMPRESTIMOS` (`ISBN`, `username`, `data_reserva`, `prazo_dev`) VALUES (175624, 'italobarros', '2018-10-31', '2018-11-15');
+
+COMMIT;
+
+START TRANSACTION;
+USE `equipe385116`;
+INSERT INTO `equipe385116`.`REQUISICAO` (`id_req`, `username`) VALUES (001, 'expdito');
 
 COMMIT;
