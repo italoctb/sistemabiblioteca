@@ -113,10 +113,6 @@ class Sys_model extends CI_Model {
     return $query->result();
   }
 
-<<<<<<< HEAD
-  public function buscarReserva($busca){
-    $busca = $this->input->post('caixap2');
-=======
   public function buscarI($busca){
     $query = $this->db->query("select ISBN, titulo, nome_autor, ano_lançamento, editora, cpf, qtd_disp, qtd_copias, descricao from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES where ISBN = $busca;");
     return $query->row_object();
@@ -134,7 +130,6 @@ class Sys_model extends CI_Model {
 
   public function buscarUsuario($busca){
     $busca = $this->input->post('caixap1');
->>>>>>> 21537a23eece35da4edf201a9e72e067fe8ddc07
     if (empty($busca)) {
       return array();
     }

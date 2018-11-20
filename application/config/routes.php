@@ -103,13 +103,19 @@ $route['tratarConsultaUsuario'] = 'pages/tratarConsultaUsuario';
 $route['consultaProf'] 		= 'pages/consultaProf';
 $route['consultaProf/(:any)'] 	= 'pages/consultaProf/$1';
 $route['tratarConsultaProf'] = 'pages/tratarConsultaProf';
-//-------------------------------------------------------------
 $route['consultaEmprestimo'] 	= 'administrador/consultaEmprestimo';
+$route['consultaEmprestimo/(:any)'] 	= 'administrador/consultaEmprestimo/$1';
+$route['tratarConsultaEmp'] = 'administrador/tratarConsultaEmp';
+$route['consultaReserva'] 	= 'administrador/consultaReserva';
+$route['consultaReserva/(:any)'] 	= 'administrador/consultaReserva/$1';
+$route['tratarconsultaReserva'] 	= 'administrador/tratarconsultaReserva';
+//-------------------------------------------------------------
+
 $route['livros/(:any)'] 	= 'pages/livros/$1';
 $route['categoria/(:any)'] 	= 'pages/categoria/$1';
 $route['editora/(:any)'] 	= 'pages/editora/$1';
 $route['curso/(:any)'] 	= 'pages/curso/$1';
-$route['consultaReserva'] 	= 'administrador/consultaReserva';
+
 $route['alterarReserva'] 	= 'administrador/alterarReserva';
 $route['cancelReserva'] 	= 'administrador/cancelReserva';
 $route['solicitaRemocao'] 	= 'administrador/solicitaRemocao';

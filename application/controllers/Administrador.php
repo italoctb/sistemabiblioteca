@@ -65,9 +65,9 @@ class Administrador extends CI_Controller{
             $this->load->view('templates/footer');
           }
 
-          public function consultaEmprestimo(){
+          public function consultaEmprestimo($pesq=null){
             $data = array(
-              'title' => $this->sys_model->consultaEmprestimo($_POST)
+              'title' => $this->sys_model->consultaEmprestimo($pesq)
             );
             $this->load->view('templates/header');
             $this->load->view('templates/nav_adm');
@@ -75,15 +75,25 @@ class Administrador extends CI_Controller{
             $this->load->view('templates/footer');
           }
 
-		public function consultaReserva(){
+          public function tratarConsultaEmp(){
+            $caixaE = $this->input->post('caixaE');
+            redirect(base_url('consultaEmprestimo/'.$caixaE));
+          }
+
+		public function consultaReserva($pesq=NULL){
 			$data = array(
-				'title' => $this->sys_model->consultaReserva($_POST)
+				'title' => $this->sys_model->consultaReserva($pesq)
 			);
 			$this->load->view('templates/header');
 			$this->load->view('templates/nav_adm');
 			$this->load->view('pages/consultaReserva', $data);
 			$this->load->view('templates/footer');
 		}
+    public function tratarconsultaReserva(){
+      $caixaR = $this->input->post('caixaR');
+      redirect(base_url('consultaReserva/'.$caixaR));
+    }
+    
 
 		public function alterarReserva(){
 			$user = $this->session->userdata('nivel_usuario');
@@ -451,12 +461,12 @@ class Administrador extends CI_Controller{
           $this->load->view('templates/nav_adm');
           $this->load->view('pages/solicitaRemocao', $data);
           $this->load->view('templates/footer');
-      
+
         }
 
 
         public function confirmaSolicitacao($ident = NULL){  //Recebe o username do usuário a ser removido.
-   
+
                 $test = $this->user_model->getQntdByUsername($ident); //Verifica se o usuário possui alguma pendência.
                 if($test) { //Sem pendências na biblioteca.
                   $this->db->where('username',$ident);
@@ -464,9 +474,9 @@ class Administrador extends CI_Controller{
 
                       $this->db->where('username',$ident);
                       $this->db->delete('USUARIO'); //Remove o usuário do sistema.
-                     
-                      $this->session->set_flashdata('success_msg', 'Registro deletado');   
-                      redirect(base_url('solicitaRemocao'));   
+
+                      $this->session->set_flashdata('success_msg', 'Registro deletado');
+                      redirect(base_url('solicitaRemocao'));
                   else:
                       $this->session->set_flashdata('error_msg', 'Erro ao deletar registro');
                       redirect(base_url('solicitaRemocao'));
@@ -475,10 +485,10 @@ class Administrador extends CI_Controller{
                     $this->session->set_flashdata('error_msg', 'Usuário com débito não pode ser deletado');
                     redirect(base_url('solicitaRemocao'));
                 }
-    
-           
-          
-      
+
+
+
+
         }
 
 

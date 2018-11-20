@@ -35,10 +35,8 @@
         <div class="data-table-list">
           <div class="table-responsive">
             <div class="searc-input">
-              <form action="<?=base_url('rconsultaReserva')?>" method="POST">
-              <input type="text" class="caixaPclass" name="caixaISBN" id="caixaISBN" placeholder="Pesquisar por ISBN"/>
-              <button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
-              <input type="text" class="caixaPclass" name="caixaUser" id="caixaUser" placeholder="Pesquisar por Usuário"/>
+              <form action="<?=base_url('tratarconsultaReserva')?>" method="POST">
+              <input type="text" class="caixaPclass" name="caixaR" id="caixaR" placeholder="Pesquisar"/>
               <button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
             </form>
           </div>

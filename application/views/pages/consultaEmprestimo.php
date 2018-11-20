@@ -35,7 +35,7 @@
         <div class="data-table-list">
           <div class="table-responsive">
             <div class="searc-input">
-              <form action="<?=base_url('consultaEmprestimo')?>" method="POST">
+              <form action="<?=base_url('tratarConsultaEmp')?>" method="POST">
               <input type="text" class="caixaPclass" name="caixaE" id="caixaE" placeholder="pesquisar"/>
               <button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
               </form>
