@@ -26,14 +26,23 @@
   bottom: 1px;
 }
 
+#ali-div-book{
+  position: relative;
+  top:20px;
+}
+
+#a-edit{
+  text-decoration: none;
+  color: black;
+}
+
+#a-edit:hover{
+  color: #00c292;
+}
+
 @media (min-width: 1281px) {
 
   .form-add{
     height: 306px;
   }
-}
-
-.a-align{
-  position: relative;;
-  bottom: 8px;
 }

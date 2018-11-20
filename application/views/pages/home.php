@@ -53,13 +53,13 @@
               <thead>
 
                 <tr>
-                  <th><a class="fixing_bug" href="#data-table-basic">ISBN</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Nome da obra</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Autor</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Ano de publicação</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Editora</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Categoria</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Disponibilidade</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaISBN')?>">ISBN</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaNomeObra')?>">Nome da obra</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaNomeAutor')?>">Autor</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaAno')?>">Ano de publicação</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaEdit')?>">Editora</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaCategoria')?>">Categoria</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaDisp')?>">Disponibilidade</a></th>
                 </tr>
 
               </thead>
@@ -75,8 +75,8 @@
                         $aux = 0;
                 ?>
                     <tr>
-                      <td><?=$query->ISBN?></td>
-                      <td><?=$query->titulo?></td>
+                      <td><a id="a-edit" href="<?=base_url('livros/'.$query->ISBN)?>"><?=$query->ISBN?></a></td>
+                      <td><a id="a-edit" href="<?=base_url('livros/'.$query->ISBN)?>"><?=$query->titulo?></a></td>
 
                       <td>
                         <?php
@@ -97,8 +97,8 @@
                       </td>
 
                       <td><?=$query->ano_lançamento?></td>
-                      <td><?=$query->editora?></td>
-                      <td><?=$query->descricao?></td>
+                      <td><a id="a-edit" href="<?=base_url('editora/'.$query->editora)?>"><?=$query->editora?></a></td>
+                      <td><a id="a-edit" href="<?=base_url('categoria/'.$query->cod_categoria)?>"><?=$query->descricao?></a></td>
                       <td><?=$query->qtd_disp.'/'.$query->qtd_copias?></td>
                     </tr>
                 <?php

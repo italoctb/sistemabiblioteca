@@ -15,7 +15,12 @@ class Sys_model extends CI_Model {
   }
 
   public function consultaTitulos(){
-    $query = $this->db->query('select ISBN, titulo, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES;');
+    $query = $this->db->query('select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES;');
+    return $query->result();
+  }
+
+  public function consultaProfsCurso($curso){
+    $query = $this->db->query('select nome, mat_siape, telefone_celular from curso natural join professores natural join usuario where nome_curso ="'.$curso.'";');
     return $query->result();
   }
 
@@ -24,11 +29,24 @@ class Sys_model extends CI_Model {
     return $query->row_object();
   }
 
+  public function consulta_especifico_EDITORA($editora){
+    $query = $this->db->query('select * from LIVROS where editora ="'.$editora.'";');
+    return $query->row_object();
+  }
+
+  public function consulta_categoryBycod($cod){
+    $query = $this->db->query('select descricao from CATEGORIA where cod_categoria ="'.$cod.'";');
+    return $query->row_object();
+  }
+
   public function consulta_especifico_Livro($isbn){
     $query = $this->db->query('select * from LIVROS where ISBN ="'.$isbn.'";');
     return $query->row_object();
   }
-
+  public function consulta_livro_menu($isbn){
+    $query = $this->db->query('select ISBN, titulo, nome, username, data_reserva, prazo_dev from LIVROS natural join EMPRESTIMOS natural join USUARIO where ISBN ='.$isbn.';');
+    return $query->result();
+  }
   public function consulta_especifico_ISBN($titulo){
     $query = $this->db->query('select ISBN from LIVROS where titulo ="'.$titulo.'";');
     return $query->row_object();
@@ -95,8 +113,28 @@ class Sys_model extends CI_Model {
     return $query->result();
   }
 
+<<<<<<< HEAD
   public function buscarReserva($busca){
     $busca = $this->input->post('caixap2');
+=======
+  public function buscarI($busca){
+    $query = $this->db->query("select ISBN, titulo, nome_autor, ano_lançamento, editora, cpf, qtd_disp, qtd_copias, descricao from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES where ISBN = $busca;");
+    return $query->row_object();
+  }
+
+  public function buscarIC($busca){
+    $query = $this->db->query('select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, cpf, qtd_disp, qtd_copias, descricao from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES where cod_categoria = "'.$busca.'";');
+    return $query->result();
+  }
+
+  public function buscarIE($busca){
+    $query = $this->db->query('select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, cpf, qtd_disp, qtd_copias, descricao from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES where editora = "'.$busca.'";');
+    return $query->result();
+  }
+
+  public function buscarUsuario($busca){
+    $busca = $this->input->post('caixap1');
+>>>>>>> 21537a23eece35da4edf201a9e72e067fe8ddc07
     if (empty($busca)) {
       return array();
     }
@@ -175,5 +213,47 @@ class Sys_model extends CI_Model {
         break;
     }
     //return $update->result();
+  }
+
+  public function requisicoes(){
+    $query = $this->db->query('select * from REQUISICAO;');
+    return $query->result();
+  }
+
+
+  public function consultaTitulosISBN(){
+      $query = $this->db->query('select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES ORDER BY ISBN;');
+    return $query->result();
+  }
+
+  public function consultaTitulosNomeObra(){
+      $query = $this->db->query('select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES ORDER BY titulo;');
+    return $query->result();
+  }
+
+  public function consultaTitulosAutor(){
+      $query = $this->db->query('select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES ORDER BY nome_autor;');
+    return $query->result();
+  }
+
+
+  public function consultaTitulosLançamento(){
+      $query = $this->db->query('select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES ORDER BY ano_lançamento DESC;');
+    return $query->result();
+  }
+
+   public function consultaTitulosEdit(){
+      $query = $this->db->query('select ISBN, titulo, cod_categoria,nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES ORDER BY editora;');
+    return $query->result();
+  }
+
+   public function consultaTitulosCategoria(){
+      $query = $this->db->query('select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES ORDER BY descricao;');
+    return $query->result();
+  }
+
+   public function consultaTitulosDisp(){
+      $query = $this->db->query('select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES ORDER BY qtd_disp DESC;');
+    return $query->result();
   }
 }

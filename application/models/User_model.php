@@ -5,9 +5,29 @@
         $this->db->insert('USUARIO', $user);
     }
 
-      public function reg_usuario($user){
-          $this->db->insert('USUARIO', $user);
-      }
+	  public function reg_prof($prof){
+		  $this->db->insert('PROFESSORES', $prof);
+	  }
+
+	  public function reg_alu($alu){
+		  $this->db->insert('ALUNOS', $alu);
+	  }
+
+	  public function reg_func($func){
+		  $this->db->insert('FUNCIONARIOS', $func);
+	  }
+
+	  public function reg_fone_alu($fone_alu){
+		  $this->db->insert('FONE_ALUNOS', $fone_alu);
+	  }
+
+	  public function reg_fone_func($fone_func){
+		  $this->db->insert('FONE_FUNC', $fone_func);
+	  }
+
+	  public function reg_usuario($user){
+		  $this->db->insert('USUARIO', $user);
+	  }
 
       public function reg_emprestimo($EMPRESTIMOS){
           $this->db->insert('EMPRESTIMOS', $EMPRESTIMOS);
@@ -171,8 +191,8 @@
           $this->db->where('username',$usernome);
           $this->db->where('qntd_livros',0);
 
-          if($query=$this->db->get()) {
-              return $query->row_array();
+          if($query==$this->db->get()) {
+              return true;
           }
 
           else{
@@ -314,5 +334,8 @@
           return false;
         }
       }
+
+
+   
   }
 ?>

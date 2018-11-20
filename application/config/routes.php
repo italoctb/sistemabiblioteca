@@ -105,12 +105,24 @@ $route['consultaProf/(:any)'] 	= 'pages/consultaProf/$1';
 $route['tratarConsultaProf'] = 'pages/tratarConsultaProf';
 //-------------------------------------------------------------
 $route['consultaEmprestimo'] 	= 'administrador/consultaEmprestimo';
+$route['livros/(:any)'] 	= 'pages/livros/$1';
+$route['categoria/(:any)'] 	= 'pages/categoria/$1';
+$route['editora/(:any)'] 	= 'pages/editora/$1';
+$route['curso/(:any)'] 	= 'pages/curso/$1';
 $route['consultaReserva'] 	= 'administrador/consultaReserva';
 $route['alterarReserva'] 	= 'administrador/alterarReserva';
 $route['cancelReserva'] 	= 'administrador/cancelReserva';
+$route['solicitaRemocao'] 	= 'administrador/solicitaRemocao';
 $route['cancelReserva/(:any)/(:any)'] 	= 'administrador/cancelReserva/$1/$2';
+$route['confirmaSolicitacao/(:any)'] 	= 'administrador/confirmaSolicitacao/(:any)';
+$route['ordenaISBN'] 	= 'pages/ordena/ISBN';
+$route['ordenaNomeObra'] 	= 'pages/ordena/nomeObra';
+$route['ordenaNomeAutor'] 	= 'pages/ordena/nomeAutor';
+$route['ordenaAno'] 	= 'pages/ordena/ano';
+$route['ordenaEdit']		= 'pages/ordena/edit';
+$route['ordenaCategoria']	= 'pages/ordena/categoria';
+$route['ordenaDisp']		= 'pages/ordena/disp';
 
-$route['user/home']		= '/user/home';
 
 $route['blib/home']		= '/bibliotecario/home';
 

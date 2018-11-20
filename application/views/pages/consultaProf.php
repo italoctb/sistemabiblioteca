@@ -1,6 +1,6 @@
 <?php
     $user = $this->session->userdata('nivel_usuario');
-    if($user != 'administrador' && $user != 'bibliotecario'){redirect(base_url(''));}
+    if($user != 'administrador' && $user != 'bibliotecario'){base_url('');}
 ?>
 
 <div class="data-table-area">
@@ -30,7 +30,7 @@
                     <tr>
                       <td><?php echo $query->mat_siape ?></td>
                       <td><?php echo $query->nome ?></td>
-                      <td><?php echo $query->nome_curso ?></td>
+                      <td><a id="a-edit"  href="<?=base_url('curso/'.$query->nome_curso)?>"><?php echo $query->nome_curso ?></a></td>
                     </tr>
                 <?php  }?>
 
