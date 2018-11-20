@@ -85,7 +85,6 @@ CREATE TABLE IF NOT EXISTS `equipe385116`.`ALUNOS` (
   PRIMARY KEY (`mat_aluno`),
   INDEX `cod_curso_idx` (`cod_curso` ASC) ,
   UNIQUE INDEX `mat_aluno_UNIQUE` (`mat_aluno` ASC) ,
-  UNIQUE INDEX `cod_curso_UNIQUE` (`cod_curso` ASC) ,
   CONSTRAINT `cod_curso`
     FOREIGN KEY (`cod_curso`)
     REFERENCES `equipe385116`.`CURSO` (`cod_curso`)

@@ -75,8 +75,8 @@
                         $aux = 0;
                 ?>
                     <tr>
-                      <td><?=$query->ISBN?></td>
-                      <td><?=$query->titulo?></td>
+                      <td><a id="a-edit" href="<?=base_url('livros/'.$query->ISBN)?>"><?=$query->ISBN?></a></td>
+                      <td><a id="a-edit" href="<?=base_url('livros/'.$query->ISBN)?>"><?=$query->titulo?></a></td>
 
                       <td>
                         <?php
@@ -97,8 +97,8 @@
                       </td>
 
                       <td><?=$query->ano_lançamento?></td>
-                      <td><?=$query->editora?></td>
-                      <td><?=$query->descricao?></td>
+                      <td><a id="a-edit" href="<?=base_url('editora/'.$query->editora)?>"><?=$query->editora?></a></td>
+                      <td><a id="a-edit" href="<?=base_url('categoria/'.$query->cod_categoria)?>"><?=$query->descricao?></a></td>
                       <td><?=$query->qtd_disp.'/'.$query->qtd_copias?></td>
                     </tr>
                 <?php

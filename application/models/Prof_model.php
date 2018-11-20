@@ -22,16 +22,19 @@
 
       }
 
-      public function prof_check($mat_siape) {
-          $query  =  $this->db->get_where(
-              'PROFESSORES',
-              array(
-                  'mat_siape' => $mat_siape,
-              )
-          );
+	  public function prof_check($mat_siape){
+		  $this->db->select('*');
+		  $this->db->from('PROFESSORES');
+		  $this->db->where('mat_siape',$mat_siape);
 
-          return $query->row_array();
-      }
+		  if($query=$this->db->get()) {
+			  return $query->row_array();
+		  }
+
+		  else{
+			  return false;
+		  }
+	  }
 
 
       public function prof_log($mat_siape, $nome) {

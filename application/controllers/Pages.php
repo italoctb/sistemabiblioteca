@@ -179,6 +179,95 @@ class Pages extends CI_Controller {
 
     }
 
+    public function livros($isbn){
+            $this->session->set_flashdata('success_msg', '');
+            $user = $this->session->userdata('nivel_usuario');
+            $data = array(
+              'liv' => $this->sys_model->consulta_livro_menu($isbn),
+              'liv_foco' => $this->sys_model->buscarI($isbn),
+              'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
+              'autor' => $this->db->get("AUTORES")->result()
+            );
+            $this->load->view('templates/header.php');
+
+            if ($user === 'administrador'):
+                $nav = 'nav_adm';
+            elseif ($user === 'usuario'):
+                $nav = 'nav_user';
+            elseif ($user === 'bibliotecario'):
+                $nav = 'nav_blib';
+            endif;
+            $this->load->view('templates/'.$nav);
+            $this->load->view('pages/livro', $data);
+            $this->load->view('templates/footer.php');
+    }
+
+    public function categoria($categoria){
+            $this->session->set_flashdata('success_msg', '');
+            $user = $this->session->userdata('nivel_usuario');
+            $data = array(
+              'cat'=>$this->sys_model->consulta_categoryBycod($categoria),
+              'liv' => $this->sys_model->buscarIC($categoria),
+              'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
+              'autor' => $this->db->get("AUTORES")->result()
+            );
+            $this->load->view('templates/header.php');
+
+            if ($user === 'administrador'):
+                $nav = 'nav_adm';
+            elseif ($user === 'usuario'):
+                $nav = 'nav_user';
+            elseif ($user === 'bibliotecario'):
+                $nav = 'nav_blib';
+            endif;
+            $this->load->view('templates/'.$nav);
+            $this->load->view('pages/categoria', $data);
+            $this->load->view('templates/footer.php');
+    }
+
+    public function editora($editora){
+            $this->session->set_flashdata('success_msg', '');
+            $user = $this->session->userdata('nivel_usuario');
+            $data = array(
+              'cat'=>str_replace("%20", " ", $editora),
+              'liv' => $this->sys_model->buscarIE(str_replace("%20", " ", $editora)),
+              'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
+              'autor' => $this->db->get("AUTORES")->result()
+            );
+            $this->load->view('templates/header.php');
+
+            if ($user === 'administrador'):
+                $nav = 'nav_adm';
+            elseif ($user === 'usuario'):
+                $nav = 'nav_user';
+            elseif ($user === 'bibliotecario'):
+                $nav = 'nav_blib';
+            endif;
+            $this->load->view('templates/'.$nav);
+            $this->load->view('pages/editora', $data);
+            $this->load->view('templates/footer.php');
+    }
+
+    public function curso($curso){
+            $this->session->set_flashdata('success_msg', '');
+            $user = $this->session->userdata('nivel_usuario');
+            $data = array(
+              'cat'=>$curso,
+              'liv'=>$this->sys_model->consultaProfsCurso($curso)
+            );
+            $this->load->view('templates/header.php');
+
+            if ($user === 'administrador'):
+                $nav = 'nav_adm';
+            elseif ($user === 'usuario'):
+                $nav = 'nav_user';
+            elseif ($user === 'bibliotecario'):
+                $nav = 'nav_blib';
+            endif;
+            $this->load->view('templates/'.$nav);
+            $this->load->view('pages/curso', $data);
+            $this->load->view('templates/footer.php');
+    }
 
     public function consulta(){
             $this->session->set_flashdata('success_msg', '');

@@ -129,6 +129,9 @@
               <label class="btn btn-secondary">
                 <input type="radio" name="options" id="option2" autocomplete="off"> 40h
               </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" id="option2" autocomplete="off"> DE
+              </label>
             </div>
         </div>
       </div>
