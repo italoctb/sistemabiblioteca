@@ -53,13 +53,13 @@
               <thead>
 
                 <tr>
-                  <th><a class="fixing_bug" href="#data-table-basic">ISBN</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Nome da obra</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Autor</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Ano de publicação</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Editora</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Categoria</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Disponibilidade</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaISBN')?>">ISBN</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaNomeObra')?>">Nome da obra</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaNomeAutor')?>">Autor</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaAno')?>">Ano de publicação</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaEdit')?>">Editora</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaCategoria')?>">Categoria</a></th>
+                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaDisp')?>">Disponibilidade</a></th>
                 </tr>
 
               </thead>

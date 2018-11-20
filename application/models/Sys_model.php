@@ -114,4 +114,39 @@ class Sys_model extends CI_Model {
   }
 
 
+  public function consultaTitulosISBN(){
+      $query = $this->db->query('select ISBN, titulo, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES ORDER BY ISBN;');
+    return $query->result();
+  }
+
+  public function consultaTitulosNomeObra(){
+      $query = $this->db->query('select ISBN, titulo, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES ORDER BY titulo;');
+    return $query->result();
+  }
+
+  public function consultaTitulosAutor(){
+      $query = $this->db->query('select ISBN, titulo, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES ORDER BY nome_autor;');
+    return $query->result();
+  }
+
+
+  public function consultaTitulosLançamento(){
+      $query = $this->db->query('select ISBN, titulo, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES ORDER BY ano_lançamento DESC;');
+    return $query->result();
+  }
+
+   public function consultaTitulosEdit(){
+      $query = $this->db->query('select ISBN, titulo, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES ORDER BY editora;');
+    return $query->result();
+  }
+
+   public function consultaTitulosCategoria(){
+      $query = $this->db->query('select ISBN, titulo, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES ORDER BY descricao;');
+    return $query->result();
+  }
+
+   public function consultaTitulosDisp(){
+      $query = $this->db->query('select ISBN, titulo, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES ORDER BY qtd_disp DESC;');
+    return $query->result();
+  }
 }

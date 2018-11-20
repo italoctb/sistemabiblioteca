@@ -593,4 +593,94 @@ class Pages extends CI_Controller {
       $this->load->view('pages/rconsultaProfs', $data);
       $this->load->view('templates/footer');
     }
+
+
+    public function ordena($tipo = NULL){
+      $user = $this->session->userdata('usuario');
+
+      if($tipo == "ISBN"):
+          $data = array(       
+            'title' => $this->sys_model->consultaTitulosISBN(),
+            'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
+            'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
+            'autor' => $this->db->get("AUTORES")->result()
+          );
+      elseif($tipo == "nomeObra"):
+        $data = array(
+          'title' => $this->sys_model->consultaTitulosNomeObra(),
+          'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
+          'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
+          'autor' => $this->db->get("AUTORES")->result()
+        );
+      elseif($tipo == "nomeAutor"):
+        $data = array(
+          'title' => $this->sys_model->consultaTitulosAutor(),
+          'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
+          'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
+          'autor' => $this->db->get("AUTORES")->result()
+        );
+      elseif($tipo == "ano"):
+        $data = array(
+          'title' => $this->sys_model->consultaTitulosLançamento(),
+          'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
+          'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
+          'autor' => $this->db->get("AUTORES")->result()
+        );
+      elseif($tipo == "edit"):
+        $data = array(
+          'title' => $this->sys_model->consultaTitulosEdit(),
+          'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
+          'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
+          'autor' => $this->db->get("AUTORES")->result()
+        );
+      elseif($tipo == "categoria"):
+        $data = array(
+          'title' => $this->sys_model->consultaTitulosCategoria(),
+          'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
+          'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
+          'autor' => $this->db->get("AUTORES")->result()
+        );
+      elseif($tipo == "disp"):
+        $data = array(
+          'title' => $this->sys_model->consultaTitulosDisp(),
+          'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
+          'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
+          'autor' => $this->db->get("AUTORES")->result()
+        );
+      endif;
+      
+
+      
+     
+      $this->session->set_flashdata('success_msg', 'Bem-vindo, ' . $data['nome']);
+      $this->load->view('templates/header.php');
+     
+      $sel = $this->sys_model->consulta_especifico_Usuario($user)->nivel_usuario;
+      switch ($sel) {
+        case "usuario":
+          $this->session->set_userdata('usuario', $user);
+          $this->session->set_userdata('nivel_usuario', $sel);
+          $nav = 'nav_user';
+          break;
+        case "bibliotecario":
+          $this->session->set_userdata('usuario', $user);
+          $this->session->set_userdata('nivel_usuario', $sel);
+            $nav = 'nav_blib';
+          break;
+        case "administrador":
+          $this->session->set_userdata('usuario', $user);
+          $this->session->set_userdata('nivel_usuario', $sel);
+          $nav = 'nav_adm';
+          break;
+        default:
+          echo $sel;
+          break;
+      }      
+      
+      $this->load->view('templates/'.$nav.'.php');
+      $this->load->view('pages/home', $data);
+      $this->load->view('templates/footer.php');
+    }  
+
+    
 }
