@@ -46,7 +46,7 @@
         <div class="data-table-list">
           <div class="table-responsive">
             <div class="searc-input">
-              <form action="<?=base_url('rconsultaUsuario')?>" method="POST">
+              <form action="<?=base_url('tratarConsultaUsuario')?>" method="POST">
               <input type="text" name="caixap1" class="caixaPclass" id="caixap1" placeholder="Pesquisar"/>
               <button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
             </form>
@@ -58,7 +58,7 @@
                 <tr>
                   <th><a class="fixing_bug" href="#data-table-basic">Usuário</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Nome</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">tipoUsuario</a></th>
+                  <th><a class="fixing_bug" href="#data-table-basic">Tipo de Usuario</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Matrícula</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Nivel de acesso</a></th>
                   <th><a class="fixing_bug" href="#data-table-basic">Endereço</a></th>
@@ -73,14 +73,16 @@
                     <tr>
                       <td><?php echo $query->username ?></td>
                       <td><?php echo $query->nome ?></td>
-                      <td><?php echo $query->tipoUsuario ?></td>
                       <?php if ($query->tipoUsuario == 'tipoAl'): ?>
+                        <td>Aluno</td>
                         <td><?php echo $query->mat_aluno ?></td>
                       <?php endif; ?>
                       <?php if ($query->tipoUsuario == 'tipoFunc'): ?>
+                        <td>Funcionário</td>
                         <td><?php echo $query->mat_func ?></td>
                       <?php endif; ?>
                       <?php if ($query->tipoUsuario == 'tipoProf'): ?>
+                        <td>Professor</td>
                         <td><?php echo "(SIAPE) $query->mat_siape" ?></td>
                       <?php endif; ?>
                       <td><?php echo $query->nivel_usuario ?></td>
@@ -95,7 +97,7 @@
                   <tr>
                     <th><a class="fixing_bug" href="#data-table-basic">Usuário</a></th>
                     <th><a class="fixing_bug" href="#data-table-basic">Nome</a></th>
-                    <th><a class="fixing_bug" href="#data-table-basic">tipoUsuario</a></th>
+                    <th><a class="fixing_bug" href="#data-table-basic">Tipo de Usuario</a></th>
                     <th><a class="fixing_bug" href="#data-table-basic">Matrícula</a></th>
                     <th><a class="fixing_bug" href="#data-table-basic">Nivel de acesso</a></th>
                     <th><a class="fixing_bug" href="#data-table-basic">Endereço</a></th>

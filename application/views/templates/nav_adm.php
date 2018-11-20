@@ -61,9 +61,9 @@
 
 	                    <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
 	                        <ul class="notika-main-menu-dropdown">
-								<li><a href="<?=base_url('admin/home')?>">Biblioteca</a></li>
-								<li><a href="<?=base_url('admin/professores')?>">Professores</a></li>
-								<li><a href="<?=base_url('admin/consultaUsuario')?>">Consultar usuários</a></li>
+								<li><a href="<?=base_url('consultaHome')?>">Biblioteca</a></li>
+								<li><a href="<?=base_url('consultaProf')?>">Professores</a></li>
+								<li><a href="<?=base_url('consultaUsuario')?>">Consultar usuários</a></li>
 								<li><a href="<?=base_url('admin/consultaEmprestimo')?>">Consultar empréstimos</a></li>
 								<li><a href="<?=base_url('admin/consultaReserva')?>">Consultar reservas</a></li>
 								<li><a href="<?=base_url('admin/meusEmprestimos')?>">Meus empréstimos</a></li>
@@ -74,7 +74,7 @@
 
 	                    <div id="Forms" class="tab-pane notika-tab-menu-bg animated flipInX">
 	                        <ul class="notika-main-menu-dropdown">
-														<li><a href="<?=base_url('consulta')?>">Realizar empréstimo</a></li>
+														<li><a href="<?=base_url('emprestimo')?>">Realizar empréstimo</a></li>
 														<li><a href="<?=base_url('reserva')?>">Realizar reserva</a></li>
 														<li><a href="<?=base_url('alterarEmprestimos')?>">Alterar empréstimos</a></li>
 														<li><a href="<?=base_url('alterarReserva')?>">Alterar Reservas</a></li>

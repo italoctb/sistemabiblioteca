@@ -53,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] 				= 'pages/view';
 $route['autenticate'] 		 				= 'pages/aut_login';
 $route['sem_acesso'] 						= 'pages/error_page';
-$route['consulta'] 							= 'pages/consulta';
+$route['emprestimo'] 							= 'pages/consulta';
 $route['reserva'] 							= 'pages/reserva';
 $route['emprestimoLivro'] 					= 'pages/emprestimoLivro';
 $route['emprestimoLivro/(:num)/(:any)'] 			= 'pages/emprestimoLivro/$1/$2';
@@ -76,18 +76,34 @@ $route['baixaEmprestimo/(:any)'] 			= 'pages/baixaEmprestimo/$1';
 $route['devEmprestimo'] 					= 'pages/devEmprestimo';
 $route['devEmprestimo/(:any)/(:any)'] 		= 'pages/devEmprestimo/$1/$2';
 $route['logout'] 							= 'pages/logout';
-$route['caixa']     = 'pages/caixaPesquisa';
-$route['rconsultaUsuario']  = 'pages/rconsultaUsuario';
+$route['consulta']     = 'pages/caixaPesquisa';
 $route['rconsultaReserva']  = 'pages/rconsultaReserva';
-$route['rconsultaProfs'] = 'pages/rconsultaProfs';
-$route['meuPerfil'] = 'pages/meuPerfil';
 
+//Perfil
+$route['meuPerfil'] = 'pages/meuPerfil';
+$route['editarPerfil'] = 'pages/editarPerfil';
+//$route['editarPerfil/(:any)'] = 'pages/editarPerfil/$1';
+$route['editarPerfil/(:any)/(:any)'] = 'pages/editarPerfil/$1/$2';
+$route['tratarEditarPerfilAl'] = 'pages/tratarEditarPerfilAl';
+$route['tratarEditarPerfilFunc'] = 'pages/tratarEditarPerfilFunc';
+$route['tratarEditarPerfilProf'] = 'pages/tratarEditarPerfilProf';
+//----------------------------------------------------
 $route['user/(:any)']  = 'user/$1';
 $route['blib/(:any)']  = 'bibliotecario/$1';
 $route['admin/(:any)'] = 'administrador/$1';
 
 $route['professores'] 		= 'administrador/professores';
-$route['consultaUsuario'] 	= 'administrador/consultaUsuario';
+//Consultas de campo de pesquisa
+$route['consultaHome'] = 'pages/consultaHome';
+$route['consultaHome/(:any)'] = 'pages/consultaHome/$1';
+$route['tratarConsultaHome'] = 'pages/tratarConsultaHome';
+$route['consultaUsuario'] 	= 'pages/consultaUsuario';
+$route['consultaUsuario/(:any)'] 	= 'pages/consultaUsuario/$1';
+$route['tratarConsultaUsuario'] = 'pages/tratarConsultaUsuario';
+$route['consultaProf'] 		= 'pages/consultaProf';
+$route['consultaProf/(:any)'] 	= 'pages/consultaProf/$1';
+$route['tratarConsultaProf'] = 'pages/tratarConsultaProf';
+//-------------------------------------------------------------
 $route['consultaEmprestimo'] 	= 'administrador/consultaEmprestimo';
 $route['consultaReserva'] 	= 'administrador/consultaReserva';
 $route['alterarReserva'] 	= 'administrador/alterarReserva';

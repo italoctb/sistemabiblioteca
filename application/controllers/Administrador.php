@@ -47,7 +47,7 @@ class Administrador extends CI_Controller{
 
           public function professores(){
             $data = array(
-              'title' => $this->sys_model->consultaProf()
+              'title' => $this->sys_model->consultaProf($_POST)
             );
             $this->load->view('templates/header');
             $this->load->view('templates/nav_adm');
@@ -67,7 +67,7 @@ class Administrador extends CI_Controller{
 
           public function consultaEmprestimo(){
             $data = array(
-              'title' => $this->sys_model->consultaEmprestimo()
+              'title' => $this->sys_model->consultaEmprestimo($_POST)
             );
             $this->load->view('templates/header');
             $this->load->view('templates/nav_adm');
@@ -77,7 +77,7 @@ class Administrador extends CI_Controller{
 
 		public function consultaReserva(){
 			$data = array(
-				'title' => $this->sys_model->consultaReserva()
+				'title' => $this->sys_model->consultaReserva($_POST)
 			);
 			$this->load->view('templates/header');
 			$this->load->view('templates/nav_adm');

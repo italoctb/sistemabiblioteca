@@ -4,15 +4,15 @@
 ?>
 
 <div class="data-table-area">
-  <div class="container">
+  <div class="container form-add">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="data-table-list">
           <div class="table-responsive">
             <div class="searc-input">
-              <form action="<?=base_url('rconsultaProfs')?>" method="POST">
-              <input type="text" name="caixap3" id="caixap3" placeholder="Pesquisar"/>
-              <button type="submit" class="notika-icon notika-right-arrow"></button>
+              <form action="<?=base_url('tratarConsultaProf')?>" method="POST">
+              <input type="text" class="caixaPclass" name="caixaProf" id="caixaProf" placeholder="Pesquisar"/>
+              <button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
             </form>
           </div>
             <table id="" class="table table-striped">

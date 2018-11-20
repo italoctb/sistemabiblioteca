@@ -82,13 +82,13 @@
 								<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-search" id="adjust_position_finder"></i></span></a>
 								<div role="menu" class="dropdown-menu search-dd animated flipInX">
 									<div class="search-input">
-										<form action="<?=base_url('caixa')?>" method="POST">
+										<form action="<?=base_url('tratarConsultaHome')?>" method="POST">
 											<div class="row">
 												<div class="col-md-1">
 													<button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
 												</div>
 												<div class="col-md-11">
-													<input type="text" name="caixap" id="caixap" placeholder="Encontre aqui a obra por nome ou por autor(a)">
+													<input type="text" name="caixaHome" id="caixaHome" placeholder="Encontre aqui a obra por nome ou por autor(a)">
 												</div>
 											</div>
 									</form>

@@ -44,8 +44,8 @@
         <div class="data-table-list">
           <div class="table-responsive">
             <div class="searc-input">
-              <form action="<?=base_url('rconsultaProfs')?>" method="POST">
-              <input type="text" class="caixaPclass" name="caixap3" id="caixap3" placeholder="pesquisar"/>
+              <form action="<?=base_url('tratarConsultaHome')?>" method="POST">
+              <input type="text" class="caixaPclass" name="caixaHome" id="caixaHome" placeholder="pesquisar"/>
               <button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
               </form>
             </div>
@@ -80,10 +80,10 @@
 
                       <td>
                         <?php
-                          foreach ($cpf as $cpf_query){
+                          foreach ($title->cpf as $cpf_query){
                             if ($query->ISBN == $cpf_query->ISBN){
                               $aux++;
-                              foreach ($autor as $autor_query) {
+                              foreach ($title->autor as $autor_query) {
                                 if ($cpf_query->cpf == $autor_query->cpf){
                                   if ($aux>=2){
                                     echo " / ";
