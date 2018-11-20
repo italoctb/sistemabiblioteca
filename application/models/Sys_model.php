@@ -140,4 +140,11 @@ class Sys_model extends CI_Model {
     $query = $this->db->query("select mat_siape, nome, nome_curso from PROFESSORES natural join USUARIO natural join CURSO where nome like '%".$busca."%' or nome_curso like '%".$busca."%' or mat_siape like '%".$busca."%';");
     return $query->result();
   }
+
+  public function requisicoes(){
+    $query = $this->db->query('select * from REQUISICAO;');
+    return $query->result();
+  }
+
+
 }

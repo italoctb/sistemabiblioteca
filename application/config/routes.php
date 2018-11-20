@@ -95,7 +95,9 @@ $route['curso/(:any)'] 	= 'pages/curso/$1';
 $route['consultaReserva'] 	= 'administrador/consultaReserva';
 $route['alterarReserva'] 	= 'administrador/alterarReserva';
 $route['cancelReserva'] 	= 'administrador/cancelReserva';
+$route['solicitaRemocao'] 	= 'administrador/solicitaRemocao';
 $route['cancelReserva/(:any)/(:any)'] 	= 'administrador/cancelReserva/$1/$2';
+$route['confirmaSolicitacao/(:any)'] 	= 'administrador/confirmaSolicitacao/(:any)';
 
 $route['user/home']		= '/user/home';
 
