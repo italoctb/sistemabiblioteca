@@ -1,4 +1,4 @@
-<?php
+SE<?php
   class User_model extends CI_model{
 
     public function register_user($user){
@@ -189,14 +189,14 @@
           $this->db->select('*');
           $this->db->from('USUARIO');
           $this->db->where('username',$usernome);
-          $this->db->where('qntd_livros',0);
+          $teste = $this->db->having('qntd_livros',0);
 
-          if($query==$this->db->get()) {
-              return true;
+          if($teste) {
+              return '1';
           }
 
           else{
-              return false;
+              return '0';
           }
 
       }
