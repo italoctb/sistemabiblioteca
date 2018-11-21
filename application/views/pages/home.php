@@ -68,7 +68,9 @@
 							$isbnTemp = 0;
 							$autorTemp = 0;
 							$cont = 0;
+							$data_isbn[] = '';
 							foreach ($title as $query) {
+								if (!in_array($query->ISBN, $data_isbn)){
 								if ($isbnTemp!=$query->ISBN){
 									$aux = 0;
 									?>
@@ -102,7 +104,8 @@
 									<?php
 									$isbnTemp=$query->ISBN;
 									$autorTemp=$query->nome_autor;
-								}}
+									array_push($data_isbn, $isbnTemp);
+								}}}
 							?>
 
 							</tbody>
