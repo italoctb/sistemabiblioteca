@@ -11,12 +11,12 @@
 
 	                            <li><a data-toggle="collapse" data-target="#Charts" href="#">Início</a>
 	                                <ul class="collapse dropdown-header-top">
-																		<li><a href="<?=base_url('home')?>">Biblioteca</a></li>
-																		<li><a href="<?=base_url('professores')?>">Professores</a></li>
-																		<li><a href="<?=base_url('consultaUsuario')?>">Consulta usuários</a></li>
-																		<li><a href="<?=base_url('consultaEmprestimo')?>">Consulta empréstimos</a></li>
-																		<li><a href="<?=base_url('meusEmprestimos')?>">Meus empréstimos</a></li>
-																		<li><a href="<?=base_url('logout')?>">Sair</a></li>
+										<li><a href="<?=base_url('home')?>">Biblioteca</a></li>
+										<li><a href="<?=base_url('professores')?>">Professores</a></li>
+										<li><a href="<?=base_url('consultaUsuario')?>">Consulta usuários</a></li>
+										<li><a href="<?=base_url('consultaEmprestimo')?>">Consulta empréstimos</a></li>
+										<li><a href="<?=base_url('meusEmprestimos')?>">Meus empréstimos</a></li>
+										<li><a href="<?=base_url('logout')?>">Sair</a></li>
 	                                </ul>
 	                            </li>
 

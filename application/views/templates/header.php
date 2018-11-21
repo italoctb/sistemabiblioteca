@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang=>
+<html class="no-js" lang=pt-br>
 
 <head>
 	<meta charset="utf-8">
@@ -42,7 +42,6 @@
 	<!-- notika icon CSS
 	============================================ -->
 	<link rel="stylesheet" href="<?=base_url('static/css/notika-custom-icon.css')?>">
-	<link rel="stylesheet" href="<?=base_url('static/css/bootstrap-select/bootstrap-select.css')?>">
 	<!-- wave CSS
 	============================================ -->
 	<link rel="stylesheet" href="<?=base_url('static/css/wave/waves.min.css')?>">
@@ -62,42 +61,42 @@
 	<!-- modernizr JS
 	============================================ -->
 	<script src="<?=base_url('static/js/vendor/modernizr-2.8.3.min.js')?>"></script>
-	<link rel="stylesheet" type="text/css" href="<?=base_url('static/css/perso.css')?>"></script>
+
 
 </head>
 <body>
-	<!-- NavBar primária -->
-	<div class="header-top-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="logo-area">
-						<a href="<?=base_url('/')?>"><img src="<?=base_url('static/img/logo/logo_bibli_2.png')?>" alt="" /></a>
-					</div>
+<!-- NavBar primária -->
+<div class="header-top-area">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+				<div class="logo-area">
+					<a href="#"><img src="<?=base_url('static/img/logo/logo_bibli_2.png')?>" alt="" /></a>
 				</div>
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<div class="header-top-menu">
-						<ul class="nav navbar-nav notika-top-nav">
-							<li class="nav-item dropdown">
-								<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-search" id="adjust_position_finder"></i></span></a>
-								<div role="menu" class="dropdown-menu search-dd animated flipInX">
-									<div class="search-input">
-										<form action="<?=base_url('tratarConsultaHome')?>" method="POST">
-											<div class="row">
-												<div class="col-md-1">
-													<button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
-												</div>
-												<div class="col-md-11">
-													<input type="text" name="caixaHome" id="caixaHome" placeholder="Encontre aqui a obra por nome ou por autor(a)">
-												</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="header-top-menu">
+					<ul class="nav navbar-nav notika-top-nav">
+						<li class="nav-item dropdown">
+							<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-search" id="adjust_position_finder"></i></span></a>
+							<div role="menu" class="dropdown-menu search-dd animated flipInX">
+								<div class="search-input">
+									<form action="<?=base_url('tratarConsultaHome')?>" method="POST">
+										<div class="row">
+											<div class="col-md-1">
+												<button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
 											</div>
+											<div class="col-md-11">
+												<input type="text" name="caixaHome" id="caixaHome" placeholder="Encontre aqui a obra por nome ou por autor(a)">
+											</div>
+										</div>
 									</form>
-									</div>
 								</div>
-							</li>
-						</ul>
-					</div>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>

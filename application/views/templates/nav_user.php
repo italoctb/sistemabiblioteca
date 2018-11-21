@@ -15,7 +15,7 @@
                             </li>
                             <li><a data-toggle="collapse" data-target="#Charts" href="#">Sistema</a>
                               <ul class="notika-main-menu-dropdown">
-                                <li><a href="<?=base_url('consulta')?>">Realizar empréstimos</a></li>
+								  <li><a href="<?=base_url('reserva')?>">Realizar reserva</a></li>
                               </ul>
                             </li>
                             <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Usuário</a>
@@ -56,7 +56,6 @@
                     </div>
                     <div id="Forms" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
-                          	<li><a href="<?=base_url('consulta')?>">Realizar empréstimos</a></li>
 							<li><a href="<?=base_url('reserva')?>">Realizar reserva</a></li>
                         </ul>
                     </div>
