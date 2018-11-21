@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 |	['dsn']      The full DSN string describe a connection to the database.
 |	['hostname'] The hostname of your database server.
-|	['username'] The username used to connect to the database
+|	['username'] The username used to connect tmyo the database
 |	['password'] The password used to connect to the database
 |	['database'] The name of the database you want to connect to
 |	['dbdriver'] The database driver. e.g.: mysqli.
@@ -75,9 +75,15 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
+<<<<<<< HEAD
 	'hostname' => '127.0.0.1',
 	'username' => 'root',
 	'password' => '2223',
+=======
+	'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => '',
+>>>>>>> b7532f5b8bbc6463f31bf6346e44335b7d805bb1
 	'database' => 'equipe385116',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
