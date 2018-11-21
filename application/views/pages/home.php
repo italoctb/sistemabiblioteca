@@ -44,8 +44,8 @@
         <div class="data-table-list">
           <div class="table-responsive">
             <div class="searc-input">
-              <form action="<?=base_url('rconsultaProfs')?>" method="POST">
-              <input type="text" class="caixaPclass" name="caixap3" id="caixap3" placeholder="pesquisar"/>
+              <form action="<?=base_url('tratarConsultaHome')?>" method="POST">
+              <input type="text" class="caixaPclass" name="caixaHome" id="caixaHome" placeholder="pesquisar"/>
               <button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
               </form>
             </div>
@@ -53,13 +53,13 @@
               <thead>
 
                 <tr>
-                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaISBN')?>">ISBN</a></th>
-                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaNomeObra')?>">Nome da obra</a></th>
-                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaNomeAutor')?>">Autor</a></th>
-                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaAno')?>">Ano de publicação</a></th>
-                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaEdit')?>">Editora</a></th>
-                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaCategoria')?>">Categoria</a></th>
-                  <th><a class="btn btn-success notika-btn-success waves-effect" href="<?=base_url('ordenaDisp')?>">Disponibilidade</a></th>
+                  <th><a class="fixing_bug" href="<?=base_url('ordenaISBN')?>">ISBN</a></th>
+                  <th><a class="fixing_bug" href="<?=base_url('ordenaNomeObra')?>">Nome da obra</a></th>
+                  <th><a class="fixing_bug" href="<?=base_url('ordenaNomeAutor')?>">Autor</a></th>
+                  <th><a class="fixing_bug" href="<?=base_url('ordenaAno')?>">Ano de publicação</a></th>
+                  <th><a class="fixing_bug" href="<?=base_url('ordenaEdit')?>">Editora</a></th>
+                  <th><a class="fixing_bug" href="<?=base_url('ordenaCategoria')?>">Categoria</a></th>
+                  <th><a class="fixing_bug" href="<?=base_url('ordenaDisp')?>">Disponibilidade</a></th>
                 </tr>
 
               </thead>

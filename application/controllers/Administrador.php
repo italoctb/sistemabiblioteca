@@ -47,7 +47,7 @@ class Administrador extends CI_Controller{
 
           public function professores(){
             $data = array(
-              'title' => $this->sys_model->consultaProf()
+              'title' => $this->sys_model->consultaProf($_POST)
             );
             $this->load->view('templates/header');
             $this->load->view('templates/nav_adm');
@@ -65,9 +65,9 @@ class Administrador extends CI_Controller{
             $this->load->view('templates/footer');
           }
 
-          public function consultaEmprestimo(){
+          public function consultaEmprestimo($pesq=null){
             $data = array(
-              'title' => $this->sys_model->consultaEmprestimo()
+              'title' => $this->sys_model->consultaEmprestimo($pesq)
             );
             $this->load->view('templates/header');
             $this->load->view('templates/nav_adm');
@@ -75,15 +75,25 @@ class Administrador extends CI_Controller{
             $this->load->view('templates/footer');
           }
 
-		public function consultaReserva(){
+          public function tratarConsultaEmp(){
+            $caixaE = $this->input->post('caixaE');
+            redirect(base_url('consultaEmprestimo/'.$caixaE));
+          }
+
+		public function consultaReserva($pesq=NULL){
 			$data = array(
-				'title' => $this->sys_model->consultaReserva()
+				'title' => $this->sys_model->consultaReserva($pesq)
 			);
 			$this->load->view('templates/header');
 			$this->load->view('templates/nav_adm');
 			$this->load->view('pages/consultaReserva', $data);
 			$this->load->view('templates/footer');
 		}
+    public function tratarconsultaReserva(){
+      $caixaR = $this->input->post('caixaR');
+      redirect(base_url('consultaReserva/'.$caixaR));
+    }
+    
 
 		public function alterarReserva(){
 			$user = $this->session->userdata('nivel_usuario');

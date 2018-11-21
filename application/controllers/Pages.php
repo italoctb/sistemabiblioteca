@@ -4,6 +4,8 @@ class Pages extends CI_Controller {
               parent::__construct();
               $user = $this->session->userdata('usuario');
               $nivel = $this->session->userdata('nivel_usuario');
+              $tuser = $this->session->userdata('select tipoUsuario from USUARIO;');
+              $usern = $this->session->userdata('username');
               $this->load->model('user_model');
               $this->load->model('func_model');
               $this->load->model('prof_model');
@@ -210,7 +212,7 @@ class Pages extends CI_Controller {
               'liv' => $this->sys_model->buscarIC($categoria),
               'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
               'autor' => $this->db->get("AUTORES")->result()
-               
+
             );
             $this->load->view('templates/header.php');
 
@@ -654,14 +656,49 @@ class Pages extends CI_Controller {
       $this->load->view('templates/footer');
     }
 
-    public function rconsultaUsuario(){
+    public function consultaHome($pesq=NULL){
       $data = array(
-        'title' => $this->sys_model->buscarUsuario($_POST)
+        'title' => $this->sys_model->consultaHome($pesq)
       );
       $this->load->view('templates/header');
       $this->load->view('templates/nav_adm');
-      $this->load->view('pages/rconsultaUsuario', $data);
+      $this->load->view('pages/home', $data);
       $this->load->view('templates/footer');
+    }
+
+    public function tratarConsultaHome($caixaHome){
+      $caixaHome = $this->input->post('caixaHome');
+      redirect(base_url('consultaHome/'.$caixaHome));
+    }
+
+    public function consultaProf($pesq=NULL){
+      $data = array(
+        'title' => $this->sys_model->consultaProf($pesq)
+      );
+      $this->load->view('templates/header');
+      $this->load->view('templates/nav_adm');
+      $this->load->view('pages/consultaProf', $data);
+      $this->load->view('templates/footer');
+    }
+
+    public function tratarConsultaProf(){
+      $caixaProf = $this->input->post('caixaProf');
+      redirect(base_url('consultaProf/'.$caixaProf));
+    }
+
+    public function consultaUsuario($pesq=NULL){
+      $data = array(
+        'title' => $this->sys_model->consultaUsuario($pesq)
+      );
+      $this->load->view('templates/header');
+      $this->load->view('templates/nav_adm');
+      $this->load->view('pages/consultaUsuario', $data);
+      $this->load->view('templates/footer');
+    }
+
+    public function tratarConsultaUsuario(){
+      $caixap1 = $this->input->post('caixap1');
+      redirect(base_url('consultaUsuario/'.$caixap1));
     }
 
     public function rconsultaReserva(){
@@ -674,13 +711,13 @@ class Pages extends CI_Controller {
       $this->load->view('templates/footer');
     }
 
-    public function rconsultaProfs(){
+    public function profs(){
       $data = array(
         'title' => $this->sys_model->buscarProfs($_POST)
       );
       $this->load->view('templates/header');
       $this->load->view('templates/nav_adm');
-      $this->load->view('pages/rconsultaProfs', $data);
+      $this->load->view('pages/profs', $data);
       $this->load->view('templates/footer');
     }
 
@@ -689,7 +726,7 @@ class Pages extends CI_Controller {
       $user = $this->session->userdata('usuario');
 
       if($tipo == "ISBN"):
-          $data = array(       
+          $data = array(
             'title' => $this->sys_model->consultaTitulosISBN(),
             'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
             'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
@@ -738,13 +775,13 @@ class Pages extends CI_Controller {
           'autor' => $this->db->get("AUTORES")->result()
         );
       endif;
-      
 
-      
-     
+
+
+
       $this->session->set_flashdata('success_msg', 'Bem-vindo, ' . $data['nome']);
       $this->load->view('templates/header.php');
-     
+
       $sel = $this->sys_model->consulta_especifico_Usuario($user)->nivel_usuario;
       switch ($sel) {
         case "usuario":
@@ -765,12 +802,74 @@ class Pages extends CI_Controller {
         default:
           echo $sel;
           break;
-      }      
-      
+      }
+
       $this->load->view('templates/'.$nav.'.php');
       $this->load->view('pages/home', $data);
       $this->load->view('templates/footer.php');
-    }  
+    }
 
-    
+    public function meuPerfil(){
+      $user = $this->session->userdata('usuario');
+      $data = array(
+        'title' => $this->sys_model->meuPerfil($user),
+        'title2' => $this->sys_model->meuPerfilFone($user)
+      );
+      $this->load->view('templates/header');
+      $this->load->view('templates/nav_adm');
+      $this->load->view('pages/meuPerfil', $data);
+      $this->load->view('templates/footer');
+    }
+
+    public function editarPerfil($info=null){
+      $user = $this->session->userdata('usuario');
+      $data = array(
+        'title' => $this->sys_model->meuPerfil($user),
+        //'title2' => $this->sys_model->meuPerfilFone($user),
+        'title2' => $this->sys_model->editarPerfil($info)
+      );
+      $this->load->view('templates/header');
+      $this->load->view('templates/nav_adm');
+      $this->load->view('pages/editarPerfil', $data['title']);
+      $this->load->view('templates/footer');
+    }
+
+    public function tratarEditarPerfilAl(){
+      $novoInfo = array(
+        'nome' => $this->input->post('nome'),
+        'username' => $this->input->post('username'),
+        'password' => $this->input->post('password'),
+        'user_end' => $this->input->post('user_end'),
+        'mat_aluno' => $this->input->post('mat_aluno'),
+        'nome_curso' => $this->input->post('nome_curso'),
+        'data_de_ingresso' => $this->input->post('data_de_ingresso'),
+        'data_de_conclusao_prev' => $this->input->post('data_de_conclusao_prev')
+      );
+      redirect(base_url('editarPerfil/'.$novoInfo));
+    }
+
+    public function tratarEditarPerfilFunc(){
+        $info = array(
+          'nome' => $this->input->post('nome'),
+          'user_end' => $this->input->post('user_end'),
+          'username' => $this->input->post('nome')
+        );
+
+      redirect(base_url('editarPerfil/'.$info['nome']));
+    }
+
+    public function tratarEditarPerfilProf(){
+      $info = array(
+        'nome' => $this->input->post('nome'),
+        'username' => $this->input->post('username'),
+        'password' => $this->input->post('password'),
+        'user_end' => $this->input->post('user_end'),
+        'telefone_celular' => $this->input->post('telefone_celular'),
+        'mat_siape' => $this->input->post('mat_siape'),
+        'nome_curso' => $this->input->post('nome_curso'),
+        'data_de_contratacao' => $this->input->post('data_de_contratacao')
+      );
+      redirect(base_url('editarPerfil/'.$novoInfo));
+    }
+
 }

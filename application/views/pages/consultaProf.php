@@ -1,18 +1,18 @@
 <?php
     $user = $this->session->userdata('nivel_usuario');
-    if($user != 'administrador' && $user != 'bibliotecario'){redirect(base_url(''));}
+    if($user != 'administrador' && $user != 'bibliotecario'){base_url('');}
 ?>
 
 <div class="data-table-area">
-  <div class="container">
+  <div class="container form-add">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="data-table-list">
           <div class="table-responsive">
             <div class="searc-input">
-              <form action="<?=base_url('rconsultaProfs')?>" method="POST">
-              <input type="text" name="caixap3" id="caixap3" placeholder="Pesquisar"/>
-              <button type="submit" class="notika-icon notika-right-arrow"></button>
+              <form action="<?=base_url('tratarConsultaProf')?>" method="POST">
+              <input type="text" class="caixaPclass" name="caixaProf" id="caixaProf" placeholder="Pesquisar"/>
+              <button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
             </form>
           </div>
             <table id="" class="table table-striped">
@@ -30,7 +30,7 @@
                     <tr>
                       <td><?php echo $query->mat_siape ?></td>
                       <td><?php echo $query->nome ?></td>
-                      <td><?php echo $query->nome_curso ?></td>
+                      <td><a id="a-edit"  href="<?=base_url('curso/'.$query->nome_curso)?>"><?php echo $query->nome_curso ?></a></td>
                     </tr>
                 <?php  }?>
 
