@@ -657,8 +657,10 @@ class Pages extends CI_Controller {
     }
 
     public function consultaHome($pesq=NULL){
+		$user = $this->session->userdata('usuario');
       $data = array(
         'title' => $this->sys_model->consultaHome($pesq),
+		'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
 		'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
 		'autor' => $this->db->get("AUTORES")->result()
       );
