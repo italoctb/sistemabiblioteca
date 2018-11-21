@@ -1,7 +1,7 @@
 <?php
 class Administrador extends CI_Controller{
 
-          function __construct(){ //Meu primeiro comentário
+          function __construct(){
               parent::__construct();
               $user = $this->session->userdata('usuario');
               $nome = $this->session->userdata('nome');
