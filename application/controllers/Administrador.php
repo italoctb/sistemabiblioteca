@@ -431,6 +431,7 @@ class Administrador extends CI_Controller{
         public function deletarUsuario($ident = NULL){
             
             $test = $this->user_model->getQntdByUsername($ident);
+
             if($test){
                 $this->db->where('username',$ident);
                 $this->db->delete('USUARIO');
@@ -456,30 +457,27 @@ class Administrador extends CI_Controller{
         }
 
 
+        public function trataSolicitacao(){  //Recebe o username do usuário a ser removido.
+			$user = $this->input->post('username');
+			redirect(base_url('confirmaSolicitacao/'.$user));        
+        }
+
         public function confirmaSolicitacao($ident = NULL){  //Recebe o username do usuário a ser removido.
 
-                $test = $this->user_model->getQntdByUsername($ident); //Verifica se o usuário possui alguma pendência.
-                if($test) { //Sem pendências na biblioteca.
-                  $this->db->where('username',$ident);
-                  if ( $this->db->delete('REQUISICAO')): //Remove a requisição de remoção do usuário.
-
-                      $this->db->where('username',$ident);
-                      $this->db->delete('USUARIO'); //Remove o usuário do sistema.
-
-                      $this->session->set_flashdata('success_msg', 'Registro deletado');
-                      redirect(base_url('solicitaRemocao'));
-                  else:
-                      $this->session->set_flashdata('error_msg', 'Erro ao deletar registro');
-                      redirect(base_url('solicitaRemocao'));
-                  endif;
-                }else {
-                    $this->session->set_flashdata('error_msg', 'Usuário com débito não pode ser deletado');
-                    redirect(base_url('solicitaRemocao'));
-                }
+        	$test = $this->user_model->getQntdByUsername($ident);
+            if($test){
+            	echo($test);
+                $this->db->where('username',$ident);
+                $this->db->delete('REQUISICAO');
+                $this->session->set_flashdata('success_msg', 'Registro deletado');
+                redirect(base_url('solicitaRemocao'));            }
+            else {
+                $this->session->set_flashdata('error_msg', 'Usuário com débito não pode ser deletado');
+                redirect(base_url('solicitaRemocao'));
+            }
 
 
-
-
+        
         }
 
 

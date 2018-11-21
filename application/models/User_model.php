@@ -186,18 +186,8 @@ SE<?php
       }
 
       public function getQntdByUsername($usernome=null){
-          $this->db->select('*');
-          $this->db->from('USUARIO');
-          $this->db->where('username',$usernome);
-          $teste = $this->db->having('qntd_livros',0);
-
-          if($teste) {
-              return '1';
-          }
-
-          else{
-              return '0';
-          }
+          $query = $this->db->query('select * from USUARIO WHERE username = "'.$usernome.'" having qntd_livros = 0;');
+          return $query->result();
 
       }
 
@@ -206,6 +196,7 @@ SE<?php
           $this->db->from('USUARIO');
           $this->db->where($tipo, $mat);
           $this->db->where('qntd_livros',0);
+          
 
           if($query=$this->db->get()) {
               return $query->row_array();

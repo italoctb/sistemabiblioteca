@@ -33,39 +33,49 @@
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="data-table-list">
-          <div class="table-responsive">
+        
 
             <table id="" class="table table-striped">
-              <thead>
 
-                <tr>
-                  <th><a class="fixing_bug" href="#data-table-basic">Número da Solicitação</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Usuário</a></th>
-                </tr>
-              </thead>
               <tbody>
-                <?php
+           
+                <form action="<?=base_url('trataSolicitacao')?>" method="post" class="form-signin">
+                  <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="form-element-list mg-t-30">
+                        <div class="row">
 
-                  foreach ($solicitacao as $sol) {?>
-                    <tr>
-                      <td><?php echo $sol->id_req ?></td>
-                      <td><?php echo $sol->username ?></td>
-                      <td>
-                        <a 
-                          class="btn btn-danger notika-btn-danger"
-                          style="position: relative; bottom:4px;" 
-                          onclick="return confirm('Deseja confirmar a solicitação de remoção do usuário?')"           href="<?=base_url('confirmaSolicitacao/'.$sol->username)?>";>
-                          Confirmar solicitação
-                        </a>
-                      </td>
-                    </tr>
-                <?php  }?>
+                          <div class="col-lg-6  col-md-6  col-sm-6  col-xs-12">
 
-                </tbody>
-               
-              </table>
-            </div>
-          </div>
+                            <div class="nk-int-mk sl-dp-mn sm-res-mg-t-10">
+                              <h2>Solicitações</h2>
+                            </div>
+
+                            <div class="bootstrap-select fm-cmp-mg">
+                              <select class="selectpicker" data-live-search="true" name="username">
+                                <option disabled="disabled" selected>Escolha o usuário</option>
+                                  <?php foreach ($solicitacao as $sol){
+                                      echo "<option>$sol->username</option>";
+                                  }?>
+                              </select>
+                            </div>
+
+                          </div>
+
+                          <div class="col-lg-6  col-md-6  col-sm-6  col-xs-12" style="position: relative; top:25px;">
+                            <div  class="form-group justify-content-center" style="text-align: center;">
+                              <button type="submit" class="btn btn-danger notika-btn-danger" value="" onclick="return confirm('Tem certeza que deseja deletar o usuário?');">Remover</button>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </tbody> 
+            </table>
+           </div>
         </div>
       </div>
     </div>
