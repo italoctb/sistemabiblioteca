@@ -84,12 +84,13 @@
               Data de empréstimo: <?=$data?><br>
               Data de devolução: <?=$dev_data?><br>
             </pre>
+            <div  class="form-group">
+                <button type="submit" class="btn btn-success notika-btn-success" value="Reservar"/>Confirmar</button>
+                <a class="btn btn-primary notika-btn-primary" href="<?= base_url('/emprestimo') ?>">Voltar</a>
+            </div>
           </div>
 
-        <div  class="form-group">
-            <button type="submit" class="btn btn-success notika-btn-success" value="Reservar"/>Confirmar</button>
-            <a class="btn btn-primary notika-btn-primary" href="<?= base_url('/emprestimo') ?>">Voltar</a>
-        </div>
+
 
 
     </form>
