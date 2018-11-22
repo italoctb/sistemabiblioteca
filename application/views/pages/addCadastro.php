@@ -141,12 +141,6 @@ if($user != 'administrador'){redirect(base_url(''));}
 	</div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="<?php echo base_url('static/js/jquery-3.3.1.min.js')?>"></script>
-<script src="<?php echo base_url('static/js/bootstrap.min.js')?>"></script>
-<script src="<?php echo base_url('static/js/popper.min.js')?>"></script>
-<script src="<?php echo base_url('static/js/perso.js')?>"></script>
-
 
 <script>
 

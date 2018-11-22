@@ -1,4 +1,4 @@
-SE<?php
+<?php
   class User_model extends CI_model{
 
     public function register_user($user){
@@ -158,7 +158,7 @@ SE<?php
               return false;
           }
       }
-      
+
       public function livroByISBN($ISBN){
                 $query = $this->db->query('select titulo FROM LIVROS where ISBN = "'.$ISBN.'";');
                 return $query->row_object();
@@ -196,7 +196,7 @@ SE<?php
           $this->db->from('USUARIO');
           $this->db->where($tipo, $mat);
           $this->db->where('qntd_livros',0);
-          
+
 
           if($query=$this->db->get()) {
               return $query->row_array();
@@ -327,6 +327,6 @@ SE<?php
       }
 
 
-   
+
   }
 ?>
