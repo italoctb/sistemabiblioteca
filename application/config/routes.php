@@ -101,7 +101,6 @@ $route['devEmprestimo'] 					= 'pages/devEmprestimo';
 
 $route['devEmprestimo/(:any)/(:any)'] 		= 'pages/devEmprestimo/$1/$2';
 $route['logout'] 							= 'pages/logout';
-$route['consulta']     = 'pages/caixaPesquisa';
 $route['rconsultaReserva']  = 'pages/rconsultaReserva';
 
 //Perfil
@@ -143,11 +142,14 @@ $route['curso/(:any)'] 	= 'pages/curso/$1';
 
 $route['alterarReserva'] 	= 'administrador/alterarReserva';
 $route['cancelReserva'] 	= 'administrador/cancelReserva';
-$route['solicitaRemocao/(:any)'] 	= 'administrador/solicitaRemocao/$1';
-$route['solicitaRemocao'] 	= 'administrador/solicitaRemocao';
+$route['solicitaRemocao/(:any)'] 	= 'pages/solicitaRemocao/$1';
+$route['solicitaRemocao'] 	= 'pages/solicitaRemocao';
 $route['cancelReserva/(:any)/(:any)'] 	= 'administrador/cancelReserva/$1/$2';
 $route['trataSolicitacao'] 	= '/administrador/trataSolicitacao';
 $route['confirmaSolicitacao'] 	= '/administrador/confirmaSolicitacao/';
+
+$route['editarCadastro'] 	= 'administrador/editarCadastro';
+
 $route['ordenaISBN'] 	= 'pages/ordena/ISBN';
 $route['ordenaNomeObra'] 	= 'pages/ordena/nomeObra';
 $route['ordenaNomeAutor'] 	= 'pages/ordena/nomeAutor';
@@ -169,8 +171,8 @@ $route['editarUsuario/(:any)']	= '/administrador/editarUsuario/$1';
 $route['deletarUsuario']		= '/administrador/deletarUsuario';
 $route['deletarUsuario/(:any)']	= '/administrador/deletarUsuario/$1';
 $route['updateUsuario']			= '/administrador/updateUsuario';
-$route['cancelCadastro']			= '/administrador/cancelCadastro';
-$route['cancelCadastro/(:any)']			= '/administrador/cancelCadastro/$1';
-$route['TrataCancelCadastro']			= '/administrador/TrataCancelCadastro';
+$route['cancelCadastro']			= '/pages/cancelCadastro';
+$route['cancelCadastro/(:any)']			= '/pages/cancelCadastro/$1';
+$route['TrataCancelCadastro']			= '/pages/TrataCancelCadastro';
 $route['semAcesso'] = 'pages/semAcesso';
 $route['404_override'] = 'pages/erro404';

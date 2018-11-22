@@ -297,13 +297,27 @@ class Pages extends CI_Controller {
         acordo com o nível de usuário.  */
 
     public function trataEmprestimoLivro(){
-      $user = $this->input->post('username');
-      $isbn = $this->input->post('isbnEmp');
-      if(!$isbn){
-        $isbn = $this->sys_model->consulta_especifico_ISBN($this->input->post('nomeObra'))->ISBN;
-      }
-      redirect(base_url('emprestimoLivro/'.$isbn.'/'.$user));
-    }
+		$user = $this->input->post('username');
+		$isbn = $this->input->post('isbnEmp');
+		$test_1 = $this->sys_model->consulta_especifico_USUARIO($user);
+		$test_2 = $this->sys_model->consulta_especifico_Livro($isbn);
+		if($test_1 && !$isbn) {
+			$isbn = $this->sys_model->consulta_especifico_ISBN($this->input->post('nomeObra'))->ISBN;
+			redirect(base_url('emprestimoLivro/' . $isbn . '/' . $user));
+		}
+		elseif($test_2 && !$isbn) {
+			$isbn = $this->sys_model->consulta_especifico_ISBN($this->input->post('nomeObra'))->ISBN;
+			redirect(base_url('emprestimoLivro/' . $isbn . '/' . $user));
+		}
+		elseif(!$test_1){
+			$this->session->set_flashdata('error_msg', 'Usuário inexistente, tente novamente');
+			redirect(base_url('consulta'));
+		}
+		elseif(!$test_2){
+			$this->session->set_flashdata('error_msg', 'ISBN inexistente, tente novamente');
+			redirect(base_url('consulta'));
+		}
+	}
     /*  Ele recebe dois parâmetros, que são o username e o ibsn, depois ele
         fará uma consulta no banco e mostrará o título para aquele número e
         depois redireciona a página para a de empréstimos.  */
@@ -722,7 +736,18 @@ class Pages extends CI_Controller {
         'title' => $this->sys_model->consultaProf($pesq)
       );
       $this->load->view('templates/header');
-      $this->load->view('templates/nav_adm');
+      
+		$nivel = $this->session->userdata('nivel_usuario');
+		if ($nivel === 'administrador'):
+			$nav = 'nav_adm';
+		elseif ($nivel === 'usuario'):
+			$nav = 'nav_user';
+		elseif ($nivel === 'bibliotecario'):
+			$nav = 'nav_blib';
+		endif;
+
+		$this->load->view('templates/'.$nav);
+
       $this->load->view('pages/consultaProf', $data);
       $this->load->view('templates/footer');
     }
@@ -737,7 +762,16 @@ class Pages extends CI_Controller {
         'title' => $this->sys_model->consultaUsuario($pesq)
       );
       $this->load->view('templates/header');
-      $this->load->view('templates/nav_adm');
+		$nivel = $this->session->userdata('nivel_usuario');
+		if ($nivel === 'administrador'):
+			$nav = 'nav_adm';
+		elseif ($nivel === 'usuario'):
+			$nav = 'nav_user';
+		elseif ($nivel === 'bibliotecario'):
+			$nav = 'nav_blib';
+		endif;
+
+	  $this->load->view('templates/'.$nav);
       $this->load->view('pages/consultaUsuario', $data);
       $this->load->view('templates/footer');
     }
@@ -857,65 +891,204 @@ class Pages extends CI_Controller {
 
     public function meuPerfil(){
       $user = $this->session->userdata('usuario');
+      $nivel = $this->session->userdata('nivel_usuario');
       $data = array(
         'title' => $this->sys_model->meuPerfil($user),
         'title2' => $this->sys_model->meuPerfilFone($user)
       );
+
+		if ($nivel === 'administrador'):
+			$nav = 'nav_adm';
+		elseif ($nivel === 'usuario'):
+			$nav = 'nav_user';
+		elseif ($nivel === 'bibliotecario'):
+			$nav = 'nav_blib';
+		endif;
+
       $this->load->view('templates/header');
-      $this->load->view('templates/nav_adm');
+      $this->load->view('templates/'.$nav);
       $this->load->view('pages/meuPerfil', $data);
       $this->load->view('templates/footer');
     }
 
-    public function editarPerfil($info=null){
-      $user = $this->session->userdata('usuario');
-      $data = array(
-        'title' => $this->sys_model->meuPerfil($user),
-        //'title2' => $this->sys_model->meuPerfilFone($user),
-        'title2' => $this->sys_model->editarPerfil($info)
-      );
-      $this->load->view('templates/header');
-      $this->load->view('templates/nav_adm');
-      $this->load->view('pages/editarPerfil', $data['title']);
-      $this->load->view('templates/footer');
-    }
+	public function editarPerfil($ident = NULL){
+		$user = $this->session->userdata('usuario');
+		$nivel = $this->session->userdata('nivel_usuario');
+		$data = array(
+			'title' => $this->sys_model->meuPerfil($user),
+			'title2' => $this->sys_model->meuPerfilFone($user),
+			//'title2' => $this->sys_model->editarPerfil($info)
+		);
 
-    public function tratarEditarPerfilAl(){
-      $novoInfo = array(
-        'nome' => $this->input->post('nome'),
-        'username' => $this->input->post('username'),
-        'password' => $this->input->post('password'),
-        'user_end' => $this->input->post('user_end'),
-        'mat_aluno' => $this->input->post('mat_aluno'),
-        'nome_curso' => $this->input->post('nome_curso'),
-        'data_de_ingresso' => $this->input->post('data_de_ingresso'),
-        'data_de_conclusao_prev' => $this->input->post('data_de_conclusao_prev')
-      );
-      redirect(base_url('editarPerfil/'.$novoInfo));
-    }
+		if ($nivel === 'administrador'):
+			$nav = 'nav_adm';
+		elseif ($nivel === 'usuario'):
+			$nav = 'nav_user';
+		elseif ($nivel === 'bibliotecario'):
+			$nav = 'nav_blib';
+		endif;
 
-    public function tratarEditarPerfilFunc(){
-        $info = array(
-          'nome' => $this->input->post('nome'),
-          'user_end' => $this->input->post('user_end'),
-          'username' => $this->input->post('nome')
-        );
+		$this->load->view('templates/header');
+		$this->load->view('templates/'.$nav);
+		$this->load->view('pages/editarPerfil', $data);
+		$this->load->view('templates/footer');
+	}
 
-      redirect(base_url('editarPerfil/'.$info['nome']));
-    }
+	public function tratarEditarPerfilAl(){
+		$mat_aluno = $this->input->post('mat_aluno');
+		$user_data = array(
+			'nome' => $this->input->post('nome'),
+			'user_end' => $this->input->post('user_end'),
+		);
+		$test = $this->user_model->getQntdAlu( $this->input->post('mat_aluno'));
 
-    public function tratarEditarPerfilProf(){
-      $info = array(
-        'nome' => $this->input->post('nome'),
-        'username' => $this->input->post('username'),
-        'password' => $this->input->post('password'),
-        'user_end' => $this->input->post('user_end'),
-        'telefone_celular' => $this->input->post('telefone_celular'),
-        'mat_siape' => $this->input->post('mat_siape'),
-        'nome_curso' => $this->input->post('nome_curso'),
-        'data_de_contratacao' => $this->input->post('data_de_contratacao')
-      );
-      redirect(base_url('editarPerfil/'.$novoInfo));
-    }
+		if ($test){
+			$this->db->where('mat_aluno', $mat_aluno);
+			if($this->db->update('USUARIO', $user_data)){
+				$this->session->set_flashdata('success_msg', 'Registro atualizado');
+				redirect(base_url('meuPerfil'));
+			}
+			else{
+				$this->session->set_flashdata('error_msg', 'Erro na atualização');
+				redirect(base_url('meuPerfil'));
+			}
+		}
+		else{
+			$this->session->set_flashdata('error_msg', 'Erro na atualização, usuário com pendência');
+			redirect(base_url('meuPerfil'));
+		}
+	}
+
+	public function tratarEditarPerfilFunc(){
+		$mat_func = $this->input->post('mat_func');
+		$user_data = array(
+			'nome' => $this->input->post('nome'),
+			'user_end' => $this->input->post('user_end'),
+		);
+		$test = $this->user_model->getQntdFunc( $this->input->post('mat_func'));
+
+		if ($test){
+			$this->db->where('mat_func', $mat_func);
+			if($this->db->update('USUARIO', $user_data)){
+				$this->session->set_flashdata('success_msg', 'Registro atualizado');
+				redirect(base_url('meuPerfil'));
+			}
+			else{
+				$this->session->set_flashdata('error_msg', 'Erro na atualização');
+				redirect(base_url('meuPerfil'));
+			}
+		}
+		else{
+			$this->session->set_flashdata('error_msg', 'Erro na atualização, usuário com pendência');
+			redirect(base_url('meuPerfil'));
+		}
+	}
+
+	public function tratarEditarPerfilProf(){
+		$user = $this->session->userdata('tipoUsuario');
+		$mat_siape = $this->input->post('mat_siape');
+		$user_data = array(
+			'nome' => $this->input->post('nome'),
+			'user_end' => $this->input->post('user_end'),
+		);
+		$prof_data = array(
+			'telefone_celular' => $this->input->post('telefone_celular')
+		);
+		$test = $test = $this->user_model->getQntdProf( $this->input->post('mat_siape'));
+
+		if ($test){
+			$this->db->where('mat_siape', $mat_siape);
+			$this->db->update('PROFESSORES', $prof_data);
+
+			$this->db->where('mat_siape', $mat_siape);
+
+			if($this->db->update('USUARIO', $user_data) && $user==='tipoProf'){
+				$this->session->set_flashdata('success_msg', 'Registro atualizado');
+				redirect(base_url('meuPerfil'));
+			}
+			else{
+				$this->session->set_flashdata('success_msg', 'Erro na atualização');
+				redirect(base_url('meuPerfil'));
+			}
+		}
+		else{
+			$this->session->set_flashdata('error_msg', 'Erro na atualização, usuário com pendência');
+			redirect(base_url('meuPerfil'));
+		}
+	}
+
+	public function solicitaRemocao($id = null){   //Exibe as solicitações de remoção realizadas pelos usuários.
+		$nivel = $this->session->userdata('nivel_usuario');
+		$data = array(
+			'solicitacao' => $this->sys_model->requisicoes(),
+			'req' => $this->db->query('select * from REQUISICAO where id_req = "'.$id.'";')->row_object()//Array com todas as requisições de remoção do sistema.
+		);
+		$this->load->view('templates/header');
+		$nivel = $this->session->userdata('nivel_usuario');
+		if ($nivel === 'administrador'):
+			$nav = 'nav_adm';
+		elseif ($nivel === 'usuario'):
+			$nav = 'nav_user';
+		elseif ($nivel === 'bibliotecario'):
+			$nav = 'nav_blib';
+		endif;
+
+
+		$this->load->view('templates/'.$nav);
+		$this->load->view('pages/solicitacoes', $data);
+		$this->load->view('templates/footer');
+
+	}
+
+	public function TrataCancelCadastro(){   //Exibe as solicitações de remoção realizadas pelos usuários.
+		$username = $this->session->userdata('username');
+		$user = $this->input->post('usuario');
+		$senha = $this->input->post('senha');
+		$data_user = $this->input->post('data_user');
+		$data_senha = $this->input->post('data_senha');
+
+		if ($data_user == $user){
+			$result = $this->sys_model->validation($user, $senha);
+			if($result){
+				$this->session->set_flashdata('success_msg', 'Solicitação enviada ao administrador');
+				redirect(base_url("cancelCadastro"));
+			}else{
+				$this->session->set_flashdata('error_msg', 'Usuário ou senha incorreta');
+				redirect(base_url("cancelCadastro"));
+			}
+		}
+		else{
+			$this->session->set_flashdata('error_msg', 'Usuário ou senha incorreta');
+			redirect(base_url("cancelCadastro"));
+		}
+		//Murilo faz o tratamento caso seja invalido redirecione pra mesma pagina criando aquele campo de informação(flashdata) falando que as credenciais estão erradas
+	}
+
+
+	public function cancelCadastro($user = null){   //Exibe as solicitações de remoção realizadas pelos usuários.
+		$nivel = $this->session->userdata('nivel_usuario');
+		$data_user= $this->session->userdata('usuario');
+		$data = array(
+			'title' => $this->sys_model->meuPerfil($data_user),
+		);
+		if($user){
+			$this->db->query("INSERT INTO `equipe385116`.`REQUISICAO` (`username`) VALUES ( '$user'); ");
+			redirect(base_url("/"));
+		}else{
+
+			if ($nivel === 'administrador'):
+				$nav = 'nav_adm';
+			elseif ($nivel === 'usuario'):
+				$nav = 'nav_user';
+			elseif ($nivel === 'bibliotecario'):
+				$nav = 'nav_blib';
+			endif;
+
+			$this->load->view('templates/header');
+			$this->load->view('templates/'.$nav);
+			$this->load->view('pages/cancelCadastro',$data);
+			$this->load->view('templates/footer');
+		}
+	}
 
 }

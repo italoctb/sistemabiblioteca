@@ -230,7 +230,7 @@ class Administrador extends CI_Controller{
 				$PROF = array(
 					'mat_siape' => $this->input->post('matricula'),
 					'regime_trabalho' => $this->input->post('regime_trabalho'),
-					'cod_curso' => $this->input->post('cod_curso_prof'),
+					'cod_curso' => $this->input->post('cod_curso'),
 					'data_de_contratacao' => $this->input->post('data_de_contratacao'),
 					'telefone_celular' => $this->input->post('telefone_celular'),
 					'tipoProf' => ('3'),
@@ -430,6 +430,24 @@ class Administrador extends CI_Controller{
             }
         }
 
+		public function editarCadastro(){
+			$user_id = $this->session->userdata('nivel_usuario');
+			$data = array(
+				'title' => $this->sys_model->consultaUsuario()
+			);
+			$data['NOME'] = $this->user_model->sel_usuario();
+			if($user_id === 'administrador'){
+				$data['usuario'] = $this->db->get('USUARIO')->result();
+				$this->load->view('templates/header');
+				$this->load->view('templates/nav_adm');
+				$this->load->view('pages/editarCadastro', $data);
+				$this->load->view('templates/footer');
+			}
+			else{
+				{redirect(base_url('admin/consultaUsuario'));}
+			}
+		}
+
         public function deletarUsuario($ident = NULL){
 
             $test = $this->user_model->getQntdByUsername($ident);
@@ -447,42 +465,7 @@ class Administrador extends CI_Controller{
 
         }
 
-        public function solicitaRemocao($id = null){   //Exibe as solicitações de remoção realizadas pelos usuários.
-          $data = array(
-              'solicitacao' => $this->sys_model->requisicoes(),
-              'req' => $this->db->query('select * from REQUISICAO where id_req = "'.$id.'";')->row_object()//Array com todas as requisições de remoção do sistema.
-            );
-          $this->load->view('templates/header');
-          $this->load->view('templates/nav_adm');
-          $this->load->view('pages/solicitacoes', $data);
-          $this->load->view('templates/footer');
 
-        }
-
-        public function TrataCancelCadastro(){   //Exibe as solicitações de remoção realizadas pelos usuários.
-          $user = $this->input->post('usuario');
-          $senha = $this->input->post('senha');
-          $result = $this->sys_model->validation($user, $senha);
-          if($result){
-            redirect(base_url("cancelCadastro/$user"));
-          }else{
-            echo "erro!";
-          }
-          //Murilo faz o tratamento caso seja invalido redirecione pra mesma pagina criando aquele campo de informação(flashdata) falando que as credenciais estão erradas
-        }
-
-
-        public function cancelCadastro($user = null){   //Exibe as solicitações de remoção realizadas pelos usuários.
-          if($user){
-            $this->db->query("INSERT INTO `equipe385116`.`REQUISICAO` (`username`) VALUES ( '$user'); ");
-            redirect(base_url("/"));
-          }else{
-            $this->load->view('templates/header');
-            $this->load->view('templates/nav_adm');
-            $this->load->view('pages/cancelCadastro');
-            $this->load->view('templates/footer');
-          }
-        }
 
 
 
