@@ -52,63 +52,53 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 $route['default_controller'] 				= 'pages/view';
-/*  Função na qual carrega outras paginas, a partir do parâmetro dado, caso
-    esse parâmetro esteja vazio, ele retornará uma página com erro 404   */
+//Rota para view.
 $route['autenticate'] 		 				= 'pages/aut_login';
-/*  Função na qual receberá os input de login e senha, após isso eles serão
-    analisados pelas funções sys_model validation e após ser consultado no
-    banco será carregada uma página diferente para cada tipo de permissão,
-    como usuários, administradores, e bibliotecario. Caso não aja cadastro,
-    então será mostrado a página de erro de login.  */
+//Rota para autenticação de login.
 $route['sem_acesso'] 						= 'pages/error_page';
-/*  Carregará uma página de erro  */
+//Rota para uma página de erro.
 $route['consulta'] 							= 'pages/consulta';
-/*  Ele solicita uma vericação de nível de usuário, e após ver se no banco ha
-    o livro e a disponibilidade do mesmo, e  logo após carrega a página de
-    acordo com o nível de usuário.  */
+//Rota para carregamento de páginas de acordo com o nível de usuário.
 $route['reserva'] 							= 'pages/reserva';
-/*  Ele solicita uma vericação de nível de usuário, e após consultar se no
-    banco há algum livro disponível(não emprestado) ele "pega" esse livro e
-    carrega a página de acordo com o nível de usuário.  */
+//Rota para fazer uma consulta de reserva.
 $route['emprestimoLivro'] 					= 'pages/emprestimoLivro';
-/*  Ele recebe como parâmetro a identificação do livro e o tipo de usuário,
-    depois ele consulta o livro, e verifica o usuário que solicitou. */
+//Rota para realizar um empréstimo.
 $route['emprestimoLivro/(:num)/(:any)'] 			= 'pages/emprestimoLivro/$1/$2';
-/*  Faz o mesmo que o 'emprestimoLivro' mas tendo como entrada o número
-    do livro e qualquer tipo de usuário */
+//Faz o mesmo que o 'emprestimoLivro', mas tem como entrada ISBN do livro e usuário.
 $route['emprestimoLivro/(:num)'] 			= 'pages/emprestimoLivro/$1';
-/*  Faz o mesmo que o 'emprestimoLivro' mas tendo como entrada apenas o
-    número do livro.  */
+//Faz o mesmo que o 'emprestimoLivro', mas tem como entrada apenas o ISBN do livro.
 $route['redirecionaEmprestimo'] 					= 'pages/trataEmprestimoLivro';
-/*  Ele recebe dois parâmetros, que são o username e o ibsn, depois ele
-    fará uma consulta no banco e mostrará o título para aquele número e
-    depois redireciona a página para a de empréstimos.  */
+//Rota de consulta pelo ISBN e redireciona para a página de empréstimos.
 $route['reservaLivro'] 						= 'pages/reservaLivro';
-/*  Ele recebe como parâmetro a identificação do livro e o tipo de usuário,
-    depois ele consulta o livro no banco, e verifica o usuário que reservou.  */
+//Rota para verificar se o livro está reservado.
 $route['reservaLivro/(:num)'] 				= 'pages/reservaLivro/$1';
-/*  Faz o mesmo que 'reservaLivro' mas tendo como entrada apenas o número
-    do livro (ISBN).  */
+//Faz o mesmo que 'reservaLivro', mas tem como entrada apenas o ISBN do livro.
 $route['cadastro'] 							= 'pages/cadastro';
-/*  Carrega o arquivo de HTML responsável pela página de cadastro do site.  */
+//Rota para a página de cadastro.
 $route['addUsuario'] 						= 'pages/addUsuario';
-/*  Ele recebe e valida um formulário com as informações de cadastro, como,
-    nome, login, senha... Se o usuário for um professor, ele poderá levar
-    5 livros, e terá que confirmar sua siape para comprovar a docência. Se
-    o usuário for do tipo aluno, ele poderá levar 3 livros , e terá que usar
-    sua matrícula para comprovar a discência. Se o usuário for um funcionário
-    poderá levar 4 livros, e confirmará com o número registro dos funcionrio  */
+//Rota para adição de novo usuario.
 $route['envEmprestimo'] 					= 'pages/envEmprestimo';
+//Rota para de solicitação de um emprestimo, ao banco.
 $route['envReserva'] 						= 'pages/envReserva';
+//Rota para o envio de reserva para o banco.
 $route['meusEmprestimos'] 					= 'pages/meusEmprestimos';
+//Rota para mostrar os emprestimos do usuário.
 $route['minhasReservas'] 					= 'pages/minhasReservas';
+//Rota para mostrar as reservas do usuário.
 $route['alterarEmprestimos'] 	 			= 'pages/alterarEmprestimos';
+
 $route['editarEmprestimo'] 					= 'pages/editarEmprestimo';
+//Rota para modificar os emprestimos.
 $route['editarEmprestimo/(:any)/(:any)']	= 'pages/editarEmprestimo/$1/$2';
+//Rota para modificar os emprestimos com parâmetros de ISBN ou título e username ou nome.
 $route['updateEmprestimo'] 					= 'pages/updateEmprestimo';
+//Rota de requerimento de emprestimo.
 $route['baixaEmprestimo'] 					= 'pages/baixaEmprestimo';
+//Rota para visualização dos emprestimos.
 $route['baixaEmprestimo/(:any)'] 			= 'pages/baixaEmprestimo/$1';
+//Rota para visualização dos emprestidos com parâmetro username.
 $route['devEmprestimo'] 					= 'pages/devEmprestimo';
+
 $route['devEmprestimo/(:any)/(:any)'] 		= 'pages/devEmprestimo/$1/$2';
 $route['logout'] 							= 'pages/logout';
 $route['consulta']     = 'pages/caixaPesquisa';
