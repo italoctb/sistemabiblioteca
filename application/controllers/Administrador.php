@@ -438,7 +438,6 @@ class Administrador extends CI_Controller{
                 $this->db->where('username',$ident);
                 $this->db->delete('USUARIO');
                 $this->session->set_flashdata('success_msg', 'Registro deletado');
-                $this->session->set_userdata('numReq', $this->session->userdata('numReq') -1);
                 redirect(base_url('admin/consultaUsuario'));            }
             else {
                 $this->session->set_flashdata('error_msg', 'Usuário com débito não pode ser deletado');
