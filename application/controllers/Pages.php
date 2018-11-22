@@ -17,17 +17,17 @@ class Pages extends CI_Controller {
               $this->load->library(array('form_validation', 'email'));
           }
 
+
         public function view($page = 'welcome')
         {
           if ( ! file_exists(APPPATH.'views/'.$page.'.php'))
           {
-            // Whoops, we don't have a page for that!
             show_404();
           }
-          //$this->load->view('templates/header.php');
           $this->load->view($page);
-          //$this->load->view('templates/footer.php');
         }
+        /*  Função na qual carrega outras paginas, a partir do parâmetro dado,
+            caso esse parâmetro esteja vazio, ele retornará uma página com erro 404   */
 
         public function aut_login(){
           $user = $this->input->post('username');
@@ -65,17 +65,19 @@ class Pages extends CI_Controller {
             $this->load->view('templates/footer.php');*/
           }else{
             $data['title'] = "Erro de login";
-            //$this->load->view('templates/header.php');
             $this->load->view('errologin', $data);
-            //$this->load->view('templates/footer.php');
           }
-
         }
+        /*  Função na qual receberá os input de login e senha, após isso eles serão
+            analisados pelas funções sys_model validation e após ser consultado no
+            banco será carregada uma página diferente para cada tipo de permissão,
+            como usuários, administradores, e bibliotecario. Caso não aja cadastro,
+            então será mostrado a página de erro de login.  */
 
         public function cadastro(){
-            //$this->session->set_flashdata('success_msg', 'Cadastrar novo usuário');
             $this->load->view('pages/cadastro');
         }
+        /*  Carrega o arquivo de HTML responsável pela página de cadastro do site.  */
 
         public function addUsuario(){
           $this->form_validation->set_rules('nome', 'Nome', 'trim|required|required');
@@ -84,13 +86,10 @@ class Pages extends CI_Controller {
           $this->form_validation->set_rules('tipoUsuario', 'Tipo de usuário', 'trim|required');
           $this->form_validation->set_rules('matricula', 'Matrícula', 'trim|required');
           $this->form_validation->set_rules('user_end', 'Endereço', 'trim|required');
-
-
           if ($this->form_validation->run() == FALSE) {
               redirect(base_url('cadastro'));
               $this->session->set_flashdata('error_msg', 'Preencha todos os campos.');
           }
-
           else{
               if ($this->input->post('tipoUsuario') == 'tipoProf'){
                   $LOGIN = array(
@@ -115,7 +114,6 @@ class Pages extends CI_Controller {
                       redirect(base_url('cadastro'));
                   }
               }
-
               elseif ($this->input->post('tipoUsuario') == 'tipoAl'){
                   $LOGIN = array(
                       'nome' => $this->input->post('nome'),
@@ -136,19 +134,16 @@ class Pages extends CI_Controller {
                       redirect(base_url('cadastro'));
                   }
                   else {
-
                       if(!$dataAluCheck){
                           $this->session->set_flashdata('error_msg', 'Desculpe, você não pode mais utilizar os serviços da biblioteca.');
                           redirect(base_url('cadastro'));
                       }
-
                       else{
                       $this->session->set_flashdata('error_msg', 'Erro no registro, verifique se sua Matrícula está correta');
                           redirect(base_url('cadastro'));
                       }
                   }
             }
-
             elseif ($this->input->post('tipoUsuario') == 'tipoFunc'){
                 $LOGIN = array(
                     'nome' => $this->input->post('nome'),
@@ -161,9 +156,7 @@ class Pages extends CI_Controller {
                     'qntd_livros' => ('0'),
                     'user_end' => $this->input->post('user_end'),
                 );
-
                 $func_check = $this->func_model->func_check($LOGIN['mat_func']);
-
                 if ($func_check) {
                     $this->user_model->reg_usuario($LOGIN);
                     $this->session->set_flashdata('success_msg', 'Funcionário registrado com sucesso!');
@@ -174,14 +167,19 @@ class Pages extends CI_Controller {
                     redirect(base_url('cadastro'));
                 }
             }
-
             else {
                 $this->session->set_flashdata('error_msg', 'Erro no registro, verifique se sua Matrícula está correta');
                 redirect(base_url('cadastro'));
             }
         }
-
     }
+    /*  Ele recebe e valida um formulário com as informações de cadastro, como,
+        nome, login, senha... Se o usuário for um professor, ele poderá levar
+        5 livros, e terá que confirmar sua siape para comprovar a docência. Se
+        o usuário for do tipo aluno, ele poderá levar 3 livros , e terá que usar
+        sua matrícula para comprovar a discência. Se o usuário for um funcionário
+        poderá levar 4 livros, e confirmará com o número registro dos funcionário.
+        Caso aja algum parâmetro inválido, aparecerá uma mensagem de erro.  */
 
     public function livros($isbn){
             $this->session->set_flashdata('success_msg', '');
@@ -294,6 +292,10 @@ class Pages extends CI_Controller {
             $this->load->view('pages/consulta', $data);
             $this->load->view('templates/footer.php');
     }
+    /*  Ele solicita uma vericação de nível de usuário, e após ver se no banco ha
+        o livro e a disponibilidade do mesmo, e  logo após carrega a página de
+        acordo com o nível de usuário.  */
+
     public function trataEmprestimoLivro(){
       $user = $this->input->post('username');
       $isbn = $this->input->post('isbnEmp');
@@ -302,6 +304,10 @@ class Pages extends CI_Controller {
       }
       redirect(base_url('emprestimoLivro/'.$isbn.'/'.$user));
     }
+    /*  Ele recebe dois parâmetros, que são o username e o ibsn, depois ele
+        fará uma consulta no banco e mostrará o título para aquele número e
+        depois redireciona a página para a de empréstimos.  */
+
     public function emprestimoLivro($ident = NULL, $usuario = NULL){
             if($usuario == NULL){
               $usuario = $this->session->userdata('usuario');
@@ -319,11 +325,12 @@ class Pages extends CI_Controller {
                 'ISBN' => $ident,
                 'titulo' =>  $this->user_model->livroByISBN($ident)->titulo
             );
-
             $this->load->view('templates/header.php');
             $this->load->view('pages/emprestimoLivro', $data);
             $this->load->view('templates/footer.php');
     }
+    /*  Ele recebe como parâmetro a identificação do livro e o tipo de usuário,
+        depois ele consulta o livro, e verifica o usuário que solicitou. */
 
     public function envEmprestimo($ident = NULL){
             $user = $this->session->userdata('usuario');
@@ -338,7 +345,6 @@ class Pages extends CI_Controller {
             'data_reserva' => $this->input->post('data_reserva'),
             'prazo_dev' => $this->input->post('prazo_dev'),
             );
-
               $qtd_check= $this->user_model->getQtdLivros($this->input->post('ISBN'));
               $res_check = $this->user_model->check_emprestimo($ident);
               $res_check_l = $this->user_model->check_emprestimo_usuario($this->input->post('ISBN'),$this->input->post('username'));
@@ -381,6 +387,17 @@ class Pages extends CI_Controller {
               $this->load->view('pages/home', $data);
               $this->load->view('templates/footer.php');
     }
+    /*  Tem como entrada o número ISBN do livro, e a partir disso procura no banco
+        o título do livro, ver o tipo de usuário e pega o livro. Depois  cria um
+        array que recebe informações de ISBN, username,  a data de reserva e a
+        data de devolução . Depois verifica a quantidade de livro no acervo, após
+        isso, verifica se há exemplares, verifica se o usuário ainda pode fazer
+        empréstimo, ver se o usuário ainda pode pegar novos livros, depois cria uma
+        tupla com informações do usuário e do livro. Depois adiciona o empréstimo
+        no banco, diminui a quantidade de livros disponíveis, acrescenta no usuário
+        cadastrado +1 livro. Caso aja algum livro indisponível, ou se o usuário já
+        pegou esse livro, ou se já estourou a quantidade de livros que possa pegar,
+        então irá retornar uma resposta de erro ao usuário. */
 
     public function meusEmprestimos(){
         $user = $this->session->userdata('nivel_usuario');
@@ -401,6 +418,8 @@ class Pages extends CI_Controller {
         $this->load->view('pages/meusEmprestimos', $data);
         $this->load->view('templates/footer.php');
     }
+    /*  Verifica qual o tipo de usuário e faz uma consulta no banco dele para
+        mostrar no loyout de acordo com o tipo de usuário. */
 
     public function alterarEmprestimos(){
         $user = $this->session->userdata('nivel_usuario');
@@ -410,17 +429,17 @@ class Pages extends CI_Controller {
             'emprestimo' => $this->db->get("EMPRESTIMOS")->result()
         );
         $this->load->view('templates/header.php');
-
         if ($user === 'administrador'):
             $nav = 'nav_adm';
         elseif ($user === 'bibliotecario'):
             $nav = 'nav_blib';
         endif;
-
         $this->load->view('templates/'.$nav);
         $this->load->view('pages/finalizarEmprestimos', $data);
         $this->load->view('templates/footer.php');
     }
+    /*  Verifica o tipo de usuário e cria um array com os títulos armazenados
+        no banco de emprestimos do usuário. */
 
     public function editarEmprestimo($isbn = NULL, $username = NULL){
         $user_id = $this->session->userdata('nivel_usuario');
@@ -433,7 +452,6 @@ class Pages extends CI_Controller {
             $data['nome'] = $this->sys_model->consulta_especifico_USUARIO($username)->nome;
             $data['emprestimo'] = $this->user_model->checkDataEmprestimo($isbn, $username)->data_reserva;
             $data['dev'] = $this->user_model->checkDataEmprestimo($isbn, $username)->prazo_dev;
-
             $this->load->view('templates/header');
             $this->load->view('pages/editarEmprestimo', $data);
             $this->load->view('templates/footer');
@@ -442,6 +460,10 @@ class Pages extends CI_Controller {
             redirect(base_url('alterarEmprestimos'));
         }
     }
+    /*  Recebe como parâmetro o ISBN e o username do usuário que será modificado,
+        e  então verifica o nível de usuário presente. Se for administrador ou
+        o bibliotecario, eles podem podem modificar o username, isbn, data de
+        devolução e etc do emprestimo dos livros. */
 
     public function updateEmprestimo(){
             $user_id = $this->session->userdata('nivel_usuario');
@@ -449,25 +471,20 @@ class Pages extends CI_Controller {
             $this->form_validation->set_rules('prazo_dev', 'Prazo de Devolução', 'trim|required');
             $this->form_validation->set_rules('username', 'Nome de usuário', 'trim|required');
             $this->form_validation->set_rules('isbn', 'ISBN', 'trim|required');
-
             if ($this->form_validation->run() == FALSE) {
                 $this->session->set_flashdata('error_msg', 'Preencha todos os campos.');
             }
-
             else{
                     $data_reserva = $this->input->post('data_reserva');
                     $prazo_dev = $this->input->post('prazo_dev');
                     $isbn = $this->input->post('isbn');
                     $username = $this->input->post('username');
-
                     $test1 = $this->user_model->checkDataAtual($data_reserva);
                     $test2 = $this->user_model->checkDataAtual($prazo_dev);
-
                     $DATA = array(
                         'data_reserva' => $data_reserva,
                         'prazo_dev' => $prazo_dev
                     );
-
                     if($test1 && !$test2){
                         $this->db->where('ISBN', $isbn);
                         $this->db->where('username', $username);
@@ -486,10 +503,18 @@ class Pages extends CI_Controller {
                     }
             }
         }
+        /*  Verifica o nível de usuário e cria um formulário com data de reserva,
+            prazo de devolução, username e ISBN, se algum dos campos não for
+            preenchida, então será mostrado um alerta para o preenchimento.
+            Depois será preenchido a data de emprestimo, a prazo de devolução,
+            e o ISBN. Se as datas forem diferentes, então procurará o ISBN do
+            livro e o usuário e criará um emprestimo. Senão, mostrará um erro e
+            redireciona para página de consulta. */
 
     public function sem_acesso(){
       $this->load->view('pages/error_page');
     }
+    /*  Carregará uma página de erro  */
 
     function baixaEmprestimo($ident = NULL){
         $user = $this->session->userdata('nivel_usuario');
@@ -499,19 +524,18 @@ class Pages extends CI_Controller {
             'usuarios' => $this->db->get("USUARIO")->result(),
             'emprestimo' => $this->sys_model->consultaEmprestimo()
         );
-
         $this->load->view('templates/header.php');
-
         if ($user === 'administrador'):
             $nav = 'nav_adm';
         elseif ($user === 'bibliotecario'):
             $nav = 'nav_blib';
         endif;
-
         $this->load->view('templates/'.$nav);
         $this->load->view('pages/baixaEmprestimo', $data);
         $this->load->view('templates/footer.php');
     }
+    /*  Verifica o nível de usuário e mostra um array com o username, título,
+        usuário e emprestimos para o administrador e o bibliotecario. */
 
     function devEmprestimo($ident = NULL, $username = NULL){
         $user = $this->session->userdata('nivel_usuario');
@@ -563,6 +587,9 @@ class Pages extends CI_Controller {
 		$this->load->view('pages/reserva', $data);
 		$this->load->view('templates/footer.php');
 	}
+  /*  Ele solicita uma vericação de nível de usuário, e após consultar se no
+      banco há algum livro disponível(não emprestado) ele "pega" esse livro e
+      carrega a página de acordo com o nível de usuário.  */
 
 	public function reservaLivro($ident = NULL){
 		$user = $this->session->userdata('usuario');
@@ -575,11 +602,12 @@ class Pages extends CI_Controller {
 			'ISBN' => $ident,
 			'titulo' =>  $this->user_model->livroByISBN($ident)->titulo
 		);
-
 		$this->load->view('templates/header.php');
 		$this->load->view('pages/reservaLivro', $data);
 		$this->load->view('templates/footer.php');
 	}
+  /*  Ele recebe como parâmetro a identificação do livro, e o tipo de usuário,
+      depois ele consulta o livro no banco, e verifica se o usuário que reservou.  */
 
 	public function envReserva($ident = NULL){
 		$user = $this->session->userdata('usuario');
@@ -593,7 +621,6 @@ class Pages extends CI_Controller {
 			'username' => $this->input->post('username'),
 			'data_reserva' => $this->input->post('data_reserva'),
 		);
-
 		$res_check = $this->user_model->check_reserva_usuario($this->input->post('ISBN'),$this->input->post('username'));
 		$emp_check = $this->user_model->check_emprestimo_usuario($this->input->post('ISBN'),$this->input->post('username'));
     $solicitacao = $this->db->query('select id_req, username from REQUISICAO natural join USUARIO where username = "'.$this->input->post('username').'";')->result();
@@ -620,6 +647,9 @@ class Pages extends CI_Controller {
 		$this->load->view('pages/home', $data);
 		$this->load->view('templates/footer.php');
 	}
+  /*  Cria um array com username, nome e livro do usuário e cria outra com o ISBN,
+      username e data de emprestimo e checka as reservas e emprestimos no banco,
+      e depois confirma ou impede a nova reserva feita pelo usuário.  */
 
 	public function minhasReservas(){
 		$user = $this->session->userdata('nivel_usuario');
@@ -635,11 +665,12 @@ class Pages extends CI_Controller {
 		elseif ($user === 'bibliotecario'):
 			$nav = 'nav_blib';
 		endif;
-
 		$this->load->view('templates/'.$nav);
 		$this->load->view('pages/minhasReservas', $data);
 		$this->load->view('templates/footer.php');
 	}
+  /*  Verifica o tipo de usuário e procura no banco dele a lista de reservas
+      que foram feitas. Depois, mostra no loyout de cada tipo de usuário. */
 
     public function logout(){
         $this->session->sess_destroy();
