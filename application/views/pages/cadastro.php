@@ -154,11 +154,16 @@
                                     <?=form_dropdown('nivel_usuario', $nivel, '',array('class' => "selectpicker"));?>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="usuario">Tipo de Usuário</label><br>
-                                    <?=form_dropdown('tipoUsuario', $tipo, '',array('class' => "selectpicker"));?>
+									<select name="tipoUsuario" class="selectpicker" id="tipo_drop_add2">
+										<option disabled="disabled" selected>Escolha o tipo de usuário</option>
+										<option value="tipoProf">Professor</option>
+										<option value="tipoFunc">Funcionário</option>
+										<option value="tipoAl">Aluno</option>
+									</select>
                                 </div>
                             </div> 
                         </div>
+						<div id="dinamic-div-form" style="display: none;"></div>
                     </div>
 
                     <button type="submit" class="btn btn-login btn-success btn-float" value="Cadastrar"><i class="notika-icon notika-right-arrow right-arrow-ant"></i></button>
@@ -238,15 +243,8 @@
     <!-- main JS
     ============================================ -->
     <script src="<?=base_url('static/js/main.js')?>"></script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<script src="<?=base_url('static/js/perso.js')?>"></script>
 
-  gtag('config', 'UA-23581568-13');
-</script>
 </body>
 
 </html>

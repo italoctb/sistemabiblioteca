@@ -80,98 +80,150 @@ class Pages extends CI_Controller {
         /*  Carrega o arquivo de HTML responsável pela página de cadastro do site.  */
 
         public function addUsuario(){
-          $this->form_validation->set_rules('nome', 'Nome', 'trim|required|required');
-          $this->form_validation->set_rules('username', 'Nome de Usuário', 'trim|required');
-          $this->form_validation->set_rules('password', 'Senha', 'trim|required');
-          $this->form_validation->set_rules('tipoUsuario', 'Tipo de usuário', 'trim|required');
-          $this->form_validation->set_rules('matricula', 'Matrícula', 'trim|required');
-          $this->form_validation->set_rules('user_end', 'Endereço', 'trim|required');
-          if ($this->form_validation->run() == FALSE) {
-              redirect(base_url('cadastro'));
-              $this->session->set_flashdata('error_msg', 'Preencha todos os campos.');
-          }
-          else{
-              if ($this->input->post('tipoUsuario') == 'tipoProf'){
-                  $LOGIN = array(
-                      'nome' => $this->input->post('nome'),
-                      'username' => $this->input->post('username'),
-                      'password' => sha1($this->input->post('password')),
-                      'tipoUsuario' => $this->input->post('tipoUsuario'),
-                      'mat_siape' => $this->input->post('matricula'),
-                      'nivel_usuario' => ('usuario'),
-                      'qntd_livros_max' => ('5'),
-                      'qntd_livros' => ('0'),
-                      'user_end' => $this->input->post('user_end'),
-                  );
-                  $prof_check = $this->prof_model->prof_check($LOGIN['mat_siape']);
-                  if ($prof_check) {
-                      $this->user_model->reg_usuario($LOGIN);
-                      $this->session->set_flashdata('success_msg', 'Professor registrado com sucesso!');
-                      redirect(base_url('cadastro'));
-                  }
-                  else {
-                      $this->session->set_flashdata('error_msg', 'Erro no registro, verifique se sua Matrícula está correta');
-                      redirect(base_url('cadastro'));
-                  }
-              }
-              elseif ($this->input->post('tipoUsuario') == 'tipoAl'){
-                  $LOGIN = array(
-                      'nome' => $this->input->post('nome'),
-                      'username' => $this->input->post('username'),
-                      'password' => sha1($this->input->post('password')),
-                      'tipoUsuario' => $this->input->post('tipoUsuario'),
-                      'mat_aluno' => $this->input->post('matricula'),
-                      'nivel_usuario' => ('usuario'),
-                      'qntd_livros_max' => ('3'),
-                      'qntd_livros' => ('0'),
-                      'user_end' => $this->input->post('user_end'),
-                  );
-                  $alu_check = $this->alu_model->alu_check($LOGIN['mat_aluno']);
-                  $dataAluCheck = $this->alu_model->dataAluCheck($LOGIN['mat_aluno']);
-                  if ($alu_check && $dataAluCheck) {
-                      $this->user_model->reg_usuario($LOGIN);
-                      $this->session->set_flashdata('success_msg', 'Aluno registrado com sucesso!');
-                      redirect(base_url('cadastro'));
-                  }
-                  else {
-                      if(!$dataAluCheck){
-                          $this->session->set_flashdata('error_msg', 'Desculpe, você não pode mais utilizar os serviços da biblioteca.');
-                          redirect(base_url('cadastro'));
-                      }
-                      else{
-                      $this->session->set_flashdata('error_msg', 'Erro no registro, verifique se sua Matrícula está correta');
-                          redirect(base_url('cadastro'));
-                      }
-                  }
-            }
-            elseif ($this->input->post('tipoUsuario') == 'tipoFunc'){
-                $LOGIN = array(
-                    'nome' => $this->input->post('nome'),
-                    'username' => $this->input->post('username'),
-                    'password' => sha1($this->input->post('password')),
-                    'tipoUsuario' => $this->input->post('tipoUsuario'),
-                    'mat_func' => $this->input->post('matricula'),
-                    'nivel_usuario' => ('usuario'),
-                    'qntd_livros_max' => ('4'),
-                    'qntd_livros' => ('0'),
-                    'user_end' => $this->input->post('user_end'),
-                );
-                $func_check = $this->func_model->func_check($LOGIN['mat_func']);
-                if ($func_check) {
-                    $this->user_model->reg_usuario($LOGIN);
-                    $this->session->set_flashdata('success_msg', 'Funcionário registrado com sucesso!');
-                    redirect(base_url('cadastro'));
-                }
-                else {
-                    $this->session->set_flashdata('error_msg', 'Erro no registro, verifique se sua Matrícula está correta');
-                    redirect(base_url('cadastro'));
-                }
-            }
-            else {
-                $this->session->set_flashdata('error_msg', 'Erro no registro, verifique se sua Matrícula está correta');
-                redirect(base_url('cadastro'));
-            }
-        }
+			$this->load->helper('form');
+			$this->form_validation->set_rules('nome', 'Nome', 'trim|required|required');
+			$this->form_validation->set_rules('username', 'Nome de Usuário', 'trim|required');
+			$this->form_validation->set_rules('password', 'Senha', 'trim|required');
+			$this->form_validation->set_rules('tipoUsuario', 'Tipo de usuário', 'trim|required');
+			$this->form_validation->set_rules('matricula', 'Matrícula', 'trim|required');
+			$this->form_validation->set_rules('user_end', 'Endereço', 'trim|required');
+			$this->form_validation->set_rules('nivel_usuario', 'Nível de usuário', 'trim|required');
+
+
+			if ($this->form_validation->run() == FALSE) {
+				redirect(base_url('addCadastro'));
+				$this->session->set_flashdata('error_msg', 'Preencha todos os campos.');
+			}
+
+			else{
+				if ($this->input->post('tipoUsuario') == 'tipoProf'){
+					$LOGIN = array(
+						'nome' => $this->input->post('nome'),
+						'username' => $this->input->post('username'),
+						'password' => sha1($this->input->post('password')),
+						'tipoUsuario' => $this->input->post('tipoUsuario'),
+						'mat_siape' => $this->input->post('matricula'),
+						'nivel_usuario' => $this->input->post('nivel_usuario'),
+						'qntd_livros_max' => ('5'),
+						'qntd_livros' => ('0'),
+						'user_end' => $this->input->post('user_end'),
+					);
+					$PROF = array(
+						'mat_siape' => $this->input->post('matricula'),
+						'regime_trabalho' => $this->input->post('regime_trabalho'),
+						'cod_curso' => $this->input->post('cod_curso'),
+						'data_de_contratacao' => $this->input->post('data_de_contratacao'),
+						'telefone_celular' => $this->input->post('telefone_celular'),
+						'tipoProf' => ('3'),
+					);
+					$prof_check = $this->prof_model->prof_check($this->input->post('matricula'));
+					if (!$prof_check) {
+						$this->user_model->reg_prof($PROF);
+						$this->user_model->reg_usuario($LOGIN);
+						$this->session->set_flashdata('success_msg', 'Professor registrado com sucesso!');
+						redirect(base_url(''));
+					}
+					else {
+						$this->session->set_flashdata('error_msg', 'Erro no registro, verifique se os dados estão corretos');
+						redirect(base_url(''));
+					}
+				}
+
+				elseif ($this->input->post('tipoUsuario') == 'tipoAl'){
+					$LOGIN = array(
+						'nome' => $this->input->post('nome'),
+						'username' => $this->input->post('username'),
+						'password' => sha1($this->input->post('password')),
+						'tipoUsuario' => $this->input->post('tipoUsuario'),
+						'mat_aluno' => $this->input->post('matricula'),
+						'nivel_usuario' => $this->input->post('nivel_usuario'),
+						'qntd_livros_max' => ('3'),
+						'qntd_livros' => ('0'),
+						'user_end' => $this->input->post('user_end'),
+					);
+					$ALU = array(
+						'mat_aluno' => $this->input->post('matricula'),
+						'cod_curso' => $this->input->post('cod_curso_alu'),
+						'data_de_ingresso' => $this->input->post('data_de_ingresso'),
+						'data_de_conclusao_prev' => $this->input->post('data_de_conclusao_prev'),
+						'tipoAl' => ('1'),
+					);
+
+					$alu_check = $this->alu_model->alu_check($LOGIN['mat_aluno']);
+					if (!$alu_check) {
+						$this->user_model->reg_alu($ALU);
+						$dataAluCheck = $this->alu_model->dataAluCheck($LOGIN['mat_aluno']);
+
+						if ($dataAluCheck) {
+							$var = $this->input->post('i');
+							for ($j = 0; $j <= $var; $j++){
+								$FONE_ALU = array(
+									'mat_aluno' => $this->input->post('matricula'),
+									'fone_aluno' => $this->input->post("fone_aluno[$j]"),
+								);
+								$this->user_model->reg_fone_alu($FONE_ALU);
+							}
+							$this->user_model->reg_usuario($LOGIN);
+							$this->session->set_flashdata('success_msg', 'Aluno registrado com sucesso!');
+							redirect(base_url(''));
+						}
+						else {
+							$this->session->set_flashdata('error_msg', 'Desculpe, o aluno não pode ser cadastrado.');
+							redirect(base_url(''));
+						}
+					}
+					else{
+						$this->session->set_flashdata('error_msg', 'Erro no registro, verifique se sua Matrícula está correta');
+						redirect(base_url(''));
+					}
+				}
+
+				elseif ($this->input->post('tipoUsuario') == 'tipoFunc'){
+					$LOGIN = array(
+						'nome' => $this->input->post('nome'),
+						'username' => $this->input->post('username'),
+						'password' => sha1($this->input->post('password')),
+						'tipoUsuario' => $this->input->post('tipoUsuario'),
+						'mat_func' => $this->input->post('matricula'),
+						'nivel_usuario' => $this->input->post('nivel_usuario'),
+						'qntd_livros_max' => ('4'),
+						'qntd_livros' => ('0'),
+						'user_end' => $this->input->post('user_end'),
+					);
+					$FUNC = array(
+						'mat_func' => $this->input->post('matricula'),
+						'tipoFunc' => ('2'),
+					);
+
+					$func_check = $this->func_model->func_check($LOGIN['mat_func']);
+
+					if (!$func_check) {
+						$this->user_model->reg_func($FUNC);
+
+						$var = $this->input->post('i');
+						for ($j = 0; $j <= $var; $j++){
+							$FONE_FUNC = array(
+								'mat_func' => $this->input->post('matricula'),
+								'fone_func' => $this->input->post("fone_func[$j]"),
+							);
+							$this->user_model->reg_fone_func($FONE_FUNC);
+						}
+
+						$this->user_model->reg_usuario($LOGIN);
+						$this->session->set_flashdata('success_msg', 'Funcionário registrado com sucesso!');
+						redirect(base_url(''));
+					}
+					else {
+						$this->session->set_flashdata('error_msg', 'Erro no registro, verifique se os dados estão corretos');
+						redirect(base_url(''));
+					}
+				}
+
+				else {
+					$this->session->set_flashdata('error_msg', 'Erro no registro, verifique se os dados estão corretos');
+					redirect(base_url(''));
+				}
+			}
     }
     /*  Ele recebe e valida um formulário com as informações de cadastro, como,
         nome, login, senha... Se o usuário for um professor, ele poderá levar
@@ -736,7 +788,7 @@ class Pages extends CI_Controller {
         'title' => $this->sys_model->consultaProf($pesq)
       );
       $this->load->view('templates/header');
-      
+
 		$nivel = $this->session->userdata('nivel_usuario');
 		if ($nivel === 'administrador'):
 			$nav = 'nav_adm';
