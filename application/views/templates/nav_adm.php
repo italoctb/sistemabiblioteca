@@ -87,7 +87,7 @@
 														<li><a href="<?=base_url('editarPerfil')?>">Editar perfil</a></li>
 														<li><a href="<?=base_url('addCadastro')?>">Adicionar cadastro</a></li>
 														<li><a href="#">Editar cadastro</a></li>
-														<li><a href="<?=base_url('solicitaRemocao')?>">Solicitações</a></li>
+														<li><a href="<?=base_url('solicitaRemocao')?>">Requisições</a></li>
 														<li><a href="<?=base_url('removerCadastro')?>">Remover cadastro</a></li>
 														<li><a href="<?=base_url('cancelCadastro')?>">Cancelar cadastro</a></li>
 	                        </ul>
