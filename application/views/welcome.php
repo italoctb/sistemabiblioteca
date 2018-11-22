@@ -69,16 +69,16 @@
 					</div>
 
 					<div class="row">
-						<div class="col-8">
+						<div class="col-lg-8 col-sx-12">
 							<div class="container-login100-form-btn" style="margin-top: 35px;">
 								<button class="login100-form-btn">
 									Entrar
 								</button>
 							</div>
 						</div>
-						<div class="col-4">
-							<div class="container-login100-form-btn" style="margin-top: 35px;">
-								<a class="btn login100-form-btn btn-lg btn-secondary btn-block" href="<?= base_url('cadastro') ?>">Cadastro</a>
+						<div class="col-lg-4 col-sx-12">
+							<div class="container-login100-form-btn fixH" style="margin-top: 35px;">
+								<a class="login100-form-btn " href="<?= base_url('cadastro') ?>" style="text-decoration: none;">Cadastro</a>
 							</div>
 						</div>
 					</div>
