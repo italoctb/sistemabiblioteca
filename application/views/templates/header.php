@@ -95,6 +95,39 @@
 									</div>
 								</div>
 							</li>
+							<?php $c = $this->db->query('select count(*) as num from requisicao;')->row_object()->num;
+										$consultaReq = $this->db->query('select id_req, username, nome from REQUISICAO natural join USUARIO order by id_req;')->result();?>
+							<li class="nav-item nc-al"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle" onclick="$('#swtNot').fadeOut();"><span><i class="notika-icon notika-alarm" style="position: absolute; margin-top: 5px;"></i></span>
+								<?php if ($c != 0): ?>
+									<div id="swtNot"><div class="spinner4 spinner-4" style="left:36px; top:-35px;"></div><div class="ntd-ctn" style="left:42px;top:-29px;"><span style="color: white;"><?php echo $c; ?></span></div></a></div>
+								<?php endif; ?>
+
+									<div role="menu" class="dropdown-menu message-dd notification-dd animated zoomIn">
+											<div class="hd-mg-tt">
+													<h2>Requisições de cancelamento</h2>
+											</div>
+											<div class="hd-message-info">
+												<?php foreach ($consultaReq as $req): ?>
+													<a href="<?=base_url('solicitaRemocao/'.$req->id_req)?>">
+															<div class="hd-message-sn">
+																	<div class="hd-message-img">
+																			<img src="img/post/1.jpg" alt="" />
+																	</div>
+																	<div class="hd-mg-ctn">
+																			<h3><?php echo $req->nome;?></h3>
+																			<p>Deseja desligar-se do sistema</p>
+																			<p style="font-size: 14px; color: #A9A9A9; font-weight: bold;"; >id = #<?php echo $req->id_req; ?></p>
+																	</div>
+															</div>
+													</a>
+												<?php endforeach; ?>
+											</div>
+											<div class="hd-mg-va">
+													<a href="#">Ok</a>
+											</div>
+									</div>
+							</li>
+
 						</ul>
 					</div>
 				</div>
