@@ -11,7 +11,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
 	<title>Sistema Bibliotecário - Login</title>
 	<meta charset="UTF-8">

@@ -668,8 +668,12 @@ class Pages extends CI_Controller {
     }
 
     public function consultaHome($pesq=NULL){
+		$user = $this->session->userdata('usuario');
       $data = array(
-        'title' => $this->sys_model->consultaHome($pesq)
+        'title' => $this->sys_model->consultaHome($pesq),
+		'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
+		'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
+		'autor' => $this->db->get("AUTORES")->result()
       );
       $this->load->view('templates/header');
       $this->load->view('templates/nav_adm');
@@ -677,7 +681,7 @@ class Pages extends CI_Controller {
       $this->load->view('templates/footer');
     }
 
-    public function tratarConsultaHome($caixaHome){
+    public function tratarConsultaHome(){
       $caixaHome = $this->input->post('caixaHome');
       redirect(base_url('consultaHome/'.$caixaHome));
     }
