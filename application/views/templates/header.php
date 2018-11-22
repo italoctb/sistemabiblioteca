@@ -99,7 +99,7 @@
 							</li>
 							<?php if ($this->session->userdata('nivel_usuario') == "administrador"): ?>
 
-								<?php $c = $this->db->query('select count(*) as num from requisicao;')->row_object()->num;
+								<?php $c = $this->db->query('select count(*) as num from REQUISICAO;')->row_object()->num;
 											$consultaReq = $this->db->query('select id_req, username, nome from REQUISICAO natural join USUARIO order by id_req;')->result();?>
 								<li class="nav-item nc-al"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle" onclick="$('#swtNot').fadeOut();"><span><i class="notika-icon notika-alarm" style="position: absolute; margin-top: 5px;"></i></span>
 									<?php if ($c != 0): ?>
