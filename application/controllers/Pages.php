@@ -34,6 +34,7 @@ class Pages extends CI_Controller {
           $pass = $this->input->post('pass');
           $result = $this->sys_model->validation($user, $pass);
           if($result){
+            $this->session->set_userdata('numReq', $num);
             $sel = $this->sys_model->consulta_especifico_Usuario($user)->nivel_usuario;
             switch ($sel) {
               case "usuario":
@@ -55,6 +56,13 @@ class Pages extends CI_Controller {
                 echo $sel;
                 break;
             }
+
+            /*$data = array(
+                'title' => $this->my_model->consultaTitulos()
+            );
+            $this->load->view('templates/header.php');
+            $this->load->view('autenticate', $data);
+            $this->load->view('templates/footer.php');*/
           }else{
             $data['title'] = "Erro de login";
             $this->load->view('errologin', $data);
@@ -342,7 +350,9 @@ class Pages extends CI_Controller {
               $res_check_l = $this->user_model->check_emprestimo_usuario($this->input->post('ISBN'),$this->input->post('username'));
               $res_check_qtd = $this->user_model->getQtdMax($this->input->post('username'));
               $res_check_reserv = $this->sys_model->consultaReserva($this->input->post('ISBN'), $this->input->post('username'));
-              if (!$res_check && !$res_check_l && $res_check_qtd && $qtd_check) {
+              $solicitacao = $this->db->query('select id_req, username from REQUISICAO natural join USUARIO where username = "'.$this->input->post('username').'";')->result();
+
+              if (!$res_check && !$res_check_l && $res_check_qtd && $qtd_check && !$solicitacao) {
                   $this->user_model->reg_emprestimo($EMPRESTIMOS);
                   $this->user_model->dec_livro($this->input->post('ISBN'));
                   $this->user_model->inc_user($this->input->post('username'));
@@ -358,15 +368,18 @@ class Pages extends CI_Controller {
               else {
                 if(!$qtd_check){
                     $this->session->set_flashdata('error_msg', 'Não existem exemplares disponíveis');
-                    redirect(base_url('emprestimoLivro/'.$EMPRESTIMOS['ISBN']));
+                    redirect(base_url('emprestimoLivro/'.$EMPRESTIMOS['ISBN'].'/'.$EMPRESTIMOS['username']));
                 }
                 elseif($res_check_l){
                     $this->session->set_flashdata('error_msg', 'Usuário já realizou este empréstimo');
-                    redirect(base_url('emprestimoLivro/'.$EMPRESTIMOS['ISBN']));
+                    redirect(base_url('emprestimoLivro/'.$EMPRESTIMOS['ISBN'].'/'.$EMPRESTIMOS['username']));
                 }
                 elseif(!$res_check_qtd){
                     $this->session->set_flashdata('error_msg', 'Usuário já realizou o número máximo de empréstimos');
-                    redirect(base_url('emprestimoLivro/'.$EMPRESTIMOS['ISBN']));
+                    redirect(base_url('emprestimoLivro/'.$EMPRESTIMOS['ISBN'].'/'.$EMPRESTIMOS['username']));
+                }elseif($solicitacao){
+                  $this->session->set_flashdata('error_msg', 'Usuário realizou a requisição de cancelamento de conta.');
+          				redirect(base_url('emprestimoLivro/'.$EMPRESTIMOS['ISBN'].'/'.$EMPRESTIMOS['username']));
                 }
               }
               $this->load->view('templates/header.php');
@@ -610,7 +623,8 @@ class Pages extends CI_Controller {
 		);
 		$res_check = $this->user_model->check_reserva_usuario($this->input->post('ISBN'),$this->input->post('username'));
 		$emp_check = $this->user_model->check_emprestimo_usuario($this->input->post('ISBN'),$this->input->post('username'));
-		if (!$res_check && !$emp_check) {
+    $solicitacao = $this->db->query('select id_req, username from REQUISICAO natural join USUARIO where username = "'.$this->input->post('username').'";')->result();
+		if (!$res_check && !$emp_check && !$solicitacao) {
 			$this->user_model->reg_reserva($RESERVA);
 			$this->session->set_flashdata('success_msg', 'Reserva realizada com sucesso!');
 			redirect(base_url('minhasReservas'));
@@ -623,7 +637,10 @@ class Pages extends CI_Controller {
 			elseif($emp_check) {
 				$this->session->set_flashdata('error_msg', 'Usuário encontra-se com o livro alugado');
 				redirect(base_url('reservaLivro/' . $RESERVA['ISBN']));
-			}
+			}elseif($solicitacao){
+        $this->session->set_flashdata('error_msg', 'Usuário realizou a requisição de cancelamento de conta.');
+				redirect(base_url('reservaLivro/' . $RESERVA['ISBN']));
+      }
 		}
 		$this->load->view('templates/header.php');
 		$this->load->view('templates/nav_user.php');
@@ -682,8 +699,12 @@ class Pages extends CI_Controller {
     }
 
     public function consultaHome($pesq=NULL){
+		$user = $this->session->userdata('usuario');
       $data = array(
-        'title' => $this->sys_model->consultaHome($pesq)
+        'title' => $this->sys_model->consultaHome($pesq),
+		'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
+		'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
+		'autor' => $this->db->get("AUTORES")->result()
       );
       $this->load->view('templates/header');
       $this->load->view('templates/nav_adm');
@@ -691,7 +712,7 @@ class Pages extends CI_Controller {
       $this->load->view('templates/footer');
     }
 
-    public function tratarConsultaHome($caixaHome){
+    public function tratarConsultaHome(){
       $caixaHome = $this->input->post('caixaHome');
       redirect(base_url('consultaHome/'.$caixaHome));
     }

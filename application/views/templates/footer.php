@@ -82,6 +82,7 @@
 
     <!-- main JS
     ============================================ -->
+    <script src="<?=base_url('static/js/bootstrap-select/bootstrap-select.js')?>"></script>
     <script src="<?=base_url('static/js/main.js')?>"></script>
     <script src="<?=base_url('static/js/perso.js')?>"></script>
 

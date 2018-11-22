@@ -158,7 +158,7 @@
               return false;
           }
       }
-      
+
       public function livroByISBN($ISBN){
                 $query = $this->db->query('select titulo FROM LIVROS where ISBN = "'.$ISBN.'";');
                 return $query->row_object();
@@ -186,18 +186,8 @@
       }
 
       public function getQntdByUsername($usernome=null){
-          $this->db->select('*');
-          $this->db->from('USUARIO');
-          $this->db->where('username',$usernome);
-          $this->db->where('qntd_livros',0);
-
-          if($query==$this->db->get()) {
-              return true;
-          }
-
-          else{
-              return false;
-          }
+          $query = $this->db->query('select * from USUARIO WHERE username = "'.$usernome.'" having qntd_livros = 0;');
+          return $query->result();
 
       }
 
@@ -206,6 +196,7 @@
           $this->db->from('USUARIO');
           $this->db->where($tipo, $mat);
           $this->db->where('qntd_livros',0);
+
 
           if($query=$this->db->get()) {
               return $query->row_array();
@@ -336,6 +327,6 @@
       }
 
 
-   
+
   }
 ?>
