@@ -32,14 +32,16 @@ class Administrador extends CI_Controller{
 
           public function home(){
             $user = $this->session->userdata('usuario');
+            $num = $this->session->userdata('numReq');
             $data = array(
+                //'countReq' => $num,
                 'title' => $this->sys_model->consultaTitulos(),
                 'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
                 'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
                 'autor' => $this->db->get("AUTORES")->result()
             );
             $this->session->set_flashdata('other_msg', 'Bem-vindo, ' . $data['nome']);
-            $this->load->view('templates/header');
+            $this->load->view('templates/header', $data);
             $this->load->view('templates/nav_adm');
             $this->load->view('pages/home', $data);
             $this->load->view('templates/footer');
@@ -93,7 +95,7 @@ class Administrador extends CI_Controller{
       $caixaR = $this->input->post('caixaR');
       redirect(base_url('consultaReserva/'.$caixaR));
     }
-    
+
 
 		public function alterarReserva(){
 			$user = $this->session->userdata('nivel_usuario');
@@ -363,7 +365,7 @@ class Administrador extends CI_Controller{
 
           public function trataRemover(){
             $user = $this->input->post('username');
-            redirect(base_url('deletarUsuario/'.$user));
+            redirect(base_url("deletarUsuario/$user"));
           }
 
           public function editarUsuario($ident = NULL){
@@ -429,55 +431,58 @@ class Administrador extends CI_Controller{
         }
 
         public function deletarUsuario($ident = NULL){
-            
+
             $test = $this->user_model->getQntdByUsername($ident);
 
             if($test){
                 $this->db->where('username',$ident);
                 $this->db->delete('USUARIO');
                 $this->session->set_flashdata('success_msg', 'Registro deletado');
+                $this->session->set_userdata('numReq', $this->session->userdata('numReq') -1);
                 redirect(base_url('admin/consultaUsuario'));            }
             else {
                 $this->session->set_flashdata('error_msg', 'Usuário com débito não pode ser deletado');
                 redirect(base_url('admin/consultaUsuario'));
             }
-           
+
 
         }
 
-        public function solicitaRemocao(){   //Exibe as solicitações de remoção realizadas pelos usuários.
+        public function solicitaRemocao($id = null){   //Exibe as solicitações de remoção realizadas pelos usuários.
           $data = array(
-              'solicitacao' => $this->sys_model->requisicoes() //Array com todas as requisições de remoção do sistema.
+              'solicitacao' => $this->sys_model->requisicoes(),
+              'req' => $this->db->query('select * from REQUISICAO where id_req = "'.$id.'";')->row_object()//Array com todas as requisições de remoção do sistema.
             );
           $this->load->view('templates/header');
           $this->load->view('templates/nav_adm');
-          $this->load->view('pages/solicitaRemocao', $data);
+          $this->load->view('pages/solicitacoes', $data);
           $this->load->view('templates/footer');
 
         }
 
-
-        public function trataSolicitacao(){  //Recebe o username do usuário a ser removido.
-			$user = $this->input->post('username');
-			redirect(base_url('confirmaSolicitacao/'.$user));        
+        public function TrataCancelCadastro(){   //Exibe as solicitações de remoção realizadas pelos usuários.
+          $user = $this->input->post('usuario');
+          $senha = $this->input->post('senha');
+          $result = $this->sys_model->validation($user, $senha);
+          if($result){
+            redirect(base_url("cancelCadastro/$user"));
+          }else{
+            echo "erro!";
+          }
+          //Murilo faz o tratamento caso seja invalido redirecione pra mesma pagina criando aquele campo de informação(flashdata) falando que as credenciais estão erradas
         }
 
-        public function confirmaSolicitacao($ident = NULL){  //Recebe o username do usuário a ser removido.
 
-        	$test = $this->user_model->getQntdByUsername($ident);
-            if($test){
-            	echo($test);
-                $this->db->where('username',$ident);
-                $this->db->delete('REQUISICAO');
-                $this->session->set_flashdata('success_msg', 'Registro deletado');
-                redirect(base_url('solicitaRemocao'));            }
-            else {
-                $this->session->set_flashdata('error_msg', 'Usuário com débito não pode ser deletado');
-                redirect(base_url('solicitaRemocao'));
-            }
-
-
-        
+        public function cancelCadastro($user = null){   //Exibe as solicitações de remoção realizadas pelos usuários.
+          if($user){
+            $this->db->query("INSERT INTO `equipe385116`.`REQUISICAO` (`username`) VALUES ( '$user'); ");
+            redirect(base_url("/"));
+          }else{
+            $this->load->view('templates/header');
+            $this->load->view('templates/nav_adm');
+            $this->load->view('pages/cancelCadastro');
+            $this->load->view('templates/footer');
+          }
         }
 
 
