@@ -62,7 +62,7 @@ $route['autenticate'] 		 				= 'pages/aut_login';
     então será mostrado a página de erro de login.  */
 $route['sem_acesso'] 						= 'pages/error_page';
 /*  Carregará uma página de erro  */
-$route['consulta'] 							= 'pages/consulta';
+$route['emprestimo'] 							= 'pages/consulta';
 /*  Ele solicita uma vericação de nível de usuário, e após ver se no banco ha
     o livro e a disponibilidade do mesmo, e  logo após carrega a página de
     acordo com o nível de usuário.  */
@@ -153,6 +153,7 @@ $route['curso/(:any)'] 	= 'pages/curso/$1';
 
 $route['alterarReserva'] 	= 'administrador/alterarReserva';
 $route['cancelReserva'] 	= 'administrador/cancelReserva';
+$route['solicitaRemocao/(:any)'] 	= 'administrador/solicitaRemocao/$1';
 $route['solicitaRemocao'] 	= 'administrador/solicitaRemocao';
 $route['cancelReserva/(:any)/(:any)'] 	= 'administrador/cancelReserva/$1/$2';
 $route['trataSolicitacao'] 	= '/administrador/trataSolicitacao';
@@ -171,13 +172,15 @@ $route['blib/home']		= '/bibliotecario/home';
 $route['admin/home']			= '/administrador/home';
 $route['registro_usuario']		= '/administrador/registro_usuario';
 $route['addCadastro']			= '/administrador/addCadastro';
-$route['removerCadastro']			= '/administrador/removerCadastro';
+$route['removerCadastro']		= '/administrador/removerCadastro';
 $route['trataRemover']			= '/administrador/trataRemover';
 $route['editarUsuario']			= '/administrador/editarUsuario';
 $route['editarUsuario/(:any)']	= '/administrador/editarUsuario/$1';
 $route['deletarUsuario']		= '/administrador/deletarUsuario';
 $route['deletarUsuario/(:any)']	= '/administrador/deletarUsuario/$1';
 $route['updateUsuario']			= '/administrador/updateUsuario';
-
+$route['cancelCadastro']			= '/administrador/cancelCadastro';
+$route['cancelCadastro/(:any)']			= '/administrador/cancelCadastro/$1';
+$route['TrataCancelCadastro']			= '/administrador/TrataCancelCadastro';
 $route['semAcesso'] = 'pages/semAcesso';
 $route['404_override'] = 'pages/erro404';

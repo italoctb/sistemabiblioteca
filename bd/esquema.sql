@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `equipe385116`.`RESERVA` (
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `equipe385116`.`REQUISICAO` (
-  `id_req` INT NOT NULL,
+  `id_req` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
   INDEX `usernombre_idx` (`username` ASC) ,
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) ,

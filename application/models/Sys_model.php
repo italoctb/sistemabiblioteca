@@ -24,7 +24,7 @@ class Sys_model extends CI_Model {
 
   //Busca todos os professores que são usuários do sistema de determinado curso recebido por parâmetro. 
   public function consultaProfsCurso($curso){
-    $query = $this->db->query('select nome, mat_siape, telefone_celular from curso natural join professores natural join usuario where nome_curso ="'.$curso.'";');
+    $query = $this->db->query('select nome, mat_siape, telefone_celular from CURSO natural join PROFESSORES natural join USUARIO where nome_curso ="'.$curso.'";');
     return $query->result();
   }
 
