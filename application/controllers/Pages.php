@@ -203,6 +203,8 @@ class Pages extends CI_Controller {
             $this->load->view('pages/livro', $data);
             $this->load->view('templates/footer.php');
     }
+    /*  Verifica o nível de usuário e organiza os livros de acordo com
+        os autores. */
 
     public function categoria($categoria){
             $this->session->set_flashdata('success_msg', '');
@@ -227,6 +229,8 @@ class Pages extends CI_Controller {
             $this->load->view('pages/categoria', $data);
             $this->load->view('templates/footer.php');
     }
+    /*  Verifica o nível de usuário e organiza os livros de acordo com
+        a categoria. */
 
     public function editora($editora){
             $this->session->set_flashdata('success_msg', '');
@@ -250,6 +254,8 @@ class Pages extends CI_Controller {
             $this->load->view('pages/editora', $data);
             $this->load->view('templates/footer.php');
     }
+    /*  Verifica o nível de usuário e organiza os livros de acordo com
+        os autores. */
 
     public function curso($curso){
             $this->session->set_flashdata('success_msg', '');
@@ -271,6 +277,8 @@ class Pages extends CI_Controller {
             $this->load->view('pages/curso', $data);
             $this->load->view('templates/footer.php');
     }
+    /*  Verifica o nível de usuário e e procura no banco se aquele
+        professor cadastrado pertence aquele curso. */
 
     public function consulta(){
             $this->session->set_flashdata('success_msg', '');
@@ -554,19 +562,19 @@ class Pages extends CI_Controller {
             $this->session->set_flashdata('error_msg', 'Não foi possível realizar a solicitação');
             redirect(base_url(''));
         }
-
         $this->load->view('templates/header.php');
-
         if ($user === 'administrador'):
             $nav = 'nav_adm';
         elseif ($user === 'bibliotecario'):
             $nav = 'nav_blib';
         endif;
-
         $this->load->view('templates/'.$nav);
         $this->load->view('pages/baixaEmprestimo', $data);
         $this->load->view('templates/footer.php');
     }
+    /*      Recebe como parâmetro o livro e o username e o administrador
+            ou bibliotecario trata os emprestimos incrementando a quant
+             no numero max de livros no usuario.  */
 
 	public function reserva(){
 		$user = $this->session->userdata('nivel_usuario');
@@ -676,14 +684,18 @@ class Pages extends CI_Controller {
         $this->session->sess_destroy();
         redirect(base_url('/'), 'refresh');
     }
+    /*  Função de encerrar a senção.  */
 
     public function erro404(){
        $this->load->view('pages/erro404');
     }
+    /*  Função que carrega a página de erro 404. */
 
     public function semAcesso(){
        $this->load->view('pages/semAcesso');
     }
+    /*  Função que carrega a página de sem acesso a um determinado
+        conteudo. */
 
     public function caixaPesquisa(){
       $data = array(
@@ -697,6 +709,8 @@ class Pages extends CI_Controller {
       $this->load->view('pages/resultPesquisa', $data);
       $this->load->view('templates/footer');
     }
+    /*  Função que faz a pesquisa na caixa de pesquisa, utilizando
+        o método post.  */
 
     public function consultaHome($pesq=NULL){
 		$user = $this->session->userdata('usuario');
@@ -711,11 +725,14 @@ class Pages extends CI_Controller {
       $this->load->view('pages/home', $data);
       $this->load->view('templates/footer');
     }
+    /*  Verifica o nível de usuário e que quando for digitado algo
+        para pesquisa, ele cria um array com base naquilo que digitado. */
 
     public function tratarConsultaHome(){
       $caixaHome = $this->input->post('caixaHome');
       redirect(base_url('consultaHome/'.$caixaHome));
     }
+    /*  Função que redireciona a página após usar a função 'consultaHome.' */
 
     public function consultaProf($pesq=NULL){
       $data = array(
@@ -726,11 +743,14 @@ class Pages extends CI_Controller {
       $this->load->view('pages/consultaProf', $data);
       $this->load->view('templates/footer');
     }
+    /*  Função que consulta se o professor está no banco. */
 
     public function tratarConsultaProf(){
       $caixaProf = $this->input->post('caixaProf');
       redirect(base_url('consultaProf/'.$caixaProf));
     }
+    /*  Função que redireciona a página após a 'consultaProf'
+        ser concluida.  */
 
     public function consultaUsuario($pesq=NULL){
       $data = array(
@@ -741,11 +761,14 @@ class Pages extends CI_Controller {
       $this->load->view('pages/consultaUsuario', $data);
       $this->load->view('templates/footer');
     }
+    /*  Função que consulta se o usuário está no banco. */
 
     public function tratarConsultaUsuario(){
       $caixap1 = $this->input->post('caixap1');
       redirect(base_url('consultaUsuario/'.$caixap1));
     }
+    /*  Função que redireciona a página após a 'consultaUsuario'
+        ser concluida.  */
 
     public function rconsultaReserva(){
       $data = array(
@@ -756,6 +779,7 @@ class Pages extends CI_Controller {
       $this->load->view('pages/rconsultaReserva', $data);
       $this->load->view('templates/footer');
     }
+    /*  Função que carrega todas as reservas feitas e mostra na página.  */
 
     public function profs(){
       $data = array(
@@ -766,7 +790,7 @@ class Pages extends CI_Controller {
       $this->load->view('pages/profs', $data);
       $this->load->view('templates/footer');
     }
-
+    /*  Função que cria uma array com os professores cadastrado no banco.  */
 
     public function ordena($tipo = NULL){
       $user = $this->session->userdata('usuario');
@@ -821,10 +845,6 @@ class Pages extends CI_Controller {
           'autor' => $this->db->get("AUTORES")->result()
         );
       endif;
-
-
-
-
       $this->session->set_flashdata('success_msg', 'Bem-vindo, ' . $data['nome']);
       $this->load->view('templates/header.php');
 
@@ -854,6 +874,9 @@ class Pages extends CI_Controller {
       $this->load->view('pages/home', $data);
       $this->load->view('templates/footer.php');
     }
+    /*  Função que ordena a pesquisa de acordo com o que foi selecionado;
+        Mostra uma mensagem de bem vindo de acordo com o nome de quem entra;
+        Verifica o nível e usuário e carrega uma página de acordo.  */
 
     public function meuPerfil(){
       $user = $this->session->userdata('usuario');
@@ -866,6 +889,8 @@ class Pages extends CI_Controller {
       $this->load->view('pages/meuPerfil', $data);
       $this->load->view('templates/footer');
     }
+    /*  Função que usa sys_model para carregar informações do perfil, como
+        nome, sobrenome, telefone e outros... */
 
     public function editarPerfil($info=null){
       $user = $this->session->userdata('usuario');
@@ -879,6 +904,7 @@ class Pages extends CI_Controller {
       $this->load->view('pages/editarPerfil', $data['title']);
       $this->load->view('templates/footer');
     }
+    /*  Função que permite a edição do perfil através de sys_model. */
 
     public function tratarEditarPerfilAl(){
       $novoInfo = array(
@@ -893,6 +919,8 @@ class Pages extends CI_Controller {
       );
       redirect(base_url('editarPerfil/'.$novoInfo));
     }
+    /*  Função que armazena dados cadastrais de um usuário, como nome, login,
+        senha e outros dos alunos... */
 
     public function tratarEditarPerfilFunc(){
         $info = array(
@@ -903,6 +931,7 @@ class Pages extends CI_Controller {
 
       redirect(base_url('editarPerfil/'.$info['nome']));
     }
+    /*  Função que armazena dados cadastrais de um usuário funcionario. */
 
     public function tratarEditarPerfilProf(){
       $info = array(
@@ -917,5 +946,6 @@ class Pages extends CI_Controller {
       );
       redirect(base_url('editarPerfil/'.$novoInfo));
     }
-
+    /*  Função que armazena dados cadastrais de um usuário, como nome, login,
+        senha e outros dos professores... */
 }
