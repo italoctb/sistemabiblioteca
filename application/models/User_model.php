@@ -92,6 +92,20 @@
           }
       }
 
+	  public function check_requisicao($username){
+		  $this->db->select('*');
+		  $this->db->from('REQUISICAO');
+		  $this->db->where('username',$username);
+
+		  if($query=$this->db->get()) {
+			  return $query->row_array();
+		  }
+
+		  else{
+			  return false;
+		  }
+	  }
+
 	  public function check_reserva_usuario($ISBN, $username){
 		  $this->db->select('*');
 		  $this->db->from('RESERVA');

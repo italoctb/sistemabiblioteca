@@ -1101,10 +1101,17 @@ class Pages extends CI_Controller {
 
 		if ($data_user == $user){
 			$result = $this->sys_model->validation($user, $senha);
-			if($result){
+			$teste = $this->user_model->check_requisicao($user);
+			if($result && !$teste){
+				$this->db->query("INSERT INTO `equipe385116`.`REQUISICAO` (`username`) VALUES ( '$user'); ");
 				$this->session->set_flashdata('success_msg', 'Solicitação enviada ao administrador');
 				redirect(base_url("cancelCadastro"));
-			}else{
+			}
+			elseif ($teste){
+				$this->session->set_flashdata('error_msg', 'Solicitação já foi enviada, aguarde');
+				redirect(base_url("cancelCadastro"));
+			}
+			else{
 				$this->session->set_flashdata('error_msg', 'Usuário ou senha incorreta');
 				redirect(base_url("cancelCadastro"));
 			}
@@ -1113,7 +1120,6 @@ class Pages extends CI_Controller {
 			$this->session->set_flashdata('error_msg', 'Usuário ou senha incorreta');
 			redirect(base_url("cancelCadastro"));
 		}
-		//Murilo faz o tratamento caso seja invalido redirecione pra mesma pagina criando aquele campo de informação(flashdata) falando que as credenciais estão erradas
 	}
 
 
