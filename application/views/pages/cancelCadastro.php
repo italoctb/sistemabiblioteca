@@ -44,7 +44,11 @@
                       </div>
                     </div>
                   </div>
+                       <!--
 
+                          Envia para o admin a solicitação de remoção de cadastro. Para isso, é necessário novamente entrar com o Login e Senha, confirmando que você é o usuário daquela sessão
+                          
+                          -->
                   <div class="row" style="margin-top: 20px; margin-bottom:20px;">
                     <div class="col-lg-8 col-lg-offset-2  col-md-6 col-md-offset-2  col-sm-6 col-sm-offset-2  col-xs-12">
                         <div class="form-group ic-cmp-int">

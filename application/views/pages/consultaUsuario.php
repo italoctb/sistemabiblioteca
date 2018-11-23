@@ -65,8 +65,11 @@
                   <th><a class="fixing_bug" href="#data-table-basic">Livros alugados</a></th>
                 </tr>
               </thead>
-              <tbody>
+
+
                 <?php
+
+                 /*Tabela exibindo todos os usuários vinculados, as informações nome de usuário. nome, tipo de usuário (Aluno, professor ou funcionário), matrícula, seu nível de acesso (administrador, bibliotecário ou usuário), endereço e quantidade de livros alugados são exibidos.*/
 
                   foreach ($title as $query) {?>
 

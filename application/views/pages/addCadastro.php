@@ -39,6 +39,9 @@ if($user != 'administrador'){redirect(base_url(''));}
 		<form action="<?=base_url('registro_usuario')?>" method="post" class="form-signin" id="form_user">
 
 			<?php
+
+			//Formulário para coletar os dados necessários para a realização do registro de usuaŕio. Quando é escolhido qual o tipo de usuário, uma sub aba é aberta para coletar alguns dados intrísecos de cada tipo.
+
 			$nivel = array(
 				'administrador'   => 'Administrador',
 				'usuario'         => 'Usuário',
@@ -131,6 +134,13 @@ if($user != 'administrador'){redirect(base_url(''));}
 				<div class="col-xs-4 col-xs-offset-4">
 					<div  class="form-group justify-content-center" style="text-align: center;">
 						<button type="submit" class="btn btn-success notika-btn-success" value="Cadastrar">Cadastrar</button>
+
+						     <!--
+
+                          Envia para os controladores todos os dados necessários para a realização do cadastro.
+                           
+                          -->
+
 						<button id="limpar" type="reset" class="btn btn-info notika-btn-info" name="Limpar" value="Limpar">Limpar</button>
 					</div>
 				</div>

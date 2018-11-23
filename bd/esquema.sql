@@ -442,5 +442,6 @@ COMMIT;
 START TRANSACTION;
 USE `equipe385116`;
 INSERT INTO `equipe385116`.`REQUISICAO` (`id_req`, `username`) VALUES (001, 'expdito');
+INSERT INTO `equipe385116`.`REQUISICAO` (`id_req`, `username`) VALUES (002, 'italobarros');
 
 COMMIT;

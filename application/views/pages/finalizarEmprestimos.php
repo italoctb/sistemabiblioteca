@@ -16,7 +16,12 @@
                 </tr>
               </thead>
               <tbody>
+
+
                 <?php
+
+                /* Tabela exibindo os empréstimos realizados no sistema, as informações matrícula, nome, nome de usuário, nível de usuário, a quantidade de livros alugados e o limite de livros são exibidos*/
+
                   foreach ($usuarios as $cat):
                     if ($cat->tipoUsuario == 'tipoFunc'):
                       $matricula = $cat->mat_func;
@@ -37,6 +42,13 @@
 
                         <td>
                             <a class="btn btn-primary notika-btn-primary" href="<?=base_url('baixaEmprestimo/'.$cat->username)?>";>Visualisar</a>
+
+                            <!--
+
+                          Envia para os controladores a matrícula do usuário, a pagina será redirecionada para a view baixaEmprestimo.php para o procedimento posterior que será dar baixa no título.
+
+                          -->
+
                         </td>
                     </tr>
 

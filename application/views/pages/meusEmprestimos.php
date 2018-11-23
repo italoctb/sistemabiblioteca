@@ -52,6 +52,8 @@
               <tbody>
                 <?php
 
+                  /* Tabela exibindo os empréstimos realizados pelo usuário logado, as informações ISBN, nome, título e data do empréstimo, e prazo de devolução são exibidas*/
+
                   foreach ($title as $query) {?>
                     <tr>
                       <td><?php echo $query->ISBN ?></td>

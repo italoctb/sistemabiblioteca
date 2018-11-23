@@ -48,6 +48,9 @@
 							<?php
 
 							foreach ($consulta as $query) {
+
+								 /* Tabela exibindo as reservas realizadas no sistema, as informações nome de usuário, nome, código livroe e a data da reserva são exibidos*/
+
 								?>
 								<tr>
 									<td><?php echo $query->username ?></td>
@@ -58,9 +61,19 @@
 									<td>
 										<a class="btn btn-success notika-btn-success" style="position:relative; bottom: 8px;"href="<?=base_url('emprestimoLivro/'.$query->ISBN.'/'.$query->username)?>" onclick="return confirm('Deseja realmente adicionar empréstimo?');">Realizar Empréstimo</a>
 									</td>
+									  <!--
+
+			                          Envia para os controladores o código do livro e a matrícula do usuário, a pagina será redirecionada para emprestimoLivro para poder efetuar a transação de vínculo entre usuario-empréstimo-livro
+
+			                          -->
 									<td>
 										<a class="btn btn-danger notika-btn-danger" style="position:relative; bottom: 8px;" href="<?=base_url('cancelReserva/'.$query->ISBN.'/'.$query->username)?>" onclick="return confirm('Deseja realmente cancelar a reserva?');">Cancelar Reserva</a>
 									</td>
+									  <!--
+
+			                          Envia para os controladores o código do livro e a matrícula do usuário, a pagina será redirecionada para a view cancelReserva.php para o procedimento posterior que será cancelar a reserva feita pelo usuário.
+
+			                          -->
 								</tr>
 							<?php  }?>
 
