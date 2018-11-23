@@ -242,7 +242,7 @@ class Administrador extends CI_Controller{
 				$PROF = array(
 					'mat_siape' => $this->input->post('matricula'),
 					'regime_trabalho' => $this->input->post('regime_trabalho'),
-					'cod_curso' => $this->input->post('cod_curso_prof'),
+					'cod_curso' => $this->input->post('cod_curso'),
 					'data_de_contratacao' => $this->input->post('data_de_contratacao'),
 					'telefone_celular' => $this->input->post('telefone_celular'),
 					'tipoProf' => ('3'),
@@ -445,6 +445,24 @@ class Administrador extends CI_Controller{
         }
         /*  Função que permite modificar alguma informação do usuário, mas pelo
             administrador, podendo até aumentar a quantidade max de livros. */
+
+		public function editarCadastro(){
+			$user_id = $this->session->userdata('nivel_usuario');
+			$data = array(
+				'title' => $this->sys_model->consultaUsuario()
+			);
+			$data['NOME'] = $this->user_model->sel_usuario();
+			if($user_id === 'administrador'){
+				$data['usuario'] = $this->db->get('USUARIO')->result();
+				$this->load->view('templates/header');
+				$this->load->view('templates/nav_adm');
+				$this->load->view('pages/editarCadastro', $data);
+				$this->load->view('templates/footer');
+			}
+			else{
+				{redirect(base_url('admin/consultaUsuario'));}
+			}
+		}
 
         public function deletarUsuario($ident = NULL){
 

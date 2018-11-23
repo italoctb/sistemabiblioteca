@@ -86,7 +86,7 @@
             </pre>
             <div  class="form-group">
                 <button type="submit" class="btn btn-success notika-btn-success" value="Reservar"/>Confirmar</button>
-                <a class="btn btn-primary notika-btn-primary" href="<?= base_url('/emprestimo') ?>">Voltar</a>
+                <a class="btn btn-primary notika-btn-primary" href="<?= base_url('/consulta') ?>">Voltar</a>
             </div>
           </div>
 

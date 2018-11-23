@@ -4,6 +4,36 @@
     if($user_id != 'usuario' && $user_id != 'bibliotecario' && $user_id != 'administrador'){redirect(base_url('sem_acesso'));}
 ?>
 
+<span style="background-color:red;">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+                  <div class="panel-body">
+                      <?php
+					  $success_msg= $this->session->flashdata('success_msg');
+					  $error_msg= $this->session->flashdata('error_msg');
+
+					  if($success_msg){
+						  ?>
+						  <div class="alert alert-success">
+                                <?php echo $success_msg; ?>
+                              </div>
+						  <?php
+					  }
+					  if($error_msg){
+						  ?>
+						  <div class="alert alert-danger">
+                                <?php echo $error_msg; ?>
+                            </div>
+						  <?php
+					  }
+					  ?>
+                  </div>
+          </div>
+      </div>
+  </div>
+</span>
+
 <div class="container ic-cmp-int float-lb form-elet-mg form-add">
     <div class="container">
       <form action="<?=base_url('redirecionaEmprestimo')?>" method="post" class="form-signin">

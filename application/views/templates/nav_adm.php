@@ -11,29 +11,35 @@
 
 	                            <li><a data-toggle="collapse" data-target="#Charts" href="#">Início</a>
 	                                <ul class="collapse dropdown-header-top">
-										<li><a href="<?=base_url('home')?>">Biblioteca</a></li>
-										<li><a href="<?=base_url('professores')?>">Professores</a></li>
-										<li><a href="<?=base_url('consultaUsuario')?>">Consulta usuários</a></li>
-										<li><a href="<?=base_url('consultaEmprestimo')?>">Consulta empréstimos</a></li>
-										<li><a href="<?=base_url('meusEmprestimos')?>">Meus empréstimos</a></li>
+										<li><a href="<?=base_url('admin/home')?>">Biblioteca</a></li>
+										<li><a href="<?=base_url('consultaProf')?>">Professores</a></li>
+										<li><a href="<?=base_url('consultaUsuario')?>">Consultar usuários</a></li>
+										<li><a href="<?=base_url('admin/consultaEmprestimo')?>">Consultar empréstimos</a></li>
+										<li><a href="<?=base_url('admin/consultaReserva')?>">Consultar reservas</a></li>
+										<li><a href="<?=base_url('admin/meusEmprestimos')?>">Meus empréstimos</a></li>
+										<li><a href="<?=base_url('minhasReservas')?>">Minhas reservas</a></li>
 										<li><a href="<?=base_url('logout')?>">Sair</a></li>
 	                                </ul>
 	                            </li>
 
 								<li><a data-toggle="collapse" data-target="#Charts" href="#">Sistema</a>
 									<ul class="notika-main-menu-dropdown">
-										<li><a href="<?=base_url('consultaAdmin')?>">Realizar empréstimos</a></li>
-										<li><a href="<?=base_url('')?>">Alterar empréstimos</a></li>
-										<li><a href="<?=base_url('')?>">Finalizar empréstimos</a></li>
+										<li><a href="<?=base_url('consulta')?>">Realizar empréstimo</a></li>
+										<li><a href="<?=base_url('reserva')?>">Realizar reserva</a></li>
+										<li><a href="<?=base_url('alterarEmprestimos')?>">Alterar empréstimos</a></li>
+										<li><a href="<?=base_url('alterarReserva')?>">Alterar Reservas</a></li>
 									</ul>
 	                            </li>
 
 	                            <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Usuário</a>
 	                                <ul id="Pagemob" class="collapse dropdown-header-top">
 										<li><a href="<?=base_url('meuPerfil')?>">Meu perfil</a></li>
-										<li><a href="<?=base_url('editarUsuario/')?>">Editar perfil</a></li>
-										<li><a href="<?=base_url('')?>">Adicionar cadastro</a></li>
-										<li><a href="<?=base_url('')?>">Cancelar cadastro</a></li>
+										<li><a href="<?=base_url('editarPerfil')?>">Editar perfil</a></li>
+										<li><a href="<?=base_url('addCadastro')?>">Adicionar cadastro</a></li>
+										<li><a href="<?=base_url('editarCadastro')?>">Editar cadastro</a></li>
+										<li><a href="<?=base_url('solicitaRemocao')?>">Requisições</a></li>
+										<li><a href="<?=base_url('removerCadastro')?>">Remover cadastro</a></li>
+										<li><a href="<?=base_url('cancelCadastro')?>">Cancelar cadastro</a></li>
 	                                </ul>
 	                            </li>
 
@@ -74,7 +80,7 @@
 
 	                    <div id="Forms" class="tab-pane notika-tab-menu-bg animated flipInX">
 	                        <ul class="notika-main-menu-dropdown">
-														<li><a href="<?=base_url('emprestimo')?>">Realizar empréstimo</a></li>
+														<li><a href="<?=base_url('consulta')?>">Realizar empréstimo</a></li>
 														<li><a href="<?=base_url('reserva')?>">Realizar reserva</a></li>
 														<li><a href="<?=base_url('alterarEmprestimos')?>">Alterar empréstimos</a></li>
 														<li><a href="<?=base_url('alterarReserva')?>">Alterar Reservas</a></li>
@@ -86,7 +92,7 @@
 														<li><a href="<?=base_url('meuPerfil')?>">Meu perfil</a></li>
 														<li><a href="<?=base_url('editarPerfil')?>">Editar perfil</a></li>
 														<li><a href="<?=base_url('addCadastro')?>">Adicionar cadastro</a></li>
-														<li><a href="#">Editar cadastro</a></li>
+														<li><a href="<?=base_url('editarCadastro')?>">Editar cadastro</a></li>
 														<li><a href="<?=base_url('solicitaRemocao')?>">Requisições</a></li>
 														<li><a href="<?=base_url('removerCadastro')?>">Remover cadastro</a></li>
 														<li><a href="<?=base_url('cancelCadastro')?>">Cancelar cadastro</a></li>
