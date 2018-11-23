@@ -98,11 +98,16 @@ $route['baixaEmprestimo'] 					= 'pages/baixaEmprestimo';
 $route['baixaEmprestimo/(:any)'] 			= 'pages/baixaEmprestimo/$1';
 //Rota para visualização dos emprestidos com parâmetro username.
 $route['devEmprestimo'] 					= 'pages/devEmprestimo';
-
+//Rota para o administrador ou bibliotecario fazer o empréstimo de livros.
 $route['devEmprestimo/(:any)/(:any)'] 		= 'pages/devEmprestimo/$1/$2';
+//Rota semelhante a 'devEmprestimo', mas tendo como parametro o livro e usuário.
 $route['logout'] 							= 'pages/logout';
+//Rota para encerrar seção.
 $route['consulta']     = 'pages/caixaPesquisa';
+//Rota para a caixa de pesquisa.
 $route['rconsultaReserva']  = 'pages/rconsultaReserva';
+//Rota para visualização das reservas.
+
 
 //Perfil
 $route['meuPerfil'] = 'pages/meuPerfil';

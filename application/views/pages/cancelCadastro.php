@@ -1,3 +1,8 @@
+<?php
+	$user = $this->session->userdata('nivel_usuario');
+	if($user != 'administrador' && $user != 'bibliotecario' && $user != 'usuario'){redirect(base_url(''));}
+?>
+
 <!<span style="background-color:red;">
   <div class="container ">
     <div class="row">
@@ -82,6 +87,11 @@
                       </div>
                     </div>
                   </div>
+
+					<?php foreach ($title as $query) {?>
+						<input type="hidden" name="data_senha" value="<?=$query->password?>" class="form-control">
+						<input type="hidden" name="data_user" value="<?=$query->username?>" class="form-control">
+					<?php }?>
 
                 </div>
                 </div>

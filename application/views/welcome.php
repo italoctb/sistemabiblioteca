@@ -40,6 +40,37 @@
 	<link rel="stylesheet" type="text/css" href="<?=base_url('static/css/bootstrap.min.css')?>">
 	<!--===============================================================================================-->
 </head>
+
+<span style="background-color:red;">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+                  <div class="panel-body">
+                      <?php
+					  $success_msg= $this->session->flashdata('success_msg');
+					  $error_msg= $this->session->flashdata('error_msg');
+
+					  if($success_msg){
+						  ?>
+						  <div class="alert alert-success">
+                                <?php echo $success_msg; ?>
+                              </div>
+						  <?php
+					  }
+					  if($error_msg){
+						  ?>
+						  <div class="alert alert-danger">
+                                <?php echo $error_msg; ?>
+                            </div>
+						  <?php
+					  }
+					  ?>
+                  </div>
+          </div>
+      </div>
+  </div>
+</span>
+
 <body>
 	<div class="limiter">
 		<div class="container-login100">

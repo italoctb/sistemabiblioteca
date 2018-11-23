@@ -1,3 +1,8 @@
+<?php
+$user = $this->session->userdata('nivel_usuario');
+if($user != 'administrador'){redirect(base_url(''));}
+?>
+
 <span style="background-color:red;">
   <div class="container ">
     <div class="row">

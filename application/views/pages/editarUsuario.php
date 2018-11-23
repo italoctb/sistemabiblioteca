@@ -121,6 +121,7 @@
 
         <div  class="form-group">
             <button type="submit" class="btn btn-success notika-btn-success" value="Cadastrar">Atualizar</button>
+			<a class="btn btn-primary notika-btn-primary" href="<?= base_url('editarCadastro') ?>">Voltar</a>
         </div>
 
     </form>
