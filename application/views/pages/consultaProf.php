@@ -19,8 +19,8 @@
               <thead>
                 <tr>
                   <th><a class="fixing_bug" href="#data-table-basic">SIAPE</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Nome</a></th>
-                  <th><a class="fixing_bug" href="#data-table-basic">Nome do curso</a></th>
+                  <th><a class="fixing_bug" href="<?= base_url('consultaProf/ordenaPorNome');?>">Nome</a></th>
+                  <th><a class="fixing_bug" href="<?=base_url('consultaProf/ordenaPorCurso');?>">Nome do curso</a></th>
                 </tr>
               </thead>
               <tbody>

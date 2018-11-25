@@ -53,9 +53,9 @@ if (!empty($title)){
 									</div>
 									<div class="nk-int-st">
 										<p><b>Senha: </b>
-											<input type="password" value="<?= $query->password ?>" name="password"
+											<input type="password" value="" name="password"
 												   class="form-control"
-												   placeholder="Senha"></p>
+												   placeholder="Nova Senha"></p>
 									</div>
 								</div>
 							</div>
@@ -134,8 +134,8 @@ if (!empty($title)){
 									</div>
 									<div class="nk-int-st">
 										<p><b>Senha: </b>
-											<input type="password" name="password" value="<?= $query->password ?>"
-												   class="form-control" placeholder="Senha" disabled></p>
+											<input type="password" name="password"
+												   class="form-control" placeholder="Nova Senha"></p>
 									</div>
 								</div>
 							</div>
@@ -219,8 +219,8 @@ if (!empty($title)){
 									</div>
 									<div class="nk-int-st">
 										<p><b>Senha: </b>
-											<input type="password" name="password" value="<?= $query->password ?>"
-												   class="form-control" placeholder="Senha" disabled></p>
+											<input type="password" name="password" value=""
+												   class="form-control" placeholder="Nova Senha"></p>
 									</div>
 								</div>
 							</div>

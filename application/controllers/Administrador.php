@@ -32,9 +32,7 @@ class Administrador extends CI_Controller{
 
           public function home(){
             $user = $this->session->userdata('usuario');
-            $num = $this->session->userdata('numReq');
             $data = array(
-                //'countReq' => $num,
                 'title' => $this->sys_model->consultaTitulos(),
                 'nome' =>$this->sys_model->consulta_especifico_Usuario($user)->nome,
                 'cpf' => $this->db->get("LIVROS_has_AUTORES")->result(),
@@ -79,7 +77,16 @@ class Administrador extends CI_Controller{
 
           public function tratarConsultaEmp(){
             $caixaE = $this->input->post('caixaE');
-            redirect(base_url('consultaEmprestimo/'.$caixaE));
+            $nivel = $this->session->userdata('nivel_usuario');
+        		if ($nivel === 'administrador'):
+        			$nav = 'admin';
+        		elseif ($nivel === 'usuario'):
+        			$nav = 'user';
+        		elseif ($nivel === 'bibliotecario'):
+        			$nav = 'blib';
+        		endif;
+
+            redirect(base_url($nav.'/consultaEmprestimo/'.$caixaE));
           }
 
 		public function consultaReserva($pesq=NULL){
@@ -152,7 +159,7 @@ class Administrador extends CI_Controller{
 		$user = $this->session->userdata('nivel_usuario');
 		$data['reserva'] = $this->db->get("RESERVA")->result();
 
-		if ( $user === 'administrador') {
+		if ( $user === 'administrador' || $user === 'bibliotecario') {
 			$this->db->where('ISBN',$ident);
 			$this->db->where('username',$username);
 			$this->db->delete('RESERVA');
@@ -268,34 +275,34 @@ class Administrador extends CI_Controller{
 					'tipoAl' => ('1'),
 				);
 
-				$alu_check = $this->alu_model->alu_check($LOGIN['mat_aluno']);
-				if (!$alu_check) {
-					$this->user_model->reg_alu($ALU);
-					$dataAluCheck = $this->alu_model->dataAluCheck($LOGIN['mat_aluno']);
+        //$alu_check = $this->alu_model->alu_check($LOGIN['mat_aluno']);
+        if (true) { //Para facilitar a demonstração, removeremos a clausula de checagem de aluno.
+          $this->user_model->reg_alu($ALU);
+          $dataAluCheck = $this->alu_model->dataAluCheck($LOGIN['mat_aluno']);
 
-					if ($dataAluCheck) {
-						$var = $this->input->post('i');
-						for ($j = 0; $j <= $var; $j++){
-							$FONE_ALU = array(
-								'mat_aluno' => $this->input->post('matricula'),
-								'fone_aluno' => $this->input->post("fone_aluno[$j]"),
-							);
-							$this->user_model->reg_fone_alu($FONE_ALU);
-						}
-						$this->user_model->reg_usuario($LOGIN);
-						$this->session->set_flashdata('success_msg', 'Aluno registrado com sucesso!');
-						redirect(base_url('addCadastro'));
-					}
-					else {
-						$this->session->set_flashdata('error_msg', 'Desculpe, o aluno não pode ser cadastrado.');
-						redirect(base_url('addCadastro'));
-					}
-				}
-				else{
-					$this->session->set_flashdata('error_msg', 'Erro no registro, verifique se sua Matrícula está correta');
-					redirect(base_url('addCadastro'));
-				}
-			}
+          if ($dataAluCheck) {
+            $var = $this->input->post('i');
+            for ($j = 0; $j <= $var; $j++){
+              $FONE_ALU = array(
+                'mat_aluno' => $this->input->post('matricula'),
+                'fone_aluno' => $this->input->post("fone_aluno[$j]"),
+              );
+              $this->user_model->reg_fone_alu($FONE_ALU);
+            }
+            $this->user_model->reg_usuario($LOGIN);
+            $this->session->set_flashdata('success_msg', 'Aluno registrado com sucesso!');
+            redirect(base_url('addCadastro'));
+          }
+          else {
+            $this->session->set_flashdata('error_msg', 'Desculpe, o aluno não pode ser cadastrado devido a data de conclusao de curso.');
+            redirect(base_url('addCadastro'));
+          }
+        }
+        else{
+          $this->session->set_flashdata('error_msg', 'Erro no registro, verifique se sua Matrícula está correta');
+          redirect(base_url('addCadastro'));
+        }
+      }
 
 			elseif ($this->input->post('tipoUsuario') == 'tipoFunc'){
 				$LOGIN = array(

@@ -114,8 +114,9 @@ $route['tratarEditarPerfilProf'] = 'pages/tratarEditarPerfilProf';
 //----------------------------------------------------
 $route['user/(:any)']  = 'user/$1';
 $route['blib/(:any)']  = 'bibliotecario/$1';
+$route['blib/(:any)/(:any)'] = 'bibliotecario/$1/$2';
 $route['admin/(:any)'] = 'administrador/$1';
-
+$route['admin/(:any)/(:any)'] = 'administrador/$1/$2';
 $route['professores'] 		= 'administrador/professores';
 //Consultas de campo de pesquisa
 $route['consultaHome'] = 'pages/consultaHome';
@@ -127,9 +128,8 @@ $route['tratarConsultaUsuario'] = 'pages/tratarConsultaUsuario';
 $route['consultaProf'] 		= 'pages/consultaProf';
 $route['consultaProf/(:any)'] 	= 'pages/consultaProf/$1';
 $route['tratarConsultaProf'] = 'pages/tratarConsultaProf';
-$route['consultaEmprestimo'] 	= 'administrador/consultaEmprestimo';
-$route['consultaEmprestimo/(:any)'] 	= 'administrador/consultaEmprestimo/$1';
-$route['tratarConsultaEmp'] = 'administrador/tratarConsultaEmp';
+$route['admin/tratarConsultaEmp'] = 'administrador/tratarConsultaEmp';
+$route['blib/tratarConsultaEmp'] = 'administrador/tratarConsultaEmp';
 $route['consultaReserva'] 	= 'administrador/consultaReserva';
 $route['consultaReserva/(:any)'] 	= 'administrador/consultaReserva/$1';
 $route['tratarconsultaReserva'] 	= 'administrador/tratarconsultaReserva';
@@ -140,11 +140,11 @@ $route['categoria/(:any)'] 	= 'pages/categoria/$1';
 $route['editora/(:any)'] 	= 'pages/editora/$1';
 $route['curso/(:any)'] 	= 'pages/curso/$1';
 
-$route['alterarReserva'] 	= 'administrador/alterarReserva';
-$route['cancelReserva'] 	= 'administrador/cancelReserva';
+$route['alterarReserva'] 	= 'pages/alterarReserva';
+$route['cancelReserva'] 	= 'pages/cancelReserva';
 $route['solicitaRemocao/(:any)'] 	= 'pages/solicitaRemocao/$1';
 $route['solicitaRemocao'] 	= 'pages/solicitaRemocao';
-$route['cancelReserva/(:any)/(:any)'] 	= 'administrador/cancelReserva/$1/$2';
+$route['cancelReserva/(:any)/(:any)'] 	= 'pages/cancelReserva/$1/$2';
 $route['trataSolicitacao'] 	= '/administrador/trataSolicitacao';
 $route['confirmaSolicitacao'] 	= '/administrador/confirmaSolicitacao/';
 

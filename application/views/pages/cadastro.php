@@ -56,7 +56,7 @@
 	<link rel="stylesheet" href="<?=base_url('static/css/responsive.css')?>">
 
 	<link rel="stylesheet" href="<?=base_url('static/css/adjust_styles.css')?>">
-	
+
 	<link rel="stylesheet" type="text/css" href="<?=base_url('static/css/dashboard.css')?>">
 	<!-- modernizr JS
 	============================================ -->
@@ -119,12 +119,6 @@
                         </div>
                     </div>
 
-                    <div class="input-group mg-t-15">
-                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
-                        <div class="nk-int-st">
-                            <input type="text" name="matricula" class="form-control" placeholder="Matrícula" required>
-                        </div>
-                    </div>
 
                     <div class="input-group mg-t-15">
                         <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
@@ -161,7 +155,7 @@
 										<option value="tipoAl">Aluno</option>
 									</select>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
 						<div id="dinamic-div-form" style="display: none;"></div>
                     </div>

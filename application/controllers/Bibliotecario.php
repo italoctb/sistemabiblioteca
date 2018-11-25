@@ -81,4 +81,42 @@ class Bibliotecario extends CI_Controller{
             $this->load->view('pages/minhasReservas', $data);
             $this->load->view('templates/footer.php');
           }
+
+          public function consultaEmprestimo($pesq=null){
+            $this->load->model('sys_model');
+            $data = array(
+              'title' => $this->sys_model->consultaEmprestimo($pesq)
+            );
+            $this->load->view('templates/header');
+            $this->load->view('templates/nav_blib');
+            $this->load->view('pages/consultaEmprestimo', $data);
+            $this->load->view('templates/footer');
+          }
+
+          public function tratarConsultaEmp(){
+            $caixaE = $this->input->post('caixaE');
+            $nivel = $this->session->userdata('nivel_usuario');
+        		if ($nivel === 'administrador'):
+        			$nav = 'admin';
+        		elseif ($nivel === 'usuario'):
+        			$nav = 'user';
+        		elseif ($nivel === 'bibliotecario'):
+        			$nav = 'blib';
+        		endif;
+
+            redirect(base_url($nav.'/consultaEmprestimo/'.$caixaE));
+          }
+
+          public function meusEmprestimos(){
+            $this->load->model('sys_model');
+            $data = array(
+              'title' => $this->sys_model->consulta_meusEmprestimos($this->session->userdata('usuario'))
+            );
+            $this->load->view('templates/header');
+            $this->load->view('templates/nav_adm');
+            $this->load->view('pages/meusEmprestimos', $data);
+            $this->load->view('templates/footer');
+          }
+
+          
 }

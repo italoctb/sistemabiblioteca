@@ -28,6 +28,15 @@
   </div>
 </span>
 
+<?php $nivel = $this->session->userdata('nivel_usuario');
+if ($nivel === 'administrador'):
+  $navi = 'admin';
+elseif ($nivel === 'usuario'):
+  $navi = 'user';
+elseif ($nivel === 'bibliotecario'):
+  $navi = 'blib';
+endif; ?>
+
 <div class="data-table-area">
   <div class="container">
     <div class="row">
@@ -35,7 +44,7 @@
         <div class="data-table-list">
           <div class="table-responsive">
             <div class="searc-input">
-              <form action="<?=base_url('tratarConsultaEmp')?>" method="POST">
+              <form action="<?=base_url("$navi/tratarConsultaEmp")?>" method="POST">
               <input type="text" class="caixaPclass" name="caixaE" id="caixaE" placeholder="pesquisar"/>
               <button class="btn btn-info info-icon-notika buttonPesq" type="submit"><i class="notika-icon notika-search"></i></button>
               </form>

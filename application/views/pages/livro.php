@@ -1,8 +1,3 @@
-<?php
-    $user = $this->session->userdata('nivel_usuario');
-    if($user != 'administrador'){redirect(base_url(''));}
-?>
-
 <div class="container ic-cmp-int float-lb form-elet-mg form-add">
     <div class="container">
         <?php

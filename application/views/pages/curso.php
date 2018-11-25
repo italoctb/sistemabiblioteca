@@ -1,6 +1,6 @@
 <?php
     $user = $this->session->userdata('nivel_usuario');
-    if($user != 'administrador'){redirect(base_url(''));}
+    if($user == 'usuario'){redirect(base_url(''));}
 ?>
 
 <div class="container ic-cmp-int float-lb form-elet-mg form-add">
@@ -67,7 +67,7 @@
         <div class="row justify-content-center" style="margin-top : 30px;">
           <div class="col-xs-4 col-xs-offset-4">
             <div  class="form-group justify-content-center" style="text-align: center;">
-                <a class="btn btn-info notika-btn-info" href="<?=base_url('/')?>">Voltar</a>
+                <a class="btn btn-info notika-btn-info" href="<?=base_url('/consultaProf')?>">Voltar</a>
             </div>
           </div>
         </div>

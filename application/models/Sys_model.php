@@ -22,7 +22,7 @@ class Sys_model extends CI_Model {
     return $query->result();
   }
 
-  //Busca todos os professores que são usuários do sistema de determinado curso recebido por parâmetro. 
+  //Busca todos os professores que são usuários do sistema de determinado curso recebido por parâmetro.
   public function consultaProfsCurso($curso){
     $query = $this->db->query('select nome, mat_siape, telefone_celular from CURSO natural join PROFESSORES natural join USUARIO where nome_curso ="'.$curso.'";');
     return $query->result();
@@ -66,14 +66,23 @@ class Sys_model extends CI_Model {
 
   //Caso não houver parâmetro, será retornado uma consulta de todos os professores vinculados. Caso o valor recebido não for vazio, será retornado a mesma consulta dos professores segundo (nome OU nome do curso OU matricula siape) digitado no campo de pesquisa.
   public function consultaProf($busca=NULL){
-    if (empty($busca)) {
+    if (!$busca) {
       $query = $this->db->query('select * from PROFESSORES natural join USUARIO natural join CURSO;');
     }else{
       $query = $this->db->query("select mat_siape, nome, nome_curso from PROFESSORES natural join USUARIO natural join CURSO where nome like '%".$busca."%' or nome_curso like '%".$busca."%' or mat_siape like '%".$busca."%';");
     }
     return $query->result();
   }
-  
+
+  public function consultaProfOrd($select){
+    if($select == 1){
+      $query = $this->db->query('select * from PROFESSORES natural join USUARIO natural join CURSO ORDER BY nome;');
+    }else{
+      $query = $this->db->query('select * from PROFESSORES natural join USUARIO natural join CURSO ORDER BY nome_curso;');
+    }
+    return $query->result();
+  }
+
   //Caso não houver parâmetro, será retornado uma consulta de todos os usuários vinculados. Caso o valor recebido não for vazio, será retornado a mesma consulta dos usuários segundo  (nome de usuario OU nome OU tipo do usuario) digitado no campo de pesquisa.
   public function consultaUsuario($busca=null){
 
@@ -128,7 +137,7 @@ class Sys_model extends CI_Model {
     if (empty($busca)) {
       $query = $this->db->query("select * from USUARIO natural join LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES;");
     }else{
-      $query = $this->db->query("select * from USUARIO natural join LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES where titulo like '%".$busca."%' or descricao like '%".$busca."%' or nome_autor like '%".$busca."%';");
+      $query = $this->db->query("select * from USUARIO natural join LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES where titulo like '%".$busca."%' or descricao like '%".$busca."%' or nome_autor like '%".$busca."%' or ISBN like '%".$busca."%';");
     };
     return $query->result();
   }
@@ -184,7 +193,7 @@ class Sys_model extends CI_Model {
   //Recebe o nome de usuário por parâmetro e define qual tipo ele pertence, a consulta retorna os telefones vinculados ao usuário
   public function meuPerfilFone($user){
     $q = $this->db->query('select tipoUsuario from USUARIO where username ="'.$user.'";')->row_object();
-    switch ($q) {
+    switch ($q->tipoUsuario) {
       case 'tipoAl':
         $query = $this->db->query("select fone_aluno from  CURSO natural join ALUNOS natural join FONE_ALUNOS natural join USUARIO where username = '".$user."';");
         break;
@@ -198,7 +207,7 @@ class Sys_model extends CI_Model {
         $query = array();
         break;
     }
-    return $query;
+    return $query->result();
   }
 
   //As informações são recebidas por parâmetro em um array para realizar a atualização nos dados do usuário desejado.

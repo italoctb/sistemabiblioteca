@@ -12,9 +12,11 @@
 									<li><a href="<?=base_url('blib/home')?>">Biblioteca</a></li>
 									<li><a href="<?=base_url('consultaProf')?>">Professores</a></li>
 									<li><a href="<?=base_url('consultaUsuario')?>">Consultar usuários</a></li>
-									<li><a href="<?=base_url('blib/consultaReserva')?>">Consultar reservas</a></li>
-									<li><a href="<?=base_url('meusEmprestimos')?>">Meus empréstimos</a></li>
-									<li><a href="<?php echo base_url('logout')?>">Sair</a></li>
+									<li><a href="<?=base_url('admin/consultaEmprestimo')?>">Consultar empréstimos</a></li>
+									<li><a href="<?=base_url('admin/consultaReserva')?>">Consultar reservas</a></li>
+									<li><a href="<?=base_url('admin/meusEmprestimos')?>">Meus empréstimos</a></li>
+									<li><a href="<?=base_url('minhasReservas')?>">Minhas reservas</a></li>
+									<li><a href="<?=base_url('logout')?>">Sair</a></li>
 								</ul>
 							</li>
 
@@ -58,16 +60,20 @@
 							<li><a href="<?=base_url('blib/home')?>">Biblioteca</a></li>
 							<li><a href="<?=base_url('consultaProf')?>">Professores</a></li>
 							<li><a href="<?=base_url('consultaUsuario')?>">Consultar usuários</a></li>
+							<li><a href="<?=base_url('blib/consultaEmprestimo')?>">Consultar empréstimos</a></li>
 							<li><a href="<?=base_url('blib/consultaReserva')?>">Consultar reservas</a></li>
-							<li><a href="<?=base_url('meusEmprestimos')?>">Meus empréstimos</a></li>
-							<li><a href="<?php echo base_url('logout')?>">Sair</a></li>
+							<li><a href="<?=base_url('blib/meusEmprestimos')?>">Meus empréstimos</a></li>
+							<li><a href="<?=base_url('minhasReservas')?>">Minhas reservas</a></li>
+							<li><a href="<?=base_url('logout')?>">Sair</a></li>
 						</ul>
 					</div>
 
 					<div id="Forms" class="tab-pane notika-tab-menu-bg animated flipInX">
 						<ul class="notika-main-menu-dropdown">
 							<li><a href="<?=base_url('consulta')?>">Realizar empréstimo</a></li>
+							<li><a href="<?=base_url('reserva')?>">Realizar reserva</a></li>
 							<li><a href="<?=base_url('alterarEmprestimos')?>">Alterar empréstimos</a></li>
+							<li><a href="<?=base_url('alterarReserva')?>">Alterar Reservas</a></li>
 						</ul>
 					</div>
 
@@ -75,6 +81,7 @@
 						<ul class="notika-main-menu-dropdown">
 							<li><a href="<?=base_url('meuPerfil')?>">Meu perfil</a></li>
 							<li><a href="<?=base_url('editarPerfil')?>">Editar perfil</a></li>
+							<li><a href="<?=base_url('cancelCadastro')?>">Cancelar cadastro</a></li>
 						</ul>
 					</div>
 

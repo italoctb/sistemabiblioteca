@@ -149,8 +149,8 @@ class Pages extends CI_Controller {
 						'tipoAl' => ('1'),
 					);
 
-					$alu_check = $this->alu_model->alu_check($LOGIN['mat_aluno']);
-					if (!$alu_check) {
+					//$alu_check = $this->alu_model->alu_check($LOGIN['mat_aluno']);
+					if (true) { //Para facilitar a demonstração, removeremos a clausula de checagem de aluno.
 						$this->user_model->reg_alu($ALU);
 						$dataAluCheck = $this->alu_model->dataAluCheck($LOGIN['mat_aluno']);
 
@@ -168,7 +168,7 @@ class Pages extends CI_Controller {
 							redirect(base_url(''));
 						}
 						else {
-							$this->session->set_flashdata('error_msg', 'Desculpe, o aluno não pode ser cadastrado.');
+							$this->session->set_flashdata('error_msg', 'Desculpe, o aluno não pode ser cadastrado devido a data de conclusao de curso.');
 							redirect(base_url(''));
 						}
 					}
@@ -405,6 +405,14 @@ class Pages extends CI_Controller {
                 'tipoUsuario' =>$this->sys_model->consulta_especifico_Usuario($user)->tipoUsuario,
                 'livros' => $this->db->get("LIVROS")->result()
             );
+            $nivel = $this->session->userdata('nivel_usuario');
+            if ($nivel === 'administrador'):
+              $navi = 'admin';
+            elseif ($nivel === 'usuario'):
+              $navi = 'user';
+            elseif ($nivel === 'bibliotecario'):
+              $navi = 'blib';
+            endif;
             $EMPRESTIMOS = array(
             'ISBN' => $this->input->post('ISBN'),
             'username' => $this->input->post('username'),
@@ -416,9 +424,10 @@ class Pages extends CI_Controller {
               $res_check_l = $this->user_model->check_emprestimo_usuario($this->input->post('ISBN'),$this->input->post('username'));
               $res_check_qtd = $this->user_model->getQtdMax($this->input->post('username'));
               $res_check_reserv = $this->sys_model->consultaReserva($this->input->post('ISBN'), $this->input->post('username'));
-              $solicitacao = $this->db->query('select id_req, username from REQUISICAO natural join USUARIO where username = "'.$this->input->post('username').'";')->result();
+              $nivel = $this->db->query('select username from requisicao where username = "'.$user.'";');
+              $solicitacao = $this->db->query('select * from REQUISICAO natural join USUARIO where username = "'.$this->input->post('username').'";')->result();
 
-              if (!$res_check && !$res_check_l && $res_check_qtd && $qtd_check && !$solicitacao) {
+              if (!$res_check && !$res_check_l && $res_check_qtd && $qtd_check && !$solicitacao && $nivel) {
                   $this->user_model->reg_emprestimo($EMPRESTIMOS);
                   $this->user_model->dec_livro($this->input->post('ISBN'));
                   $this->user_model->inc_user($this->input->post('username'));
@@ -429,7 +438,7 @@ class Pages extends CI_Controller {
                     $this->db->where('username',$this->input->post('username'));
                     $this->db->delete('RESERVA');
                   }
-                  redirect(base_url('meusEmprestimos'));
+                  redirect(base_url($navi.'/consultaEmprestimo'));
               }
               else {
                 if(!$qtd_check){
@@ -445,6 +454,9 @@ class Pages extends CI_Controller {
                     redirect(base_url('emprestimoLivro/'.$EMPRESTIMOS['ISBN'].'/'.$EMPRESTIMOS['username']));
                 }elseif($solicitacao){
                   $this->session->set_flashdata('error_msg', 'Usuário realizou a requisição de cancelamento de conta.');
+          				redirect(base_url('emprestimoLivro/'.$EMPRESTIMOS['ISBN'].'/'.$EMPRESTIMOS['username']));
+                }elseif(!$nivel){
+                  $this->session->set_flashdata('error_msg', 'O usuário não pode realizar o emprestimo, pois solicitou o cancelamento de sua conta.');
           				redirect(base_url('emprestimoLivro/'.$EMPRESTIMOS['ISBN'].'/'.$EMPRESTIMOS['username']));
                 }
               }
@@ -606,6 +618,14 @@ class Pages extends CI_Controller {
     function devEmprestimo($ident = NULL, $username = NULL){
         $user = $this->session->userdata('nivel_usuario');
         $data['livros'] = $this->db->get("LIVROS")->result();
+        $nivel = $this->session->userdata('nivel_usuario');
+        if ($nivel === 'administrador'):
+          $navi = 'admin';
+        elseif ($nivel === 'usuario'):
+          $navi = 'user';
+        elseif ($nivel === 'bibliotecario'):
+          $navi = 'blib';
+        endif;
 
         if ( $user === 'bibliotecario' || $user === 'administrador') {
             $this->user_model->inc_livro($ident);
@@ -614,7 +634,7 @@ class Pages extends CI_Controller {
             $this->db->where('username',$username);
             $this->db->delete('EMPRESTIMOS');
             $this->session->set_flashdata('success_msg', 'Operação realizada!');
-            redirect(base_url('consultaEmprestimo'));
+            redirect(base_url($navi.'/consultaEmprestimo'));
         }
         else {
             $this->session->set_flashdata('error_msg', 'Não foi possível realizar a solicitação');
@@ -633,6 +653,55 @@ class Pages extends CI_Controller {
         $this->load->view('pages/baixaEmprestimo', $data);
         $this->load->view('templates/footer.php');
     }
+
+    public function alterarReserva(){
+      $user = $this->session->userdata('nivel_usuario');
+      $data = array(
+        'consulta' => $this->sys_model->consultaReserva(),
+        'usuarios' => $this->db->get("USUARIO")->result(),
+        'reserva' => $this->db->get("RESERVA")->result()
+      );
+      $this->load->view('templates/header.php');
+
+      if ($user === 'administrador'):
+        $nav = 'nav_adm';
+      elseif ($user === 'bibliotecario'):
+        $nav = 'nav_blib';
+      endif;
+
+      $this->load->view('templates/'.$nav);
+      $this->load->view('pages/alterarReserva', $data);
+      $this->load->view('templates/footer.php');
+    }
+
+    function cancelReserva($ident = NULL, $username = NULL){
+  		$user = $this->session->userdata('nivel_usuario');
+  		$data['reserva'] = $this->db->get("RESERVA")->result();
+
+  		if ( $user === 'administrador' || $user === 'bibliotecario') {
+  			$this->db->where('ISBN',$ident);
+  			$this->db->where('username',$username);
+  			$this->db->delete('RESERVA');
+  			$this->session->set_flashdata('success_msg', 'Operação realizada!');
+  			redirect(base_url('alterarReserva'));
+  		}
+  		else {
+  			$this->session->set_flashdata('error_msg', 'Não foi possível realizar a solicitação');
+  			redirect(base_url(''));
+  		}
+
+  		$this->load->view('templates/header.php');
+
+  		if ($user === 'administrador'):
+  			$nav = 'nav_adm';
+  		elseif ($user === 'bibliotecario'):
+  			$nav = 'nav_blib';
+  		endif;
+
+  		$this->load->view('templates/'.$nav);
+  		$this->load->view('pages/alterarReserva', $data);
+  		$this->load->view('templates/footer.php');
+  	}
 
 	public function reserva(){
 		$user = $this->session->userdata('nivel_usuario');
@@ -784,9 +853,20 @@ class Pages extends CI_Controller {
     }
 
     public function consultaProf($pesq=NULL){
-      $data = array(
-        'title' => $this->sys_model->consultaProf($pesq)
-      );
+      if($pesq == "ordenaPorNome"){
+        $data = array(
+          'title' => $this->sys_model->consultaProfOrd(1)
+        );
+      }else if($pesq == "ordenaPorCurso"){
+        $data = array(
+          'title' => $this->sys_model->consultaProfOrd(2)
+        );
+      }else{
+        $data = array(
+          'title' => $this->sys_model->consultaProf($pesq)
+        );
+      }
+
       $this->load->view('templates/header');
 
 		$nivel = $this->session->userdata('nivel_usuario');
@@ -991,6 +1071,7 @@ class Pages extends CI_Controller {
 		$user_data = array(
 			'nome' => $this->input->post('nome'),
 			'user_end' => $this->input->post('user_end'),
+      'password' => sha1($this->input->post('password'))
 		);
 		$test = $this->user_model->getQntdAlu( $this->input->post('mat_aluno'));
 
@@ -1016,6 +1097,7 @@ class Pages extends CI_Controller {
 		$user_data = array(
 			'nome' => $this->input->post('nome'),
 			'user_end' => $this->input->post('user_end'),
+      'password' => sha1($this->input->post('password'))
 		);
 		$test = $this->user_model->getQntdFunc( $this->input->post('mat_func'));
 
@@ -1042,6 +1124,7 @@ class Pages extends CI_Controller {
 		$user_data = array(
 			'nome' => $this->input->post('nome'),
 			'user_end' => $this->input->post('user_end'),
+      'password' => sha1($this->input->post('password'))
 		);
 		$prof_data = array(
 			'telefone_celular' => $this->input->post('telefone_celular')

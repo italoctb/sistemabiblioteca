@@ -66,8 +66,8 @@
                             if ($query->tipoUsuario == 'tipoAl'){?>
                         <p><b>Nome:</b> <?php echo $query->nome ?></p>
                         <p><b>Usuário:</b> <?php echo $query->username ?></p>
+                        <p><b>Telefones: </b></p>
                         <?php foreach ($title2 as $query2) {?>
-                          <p><b>Telefones: </b></p>
                           <p><?php echo $query2->fone_aluno ?></p>
                         <?php } ?>
                         <p><b>Endereço:</b> <?php echo $query->user_end ?></p>
@@ -92,8 +92,8 @@
                       if ($query->tipoUsuario == 'tipoFunc'){?>
                         <p><b>Nome:</b> <?php echo $query->nome ?></p>
                         <p><b>Usuário:</b> <?php echo $query->username ?></p>
+                        <p><b>Telefones: </b></p>
                         <?php foreach ($title2 as $query2) {?>
-                          <p><b>Telefones: </b></p>
                           <p><?php echo $query2->fone_func ?></p>
                         <?php } ?>
                         <p><b>Tipo de usuário:</b> Funcionário (a)</p>
