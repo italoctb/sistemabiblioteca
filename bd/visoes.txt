@@ -1,0 +1,46 @@
+CREATE VIEW ordenaTitulosISBN
+AS SELECT ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias
+FROM LIVROS NATURAL JOIN CATEGORIA NATURAL JOIN LIVROS_has_AUTORES NATURAL JOIN AUTORES
+ORDER BY ISBN;
+
+create view ordenaTitulosNomeObra
+as select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias
+from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES
+order by titulo;
+
+create view ordenaTitulosAutor
+as select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias
+from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES
+order by nome_autor;
+
+create view ordenaTitulosLancamento
+as select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias
+from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES
+order by ano_lançamento DESC;
+
+create view ordenaTitulosEdit
+as select ISBN, titulo, cod_categoria,nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias
+from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES
+order by editora;
+
+create view ordenaTitulosCategoria
+as select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias
+from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES
+order by descricao;
+
+create view ordenaTitulosDisp
+as select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias
+from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES
+order by qtd_disp DESC;
+
+
+
+create view profsCurso
+as select nome, mat_siape, telefone_celular
+from CURSO natural join PROFESSORES natural join USUARIO;
+
+
+
+create view listaReservas
+as select username, nome, titulo, ISBN, data_reserva
+from USUARIO natural join RESERVA natural join LIVROS;
