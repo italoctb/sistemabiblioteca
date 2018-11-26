@@ -51,6 +51,9 @@
               <tbody>
                 <?php
 
+                
+                  /* Tabela exibindo as reservas realizadas pelo usuário logado, as informações ISBN, título e data da reserva são exibidas*/
+
                   foreach ($title as $query) {?>
                     <tr>
                       <td><?php echo $query->ISBN ?></td>

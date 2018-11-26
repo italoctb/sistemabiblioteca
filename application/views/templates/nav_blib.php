@@ -22,7 +22,7 @@
 
 							<li><a data-toggle="collapse" data-target="#Charts" href="#">Sistema</a>
 								<ul class="notika-main-menu-dropdown">
-									<li><a href="<?=base_url('consulta')?>">Alterar empréstimos</a></li>
+									<li><a href="<?=base_url('realizarEmprestimo')?>">Alterar empréstimos</a></li>
 									<li><a href="<?=base_url('alterarEmprestimos')?>">Finalizar empréstimos</a></li>
 								</ul>
 							</li>
@@ -70,7 +70,7 @@
 
 					<div id="Forms" class="tab-pane notika-tab-menu-bg animated flipInX">
 						<ul class="notika-main-menu-dropdown">
-							<li><a href="<?=base_url('consulta')?>">Realizar empréstimo</a></li>
+							<li><a href="<?=base_url('realizarEmprestimo')?>">Realizar empréstimo</a></li>
 							<li><a href="<?=base_url('reserva')?>">Realizar reserva</a></li>
 							<li><a href="<?=base_url('alterarEmprestimos')?>">Alterar empréstimos</a></li>
 							<li><a href="<?=base_url('alterarReserva')?>">Alterar Reservas</a></li>

@@ -19,6 +19,13 @@
                       <div class="bootstrap-select fm-cmp-mg">
                           <select class="selectpicker" data-live-search="true" name="username">
                             <option disabled="disabled" selected>Escolha o usuário</option>
+
+                              <!--
+
+                              Exibe todos os usuários e dá a permissão ao administrador de excluir qualquer um
+
+                              -->
+
                             <?php foreach ($title as $usuario){
                                 echo "<option>$usuario->username</option>";
                             }?>
@@ -28,6 +35,12 @@
                   <div class="col-lg-6  col-md-6  col-sm-6  col-xs-12" style="position: relative; top:25px;">
                     <div  class="form-group justify-content-center" style="text-align: center;">
                         <button type="submit" class="btn btn-danger notika-btn-danger" value="Cadastrar" onclick="return confirm('Tem certeza que deseja deletar o usuário?');">Remover</button>
+
+                          <!--
+
+                          Envia para os controladores o nome de usuário seleciado pelo método POST, onde o usuário será desligado por completo do sistema se não houver pendências na biblioteca.
+
+                          -->
                     </div>
                   </div>
               </div>

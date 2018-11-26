@@ -26,6 +26,9 @@
               <tbody>
                 <?php
 
+
+                  /* Tabela exibindo as reservas disponíveis para o usuário, as informações ISBN, título e ano de lançamento, e editora são exibidas*/
+
                   foreach ($livros as $liv) {?>
                     <tr>
                       <td><?php echo $liv->ISBN ?></td>
@@ -33,8 +36,12 @@
                       <td><?php echo $liv->ano_lançamento ?></td>
                       <td><?php echo $liv->editora ?></td>
                       <td>
-                        <a class="btn btn-success notika-btn-success" style="position: relative; bottom:4px;" href="<?=base_url('reservaLivro/'.$liv->ISBN)?>";>Reservar</a>
-                      </td>
+                        <a class="btn btn-success notika-btn-success" style="position: relative; bottom:4px;" href="<?=base_url('reservaLivro/'.$liv->ISBN)?>";>Reservar</a> 
+                        <!--
+
+                        Envia para os controladores o código do livro para ser vinculado ao usuário que está logado
+
+                        -->
                     </tr>
                 <?php  }?>
 

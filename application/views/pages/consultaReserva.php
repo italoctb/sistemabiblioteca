@@ -52,6 +52,8 @@
               <tbody>
                 <?php
 
+                   /* Tabela exibindo as reservas realizadas, as informações nome de usuário, nome, título e data da reserva são exibidas*/
+
                   foreach ($title as $query) {?>
                     <tr>
                       <td><?php echo $query->username ?></td>

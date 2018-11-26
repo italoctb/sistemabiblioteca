@@ -57,7 +57,7 @@ $route['autenticate'] 		 				= 'pages/aut_login';
 //Rota para autenticação de login.
 $route['sem_acesso'] 						= 'pages/error_page';
 //Rota para uma página de erro.
-$route['consulta'] 							= 'pages/consulta';
+$route['realizarEmprestimo'] 							= 'pages/consulta';
 //Rota para carregamento de páginas de acordo com o nível de usuário.
 $route['reserva'] 							= 'pages/reserva';
 //Rota para fazer uma consulta de reserva.
@@ -98,10 +98,16 @@ $route['baixaEmprestimo'] 					= 'pages/baixaEmprestimo';
 $route['baixaEmprestimo/(:any)'] 			= 'pages/baixaEmprestimo/$1';
 //Rota para visualização dos emprestidos com parâmetro username.
 $route['devEmprestimo'] 					= 'pages/devEmprestimo';
-
+//Rota para o administrador ou bibliotecario fazer o empréstimo de livros.
 $route['devEmprestimo/(:any)/(:any)'] 		= 'pages/devEmprestimo/$1/$2';
+//Rota semelhante a 'devEmprestimo', mas tendo como parametro o livro e usuário.
 $route['logout'] 							= 'pages/logout';
+//Rota para encerrar seção.
+$route['consulta']     = 'pages/caixaPesquisa';
+//Rota para a caixa de pesquisa.
 $route['rconsultaReserva']  = 'pages/rconsultaReserva';
+//Rota para visualização das reservas.
+
 
 //Perfil
 $route['meuPerfil'] = 'pages/meuPerfil';
@@ -147,9 +153,6 @@ $route['solicitaRemocao'] 	= 'pages/solicitaRemocao';
 $route['cancelReserva/(:any)/(:any)'] 	= 'pages/cancelReserva/$1/$2';
 $route['trataSolicitacao'] 	= '/administrador/trataSolicitacao';
 $route['confirmaSolicitacao'] 	= '/administrador/confirmaSolicitacao/';
-
-$route['editarCadastro'] 	= 'administrador/editarCadastro';
-
 $route['ordenaISBN'] 	= 'pages/ordena/ISBN';
 $route['ordenaNomeObra'] 	= 'pages/ordena/nomeObra';
 $route['ordenaNomeAutor'] 	= 'pages/ordena/nomeAutor';

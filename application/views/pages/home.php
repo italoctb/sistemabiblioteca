@@ -62,9 +62,12 @@
 
 							</thead>
 
-							<tbody>
+							<tbody> 
 
 							<?php
+
+							/*Tabela principal exibindo informações como: ISBN,	Nome da obra, Autor, Ano de publicação,	Editora, Categoria e Disponibilidade. Onde as categorias ISBN, Nome da obra, Editora e Categoria são clicáveis para uma pesquisa aprofundada de quais empréstimos foram feitos sob aquela informação desejada. Única tabela com ordenação disponível.*/
+
 							$isbnTemp = 0;
 							$autorTemp = 0;
 							$cont = 0;

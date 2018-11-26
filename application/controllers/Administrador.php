@@ -19,6 +19,8 @@ class Administrador extends CI_Controller{
                 redirect(base_url('/'));
               }
           }
+          /*  Função que cria dados cadastrais de um usuário, como nome, login,
+              senha e outros... */
 
           public function view($page = 'home'){
               if ( ! file_exists(APPPATH.'views/pages'.$page.'.php'))
@@ -44,6 +46,7 @@ class Administrador extends CI_Controller{
             $this->load->view('pages/home', $data);
             $this->load->view('templates/footer');
           }
+          /*  Função que carrega a página inicial.  */
 
           public function professores(){
             $data = array(
@@ -54,6 +57,7 @@ class Administrador extends CI_Controller{
             $this->load->view('pages/profs', $data);
             $this->load->view('templates/footer');
           }
+          /* Consulta no banco os professores cadastrados.  */
 
           public function consultaUsuario(){
             $data = array(
@@ -74,6 +78,7 @@ class Administrador extends CI_Controller{
             $this->load->view('pages/consultaEmprestimo', $data);
             $this->load->view('templates/footer');
           }
+          /* Procura no banco os emprestimos que foram feitos.  */
 
           public function tratarConsultaEmp(){
             $caixaE = $this->input->post('caixaE');
@@ -88,6 +93,7 @@ class Administrador extends CI_Controller{
 
             redirect(base_url($nav.'/consultaEmprestimo/'.$caixaE));
           }
+          /*  Função que exclui ou realiza o empréstimo.  */
 
 		public function consultaReserva($pesq=NULL){
 			$data = array(
@@ -98,11 +104,13 @@ class Administrador extends CI_Controller{
 			$this->load->view('pages/consultaReserva', $data);
 			$this->load->view('templates/footer');
 		}
+    /* Procura no banco as reservas que foram feitos.  */
+
     public function tratarconsultaReserva(){
       $caixaR = $this->input->post('caixaR');
       redirect(base_url('consultaReserva/'.$caixaR));
     }
-
+    /*  Função que exclui ou realiza a reserva.  */
 
 		public function alterarReserva(){
 			$user = $this->session->userdata('nivel_usuario');
@@ -123,6 +131,8 @@ class Administrador extends CI_Controller{
 			$this->load->view('pages/alterarReserva', $data);
 			$this->load->view('templates/footer.php');
 		}
+    /*  Verifica o nível e usuário e procura no banco as reservas feitas
+        e então, as modifica. */
 
 	function emprestimoReserva($ident = NULL, $username = NULL){
 		$user = $this->session->userdata('nivel_usuario');
@@ -183,6 +193,7 @@ class Administrador extends CI_Controller{
 		$this->load->view('pages/alterarReserva', $data);
 		$this->load->view('templates/footer.php');
 	}
+    /*  Função que cancela a reserva feita pelo usuário.  */
 
           public function meusEmprestimos(){
             $data = array(
@@ -204,6 +215,7 @@ class Administrador extends CI_Controller{
             $this->load->view('pages/addCadastro', $data);
             $this->load->view('templates/footer');
           }
+          /* Função para cadastrar novo usuáro no banco.  */
 
 	public function registro_usuario(){
 		$this->load->helper('form');
@@ -369,11 +381,13 @@ class Administrador extends CI_Controller{
                   $this->load->view('pages/removerCadastro', $data);
                   $this->load->view('templates/footer.php');
           }
+          /*  Função e verifica os usuários no banco e remove eles. */
 
           public function trataRemover(){
             $user = $this->input->post('username');
             redirect(base_url("deletarUsuario/$user"));
           }
+          /*  Função que deleta o usuário.  */
 
           public function editarUsuario($ident = NULL){
               $user_id = $this->session->userdata('nivel_usuario');
@@ -436,6 +450,8 @@ class Administrador extends CI_Controller{
                     }
             }
         }
+        /*  Função que permite modificar alguma informação do usuário, mas pelo
+            administrador, podendo até aumentar a quantidade max de livros. */
 
 		public function editarCadastro(){
 			$user_id = $this->session->userdata('nivel_usuario');
@@ -471,9 +487,46 @@ class Administrador extends CI_Controller{
 
 
         }
+        /*  Função que deleta o usuário se ele não possuir uma alguma pendencia
+            na biblioteca. */
+        public function solicitaRemocao($id = null){
+          $data = array(
+              'solicitacao' => $this->sys_model->requisicoes(),
+              'req' => $this->db->query('select * from REQUISICAO where id_req = "'.$id.'";')->row_object()
+            );
+          $this->load->view('templates/header');
+          $this->load->view('templates/nav_adm');
+          $this->load->view('pages/solicitacoes', $data);
+          $this->load->view('templates/footer');
+        }
+        /*  Exibe as solicitações de remoção realizadas pelos usuários.
+            E seleciona array com todas as requisições de remoção do sistema. */
+
+        public function TrataCancelCadastro(){   //Exibe as solicitações de remoção realizadas pelos usuários.
+          $user = $this->input->post('usuario');
+          $senha = $this->input->post('senha');
+          $result = $this->sys_model->validation($user, $senha);
+          if($result){
+            redirect(base_url("cancelCadastro/$user"));
+          }else{
+            echo "erro!";
+          }
+          //Murilo faz o tratamento caso seja invalido redirecione pra mesma pagina criando aquele campo de informação(flashdata) falando que as credenciais estão erradas
+        }
 
 
-
+        public function cancelCadastro($user = null){   //Exibe as solicitações de remoção realizadas pelos usuários.
+          if($user){
+            $this->db->query("INSERT INTO `equipe385116`.`REQUISICAO` (`username`) VALUES ( '$user'); ");
+            redirect(base_url("/"));
+          }else{
+            $this->load->view('templates/header');
+            $this->load->view('templates/nav_adm');
+            $this->load->view('pages/cancelCadastro');
+            $this->load->view('templates/footer');
+          }
+        }
+        /*  Fumção que cancela o cadastro de algum usuário. */
 
 
 

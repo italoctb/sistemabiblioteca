@@ -444,3 +444,56 @@ USE `equipe385116`;
 INSERT INTO `equipe385116`.`REQUISICAO` (`id_req`, `username`) VALUES (001, 'expdito');
 
 COMMIT;
+
+CREATE VIEW ordenaTitulosISBN
+AS SELECT ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias
+FROM LIVROS NATURAL JOIN CATEGORIA NATURAL JOIN LIVROS_has_AUTORES NATURAL JOIN AUTORES
+ORDER BY ISBN;
+
+create view ordenaTitulosNomeObra
+as select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias
+from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES
+order by titulo;
+
+create view ordenaTitulosAutor
+as select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias
+from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES
+order by nome_autor;
+
+create view ordenaTitulosLancamento
+as select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias
+from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES
+order by ano_lançamento DESC;
+
+create view ordenaTitulosEdit
+as select ISBN, titulo, cod_categoria,nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias
+from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES
+order by editora;
+
+create view ordenaTitulosCategoria
+as select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias
+from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES
+order by descricao;
+
+create view ordenaTitulosDisp
+as select ISBN, titulo, cod_categoria, nome_autor, ano_lançamento, editora, descricao, qtd_disp, qtd_copias
+from LIVROS natural join CATEGORIA natural join LIVROS_has_AUTORES natural join AUTORES
+order by qtd_disp DESC;
+
+
+create view profsCurso
+as select nome, mat_siape, telefone_celular, nome_curso
+from CURSO natural join PROFESSORES natural join USUARIO;
+
+
+
+create view listaReservas
+as select username, nome, titulo, ISBN, data_reserva
+from USUARIO natural join RESERVA natural join LIVROS;
+
+CREATE TRIGGER confereData
+BEFORE UPDATE ON ALUNOS
+FOR EACH ROW BEGIN IF NEW.data_de_conclusao_prev > NOW()
+THEN SIGNAL SQLSTATE '02000' SET MESSAGE_TEXT = 'O usuário não possui mais vínculo com a instituição!';
+END IF;
+END;

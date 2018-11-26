@@ -60,6 +60,9 @@
                   <div class="typography-list typography-mgn">
                       <div class="typography-bd">
                         <?php
+
+                        //Exibe todas as informações do usuário da sessão
+
                         if (!empty($title)){
                           foreach ($title as $query) {
 

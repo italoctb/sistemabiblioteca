@@ -26,6 +26,8 @@
               <tbody>
                 <?php
 
+                /* Tabela exibindo os professores vinculados, as informações matrícula siape, nome e nome do curso são exibidas*/
+
                   foreach ($title as $query) {?>
                     <tr>
                       <td><?php echo $query->mat_siape ?></td>

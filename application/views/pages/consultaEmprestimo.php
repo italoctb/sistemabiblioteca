@@ -62,6 +62,8 @@ endif; ?>
               <tbody>
                 <?php
 
+                   /* Tabela exibindo os empréstimos realizados, as informações nome de usuário, nome, título, data _reserva, data do empréstimo e data de devolução são exibidas*/
+
                   foreach ($title as $query) {?>
                     <tr>
                       <td><?php echo $query->username ?></td>
