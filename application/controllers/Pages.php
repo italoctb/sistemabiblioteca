@@ -356,14 +356,17 @@ class Pages extends CI_Controller {
         o livro e a disponibilidade do mesmo, e  logo após carrega a página de
         acordo com o nível de usuário.  */
 
-    public function trataEmprestimoLivro(){
-      $user = $this->input->post('username');
-      $isbn = $this->input->post('isbnEmp');
-      if(!$isbn){
-        $isbn = $this->sys_model->consulta_especifico_ISBN($this->input->post('nomeObra'))->ISBN;
-      }
-      redirect(base_url('emprestimoLivro/'.$isbn.'/'.$user));
-    }
+        public function trataEmprestimoLivro(){
+          $user = $this->input->post('username');
+          $isbn = $this->input->post('isbnEmp');
+          if($this->sys_model->consulta_especifico_USUARIO($user)){
+            echo "Não existe o usuário.";
+          }else if(!$isbn){
+            $isbn = $this->sys_model->consulta_especifico_ISBN($this->input->post('nomeObra'))->ISBN;
+          }else{
+            redirect(base_url('emprestimoLivro/'.$isbn.'/'.$user));
+          }
+        }
     /*  Ele recebe dois parâmetros, que são o username e o ibsn, depois ele
         fará uma consulta no banco e mostrará o título para aquele número e
         depois redireciona a página para a de empréstimos.  */
@@ -418,7 +421,7 @@ class Pages extends CI_Controller {
               $res_check_l = $this->user_model->check_emprestimo_usuario($this->input->post('ISBN'),$this->input->post('username'));
               $res_check_qtd = $this->user_model->getQtdMax($this->input->post('username'));
               $res_check_reserv = $this->sys_model->consultaReserva($this->input->post('ISBN'), $this->input->post('username'));
-              $nivel = $this->db->query('select username from requisicao where username = "'.$user.'";');
+              $nivel = $this->db->query('select username from REQUISICAO where username = "'.$user.'";');
               $solicitacao = $this->db->query('select * from REQUISICAO natural join USUARIO where username = "'.$this->input->post('username').'";')->result();
 
               if (!$res_check && !$res_check_l && $res_check_qtd && $qtd_check && !$solicitacao && $nivel) {
